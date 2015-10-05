@@ -13,6 +13,7 @@ function Enemy(game, x, y , sprite) {
     console.log("Creating enemy");
     Phaser.Sprite.call(this, game);
     
+    
     game.physics.arcade.enable(this);
     this.scale.setTo(0.09, 0.09);
     this.anchor.setTo(0.5, 0.5);
@@ -63,7 +64,7 @@ function Enemy(game, x, y , sprite) {
        }
 
     }
-
+    game.enemy = enemy;
 }
 
 
@@ -73,6 +74,7 @@ Enemy.prototype.attack= function(){
 
 Enemy.prototype.reduceLife= function reduce(amount){
     // does something to kill the enemy
+    this.HeathValue -=amount;
     this.HealthBar.setPercent( this.HeathValue - amount);
     //this.destroy();
 }
@@ -95,7 +97,7 @@ Enemy.prototype.move = function move() {
   if( Math.abs(dist1) > Math.abs(dist2)){
         if(dist1 > 0 ){
         //move to the left
-        console.log("move to the left");
+        //console.log("move to the left");
 
         moveHorizontal(-speed);
 
@@ -107,7 +109,7 @@ Enemy.prototype.move = function move() {
         position.faceDown = false;
 
     }else if (dist1 < 0){
-        console.log("move to the right");
+       // console.log("move to the right");
 
         enemy.animations.play('right');
 
@@ -121,7 +123,7 @@ Enemy.prototype.move = function move() {
   }else{
         if(dist2> 0){
         //move up
-         console.log("move up");
+       //  console.log("move up");
         enemy.animations.play('up');
 
         moveVertical(-speed);
@@ -132,7 +134,7 @@ Enemy.prototype.move = function move() {
         position.faceRight = false;
     }else if (dist2 < 0){
         // move down
-        console.log("move down");
+        //console.log("move down");
         enemy.animations.play('down');
 
         moveVertical(speed);
@@ -180,10 +182,13 @@ function moveHorizontal(speed){
 Enemy.prototype.update = function() {
 
     
+
     if(this.HealthValue<= 0){
         this.dies();
     }
-
+    console.log("in update enemy");
+    /*var bool = game.physics.arcade.overlap(this.game.player, enemy, this.game.player.reduceHealth()  , null , this);
+    console.log(bool);*/
 }
 
 

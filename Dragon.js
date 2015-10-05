@@ -28,7 +28,7 @@ Dragon.prototype.attack= function(){
 Dragon.prototype.update = function(){
 
 	if(dragon.inCamera){
-		console.log("in update dragon")
+		//console.log("in update dragon")
 	     dragon.move();
 	  }
 	  //console.log("about to move dragon")
