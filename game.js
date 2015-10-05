@@ -11,12 +11,13 @@ var speed;
 
 function preload(){
 	game.load.spritesheet('dragon', 'assets/enemySprites/dragon1.png', 24, 32);
+	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 24, 32);
 
 }
 
 function create(){
 
-	dragon = game.add.sprite(50,50, 'dragon');
+	/*dragon = game.add.sprite(50,50, 'dragon');
 
 	dragon.animations.add('left',[9,10,11,10], 12, true);
 	dragon.animations.add('right', [3,4,5,4], 12, true);
@@ -37,12 +38,12 @@ function create(){
 		faceUp:false,
 		faceDown:true,
 	}
-	speed = 100;
+	speed = 100;*/
 }
 
 function update(){
 
-	dragon.body.velocity.x = 0;
+	/*dragon.body.velocity.x = 0;
 	dragon.body.velocity.y = 0;
 	if (cursors.left.isDown){
 
@@ -102,7 +103,7 @@ function update(){
 			dragon.animations.play('down');
 		}
 
-	}
+	}*/
 }
 
 

@@ -22,8 +22,8 @@ function HealthBar(game, x, y ) {
     game.add.tween(this).to({barProgress: 0}, 2000, null, true, 0, Infinity);
 }
 
-HealthBar.prototype.reduce= function(){
-    this.barProgress--;
+HealthBar.prototype.reduce= function(amount){
+    this.barProgress -= amount;
     
 }
 HealthBar.prototype.HealthPoints = function(){
