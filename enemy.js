@@ -12,7 +12,7 @@ var position;
 function Enemy(game, x, y , sprite) {
     console.log("Creating enemy");
     Phaser.Sprite.call(this, game);
-    
+
     
     game.physics.arcade.enable(this);
     this.scale.setTo(0.09, 0.09);
@@ -162,6 +162,8 @@ Enemy.prototype.move = function move() {
         else if (position.faceDown==true){
             enemy.animations.play('down');
         }
+
+        this.game.player.reduceHealth(2);
 
     }
 

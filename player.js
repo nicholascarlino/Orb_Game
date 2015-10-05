@@ -11,7 +11,7 @@ var fire;
 var action;
 var player;
 var position;
-//var HeathValue;
+var HealthValue;
 
 function Player(game, x, y, speed) {
 	console.log("Creating Player");
@@ -47,7 +47,7 @@ function Player(game, x, y, speed) {
       flipped: false
   };
 	this.HealthBar = new HealthBar(game, barConfig);
-	this.HeathValue = 100;
+	HealthValue = 100;
 	this.HealthBar.setPercent(100);
 	//this.weapon = new Weapon(game);
 
@@ -110,8 +110,14 @@ Player.prototype.update = function() {
  		position.faceUp = false;
  		position.faceDown = true;
 	}
-     var bool = game.physics.arcade.overlap(player, this.game.enemy, this.game.player.reduceHealth()  , null , this);
-    console.log(bool);
+    /* var bool = game.physics.arcade.overlap(player, this.game.enemy, function(){
+     		console.log("reduceHealth ", this.HeathValue);
+			this.HealthValue -= 2;
+			this.HealthBar.setPercent(this.HealthValue);		
+     }  , this);
+
+
+    console.log(bool);*/
 
 	
 
@@ -160,10 +166,19 @@ Player.prototype.change_weapon = function(weapon) {
 	this.weapon = weapon;
 }
 Player.prototype.reduceHealth = function(power) {
-	console.log("reduceHealth ", this.HeathValue);
-	this.HealthValue -= 2;
-	this.HealthBar.setPercent(this.HealthValue);
+	if(HealthValue <= 0){
+		this.dies();
+	}
 
+	console.log("reduceHealth ", HealthValue);
+	HealthValue -= power;
+	this.HealthBar.setPercent(HealthValue);
+	console.log("reduceHealth ", HealthValue);
+
+}
+
+Player.prototype.dies = function(){
+   this.destroy();
 }
 
 
