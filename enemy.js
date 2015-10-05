@@ -67,12 +67,16 @@ Enemy.prototype.dies = function(){
 
 Enemy.prototype.move = function move() {
 
-    enemy.body.velocity.x = 0;
-    enemy.body.velocity.y = 0;
+    
+   // var distanceToPlayer = this.game.physis.arcade.distanceBetween(this , this.game.player);
 
-    if (cursors.left.isDown){
+    var dist1 = this.x - this.game.player.x;
+    var dist2 = this.y - this.game.player.y;
 
-        enemy.body.velocity.x = -speed;
+    if(dist1 > 0){
+        //move to the left
+
+         enemy.body.velocity.x = speed;
 
         enemy.animations.play('left');
 
@@ -80,10 +84,10 @@ Enemy.prototype.move = function move() {
         position.faceRight = false;
         position.faceUp = false;
         position.faceDown = false;
-    }   
-    else if (cursors.right.isDown){
 
-        enemy.body.velocity.x = speed;
+    }else if (dist1 < 0){
+        // move to the right
+         enemy.body.velocity.x = speed;
 
         enemy.animations.play('right');
 
@@ -92,9 +96,10 @@ Enemy.prototype.move = function move() {
         position.faceUp = false;
         position.faceDown = false;
     }
-    else if (cursors.up.isDown){
 
-        enemy.body.velocity.y = -speed;
+    if(dist2> 0){
+        //move up
+         enemy.body.velocity.y = -speed;
 
         enemy.animations.play('up');
 
@@ -102,9 +107,8 @@ Enemy.prototype.move = function move() {
         position.faceDown = false;
         position.faceLeft = false;
         position.faceRight = false;
-    }
-    else if (cursors.down.isDown){
-
+    }else if (dist2 < 0){
+        // move down
         enemy.body.velocity.y = speed;
 
         enemy.animations.play('down');
@@ -114,8 +118,10 @@ Enemy.prototype.move = function move() {
         position.faceLeft = false;
         position.faceRight = false;
     }
-    else{
-        if (position.faceLeft==true){
+    //NOT SURE
+    if(dist1 == 0){
+
+         if (position.faceLeft==true){
             enemy.animations.play('left');
         }
         else if(position.faceRight==true){

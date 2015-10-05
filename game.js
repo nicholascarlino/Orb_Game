@@ -17,6 +17,8 @@ function preload(){
 
 function create(){
 
+	game.player = new Player(game , game.world.centerX , game.world.centerY);
+
 	/*dragon = game.add.sprite(50,50, 'dragon');
 
 	dragon.animations.add('left',[9,10,11,10], 12, true);
