@@ -6,8 +6,6 @@ Enemy.prototype.force = {x:0.0, y:0.0};
 
 
 var enemy;
-//var HealthBar;
-//var spriteType;
 var velocity;
 var position;
 
@@ -21,9 +19,24 @@ function Enemy(game, x, y , sprite) {
     this.spriteType = sprite;
 
     this.game = game;
-    var barConfig = {x:x , y:y};
+    var barConfig ={
+       width: 40,
+       height: 10,
+       x: x,
+       y: y,
+       bg: {
+      color: '#651828'
+      },
+      bar: {
+      color: '#0000FF'
+      },
+      animationDuration: 200,
+      flipped: false
+  };
+
     this.HealthBar = new HealthBar(game , barConfig);
     this.HeathValue = 100;
+    this.HealthBar.setPercent(100);
 
     //this.addChild(HealthBar);
     game.add.existing(this);
@@ -70,9 +83,6 @@ Enemy.prototype.dies = function(){
 
 Enemy.prototype.move = function move() {
 
-    
-   // var distanceToPlayer = this.game.physis.arcade.distanceBetween(this , this.game.player);
-
     var speed = 2;
 
     var coor = this.game.player.getCoordinates();
@@ -80,17 +90,12 @@ Enemy.prototype.move = function move() {
     var dist1 = enemy.x - coor.x;
     var dist2 = enemy.y - coor.y;
 
-    //console.log("enemy is at ", enemy.x , enemy.y);
-    //console.log("player is at " ,coor);
+    this.HealthBar.setPosition(enemy.x , enemy.y);
 
-    console.log("horizontal is ", dist1);
-    console.log("vertical is " , dist2);
-
-if( Math.abs(dist1) > Math.abs(dist2)){
-    if(dist1 > 0 ){
+  if( Math.abs(dist1) > Math.abs(dist2)){
+        if(dist1 > 0 ){
         //move to the left
         console.log("move to the left");
-       // enemy.body.velocity.x = speed;
 
         moveHorizontal(-speed);
 
@@ -103,8 +108,6 @@ if( Math.abs(dist1) > Math.abs(dist2)){
 
     }else if (dist1 < 0){
         console.log("move to the right");
-        // move to the right
-      //   enemy.body.velocity.x = speed;
 
         enemy.animations.play('right');
 
@@ -115,10 +118,9 @@ if( Math.abs(dist1) > Math.abs(dist2)){
         position.faceUp = false;
         position.faceDown = false;
     }
-}else{
-    if(dist2> 0){
+  }else{
+        if(dist2> 0){
         //move up
-        // enemy.body.velocity.y = -speed;
          console.log("move up");
         enemy.animations.play('up');
 
@@ -130,7 +132,6 @@ if( Math.abs(dist1) > Math.abs(dist2)){
         position.faceRight = false;
     }else if (dist2 < 0){
         // move down
-      // enemy.body.velocity.y = speed;
         console.log("move down");
         enemy.animations.play('down');
 
@@ -179,7 +180,6 @@ function moveHorizontal(speed){
 Enemy.prototype.update = function() {
 
     
-
     if(this.HealthValue<= 0){
         this.dies();
     }

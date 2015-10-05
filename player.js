@@ -11,6 +11,7 @@ var fire;
 var action;
 var player;
 var position;
+var HeathValue;
 
 function Player(game, x, y, speed) {
 	console.log("Creating Player");
@@ -29,7 +30,24 @@ function Player(game, x, y, speed) {
 	//this.body.collideWorldBounds = true;
 
 	//might need to look at this
-	this.HealthBar = new HealthBar(game, this.x, this.y);
+
+	 var barConfig ={
+       width: 40,
+       height: 10,
+       x: x,
+       y: y,
+       bg: {
+      color: '#651828'
+      },
+      bar: {
+      color: '#0000FF'
+      },
+      animationDuration: 200,
+      flipped: false
+  };
+	this.HealthBar = new HealthBar(game, barConfig);
+	this.HeathValue = 100;
+	this.HealthBar.setPercent(100);
 	//this.weapon = new Weapon(game);
 
 	wasd = {
@@ -55,10 +73,12 @@ function Player(game, x, y, speed) {
 Player.prototype.update = function() {
 
 	//console.log("in update", player.x , player.y);
+	this.HealthBar.setPosition(player.x , player.y);
 	if (wasd.down.isDown) {
 		player.animations.play('down');
 		
 		player.y += 3;
+
 
 		position.faceLeft = false;
  		position.faceRight = false;
@@ -123,7 +143,7 @@ Player.prototype.update = function() {
 
 Player.prototype.getCoordinates = function() {
 
-	console.log("Halllo",player.x , player.y);
+	//console.log("Halllo",player.x , player.y);
 	var location = {x:player.x , y:player.y};
 
 	return location;
