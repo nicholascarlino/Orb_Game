@@ -12,12 +12,17 @@ var speed;
 function preload(){
 	game.load.spritesheet('dragon', 'assets/enemySprites/dragon1.png', 24, 32);
 	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 24, 32);
+	game.load.spritesheet('player', 'assets/playerSprites/warrior_m.png', 24, 32);
 
 }
 
 function create(){
 
-	game.player = new Player(game , game.world.centerX , game.world.centerY);
+	game.player = new Player(game , game.world.centerX , game.world.centerY , 2);
+
+	var coor = game.player.getCoordinates();
+	console.log("player is ", coor);
+	game.dragon = new Dragon(game , 50 , 100);
 
 	/*dragon = game.add.sprite(50,50, 'dragon');
 

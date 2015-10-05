@@ -10,7 +10,12 @@ var HealthBar;
 
 function Dragon(game, x, y ) {
     console.log("Creating Dragon");
+
+    Phaser.Sprite.call(this, game);
+
     dragon = new Enemy(game , x , y , 'dragon');
+
+    game.add.existing(this);
     //Phaser.Sprite.call(this, game, x, y, spriteType);
 }
 
@@ -23,7 +28,9 @@ Dragon.prototype.attack= function(){
 Dragon.prototype.update = function(){
 
 	if(dragon.inCamera){
+		console.log("in update dragon")
 	     dragon.move();
 	  }
-	  
+	  //console.log("about to move dragon")
+	  //dragon.move();
 }

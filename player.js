@@ -1,29 +1,36 @@
+
+
+Player.prototype = Object.create(Phaser.Sprite.prototype);
+
+Player.prototype.constructor = Player;
+
+Player.prototype.force = {x:0.0, y:0.0};
+
 var wasd;
 var fire;
 var action;
-
-player.prototype = Object.create(Phaser.Sprite.prototype);
-
-player.prototype.constructor = Player;
-
-player.prototype.force = {x:0.0, y:0.0};
+var player;
+var position;
 
 function Player(game, x, y, speed) {
 	console.log("Creating Player");
-	Phaser.Sprite.call(this, game, x, y, 'player');
-	
-	player.prototype.animations.add('left', [9, 10, 11, 10], speed, true);
-	player.prototype.animations.add('right', [3, 4, 5, 4], speed, true);
-	player.prototype.animations.add('up', [0, 1, 2, 1], speed, true);
-	player.prototype.animations.add('down', [6, 7, 8, 7], speed, true);
+
+	Phaser.Sprite.call(this, game);
+
+	//Phaser.Sprite.call(this, game, x, y, 'player');
+	player = this.game.add.sprite(x,y, 'player');
+	player.animations.add('left', [9, 10, 11, 10], speed, true);
+	player.animations.add('right', [3, 4, 5, 4], speed, true);
+	player.animations.add('up', [0, 1, 2, 1], speed, true);
+	player.animations.add('down', [6, 7, 8, 7], speed, true);
 
 	game.physics.enable(this, Phaser.Physics.ARCADE);
-	this.body.allowRotation = false;
-	this.body.collideWorldBounds = true;
+	//this.body.allowRotation = false;
+	//this.body.collideWorldBounds = true;
 
 	//might need to look at this
 	this.HealthBar = new HealthBar(game, this.x, this.y);
-	this.weapon = new Weapon(game);
+	//this.weapon = new Weapon(game);
 
 	wasd = {
 		up: game.input.keyboard.addKey(Phaser.Keyboard.W),
@@ -31,24 +38,76 @@ function Player(game, x, y, speed) {
 		left: game.input.keyboard.addKey(Phaser.Keyboard.A),
 		right: game.input.keyboard.addKey(Phaser.Keyboard.D),
 	};
+
+	position = {
+           faceLeft:false,
+           faceRight:false,
+           faceUp:false,
+           faceDown:true,
+       }
+
 	fire = game.input.keyboard.addKey(Phaser.Keyboard.SPACE);
 	action = game.input.keyboard.addKey(Phaser.Keyboard.E);
 
 	game.add.existing(this);	
 }
-player.prototype.update = function() {
+
+Player.prototype.update = function() {
+
+	//console.log("in update", player.x , player.y);
 	if (wasd.down.isDown) {
-		this.y += 3;
+		player.animations.play('down');
+		
+		player.y += 3;
+
+		position.faceLeft = false;
+ 		position.faceRight = false;
+ 		position.faceUp = false;
+ 		position.faceDown = true;
 	}
 	else if (wasd.left.isDown) {
-		this.x -= 3;
+		player.animations.play('left');
+		player.x -= 3;
+		position.faceLeft = true;
+ 		position.faceRight = false;
+ 		position.faceUp = false;
+ 		position.faceDown = false;
 	}
 	else if (wasd.right.isDown) {
-		this.x += 3;
+		player.animations.play('right');
+		player.x += 3;
+		position.faceLeft = false;
+ 		position.faceRight = true;
+ 		position.faceUp = false;
+ 		position.faceDown = false;
 	}
 	else if (wasd.up.isDown) {
-		this.y -= 3;
-	}
+		player.animations.play('up');
+		player.y -= 3;
+		position.faceLeft = false;
+ 		position.faceRight = false;
+ 		position.faceUp = false;
+ 		position.faceDown = true;
+	}/*
+	else{
+		if (position.faceLeft==true){
+			player.animations.play('left');
+		}
+		else if(position.faceRight==true){
+			player.animations.play('right');
+		}
+		else if (position.faceUp==true){
+			player.animations.play('up');
+		}
+		else if (position.faceDown==true){
+			player.animations.play('down');
+		}
+
+	}*/
+
+
+
+
 	// Find specific name of function
 	if (fire.isDown) {
 		this.weapon.fire(this.x, this.y); 
@@ -58,12 +117,24 @@ player.prototype.update = function() {
 		
 	}
 }
-player.prototype.change_weapon = function(weapon) {
+
+//Player.prototype.locationX = player.x;
+//Player.prototype.locationY = player.y;
+
+Player.prototype.getCoordinates = function() {
+
+	console.log("Halllo",player.x , player.y);
+	var location = {x:player.x , y:player.y};
+
+	return location;
+}
+
+Player.prototype.change_weapon = function(weapon) {
 	this.weapon = weapon;
 }
-player.prototype.reduceHealth = function(power) {
+Player.prototype.reduceHealth = function(power) {
 	this.HealthBar.reduce(power);
 }
-player.prototype.addHealth = function(power) {
+Player.prototype.addHealth = function(power) {
 	this.HealthBar.increase(power);
 }
