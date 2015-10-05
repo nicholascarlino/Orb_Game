@@ -16,6 +16,7 @@ function Dragon(game, x, y ) {
     dragon = new Enemy(game , x , y , 'dragon');
 
     game.add.existing(this);
+    this.game = game;
     //Phaser.Sprite.call(this, game, x, y, spriteType);
 }
 
@@ -29,7 +30,9 @@ Dragon.prototype.update = function(){
 
 	if(dragon.inCamera){
 		//console.log("in update dragon")
-	     dragon.move();
+		if(!this.game.player.isDead()){
+	          dragon.move();
+	      }
 	  }
 	  //console.log("about to move dragon")
 	  //dragon.move();

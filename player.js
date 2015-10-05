@@ -73,7 +73,12 @@ function Player(game, x, y, speed) {
 
 Player.prototype.update = function() {
 
-	//console.log("in update", player.x , player.y);
+	console.log("in update", player.x , player.y);
+	if(this.isDead()){
+		player.x = 0;
+		player.y = 0;
+	}else{
+
 	this.HealthBar.setPosition(player.x , player.y);
 	if (wasd.down.isDown) {
 		player.animations.play('down');
@@ -139,7 +144,7 @@ Player.prototype.update = function() {
 	}*/
 
 
-
+}
 
 	// Find specific name of function
 	if (fire.isDown) {
@@ -166,22 +171,33 @@ Player.prototype.change_weapon = function(weapon) {
 	this.weapon = weapon;
 }
 Player.prototype.reduceHealth = function(power) {
-	if(HealthValue <= 0){
+	
+	if(HealthValue <= 1){
+		console.log("very down", HealthValue)
 		this.dies();
 	}
 
 	console.log("reduceHealth ", HealthValue);
 	HealthValue -= power;
 	this.HealthBar.setPercent(HealthValue);
-	console.log("reduceHealth ", HealthValue);
+	//console.log("reduceHealth ", HealthValue);
 
 }
 
 Player.prototype.dies = function(){
-   this.destroy();
+	console.log("is about to die")
+   player.destroy();
+   this.HealthBar.setPosition(-1 , -1); // not good
+   player.x = 0 ;
+   player.y = 0;
+   //this.destroy();
 }
 
-
+Player.prototype.isDead = function(){
+	if(HealthValue <= 0){
+		return true;
+	}
+}
 
 Player.prototype.addHealth = function(power) {
 	this.HealthBar.increase(power);

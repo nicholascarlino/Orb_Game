@@ -85,7 +85,8 @@ Enemy.prototype.dies = function(){
 
 Enemy.prototype.move = function move() {
 
-    var speed = 2;
+
+    var speed = 1;
 
     var coor = this.game.player.getCoordinates();
 
@@ -163,7 +164,13 @@ Enemy.prototype.move = function move() {
             enemy.animations.play('down');
         }
 
-        this.game.player.reduceHealth(2);
+        this.game.player.reduceHealth(1);
+       /* if(this.game.player.isDead()){
+            enemy.x = 50;
+            enemy.y = 50;
+        }else{
+            this.game.player.reduceHealth(1);
+        }*/
 
     }
 
