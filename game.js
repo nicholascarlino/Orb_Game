@@ -17,13 +17,12 @@ function preload(){
 	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 32, 36);
 	game.load.spritesheet('player', 'assets/playerSprites/warrior_f.png', 32, 36);
 
-
 }
 
 function create(){
 
 
-	game.player = new Player(game , game.world.centerX , game.world.centerY , 8);
+	//game.player = new Player(game , game.world.centerX , game.world.centerY , 8);
 
 	//game.debug.cameraInfo(game.camera, 32, 32);
 
