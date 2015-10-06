@@ -19,11 +19,13 @@ function Player(game, x, y, speed) {
 	Phaser.Sprite.call(this, game);
 
 	//Phaser.Sprite.call(this, game, x, y, 'player');
+
 	player = this.game.add.sprite(x,y, 'player');
 	player.animations.add('left', [9, 10, 11, 10], speed, true);
 	player.animations.add('right', [3, 4, 5, 4], speed, true);
 	player.animations.add('up', [0, 1, 2, 1], speed, true);
 	player.animations.add('down', [6, 7, 8, 7], speed, true);
+	player.scale.setTo(.7,.7);
 
 	game.physics.enable(this, Phaser.Physics.ARCADE);
 	this.game = game;
