@@ -7,12 +7,12 @@ Enemy.prototype.force = {x:0.0, y:0.0};
 
 var enemy;
 var velocity;
-var position;
+//var this.position;
 
 function Enemy(game, x, y , sprite) {
     console.log("Creating enemy");
     Phaser.Sprite.call(this, game);
-    
+
     
     game.physics.arcade.enable(this);
     this.scale.setTo(0.09, 0.09);
@@ -56,7 +56,7 @@ function Enemy(game, x, y , sprite) {
         enemy.animations.add('left',[0,1,2,3], 12, true);
         enemy.animations.add('right', [4,5,6,7], 12, true);
         
-        position = {
+        this.position = {
            faceLeft:false,
            faceRight:false,
            faceUp:false,
@@ -85,7 +85,8 @@ Enemy.prototype.dies = function(){
 
 Enemy.prototype.move = function move() {
 
-    var speed = 2;
+
+    var speed = 1;
 
     var coor = this.game.player.getCoordinates();
 
@@ -103,10 +104,10 @@ Enemy.prototype.move = function move() {
 
         enemy.animations.play('left');
 
-        position.faceLeft = true;
-        position.faceRight = false;
-        position.faceUp = false;
-        position.faceDown = false;
+        this.position.faceLeft = true;
+        this.position.faceRight = false;
+        this.position.faceUp = false;
+        this.position.faceDown = false;
 
     }else if (dist1 < 0){
        // console.log("move to the right");
@@ -115,10 +116,10 @@ Enemy.prototype.move = function move() {
 
         moveHorizontal(speed);
 
-        position.faceRight = true;
-        position.faceLeft = false;
-        position.faceUp = false;
-        position.faceDown = false;
+        this.position.faceRight = true;
+        this.position.faceLeft = false;
+        this.position.faceUp = false;
+        this.position.faceDown = false;
     }
   }else{
         if(dist2> 0){
@@ -128,10 +129,10 @@ Enemy.prototype.move = function move() {
 
         moveVertical(-speed);
 
-        position.faceUp = true;
-        position.faceDown = false;
-        position.faceLeft = false;
-        position.faceRight = false;
+        this.position.faceUp = true;
+        this.position.faceDown = false;
+        this.position.faceLeft = false;
+        this.position.faceRight = false;
     }else if (dist2 < 0){
         // move down
         //console.log("move down");
@@ -139,10 +140,10 @@ Enemy.prototype.move = function move() {
 
         moveVertical(speed);
 
-        position.faceDown = true;
-        position.faceUp = false;
-        position.faceLeft = false;
-        position.faceRight = false;
+        this.position.faceDown = true;
+        this.position.faceUp = false;
+        this.position.faceLeft = false;
+        this.position.faceRight = false;
     }
 }    
 
@@ -150,18 +151,26 @@ Enemy.prototype.move = function move() {
 
     if(dist1 == 0){
 
-         if (position.faceLeft==true){
+         if (this.position.faceLeft==true){
             enemy.animations.play('left');
         }
-        else if(position.faceRight==true){
+        else if(this.position.faceRight==true){
             enemy.animations.play('right');
         }
-        else if (position.faceUp==true){
+        else if (this.position.faceUp==true){
             enemy.animations.play('up');
         }
-        else if (position.faceDown==true){
+        else if (this.position.faceDown==true){
             enemy.animations.play('down');
         }
+
+        this.game.player.reduceHealth(1);
+       /* if(this.game.player.isDead()){
+            enemy.x = 50;
+            enemy.y = 50;
+        }else{
+            this.game.player.reduceHealth(1);
+        }*/
 
     }
 

@@ -11,17 +11,31 @@ var speed;
 
 function preload(){
 	game.load.spritesheet('dragon', 'assets/enemySprites/dragon1.png', 24, 32);
+<<<<<<< HEAD
 	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 24, 32);
 	game.load.spritesheet('player', 'assets/playerSprites/warrior_m.png', 32, 36);
+=======
+	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 32, 36);
+	game.load.spritesheet('player', 'assets/playerSprites/warrior_f.png', 24, 32);
+>>>>>>> 4ad602d1b037a95d885555fcaef0d0bd02702f77
 
 }
 
 function create(){
 
+<<<<<<< HEAD
+	game.player = new Player(game , game.world.centerX , game.world.centerY , 8);
+=======
+	//game.debug.cameraInfo(game.camera, 32, 32);
+>>>>>>> 4ad602d1b037a95d885555fcaef0d0bd02702f77
+
+	//game.camera = new Camera(game , game.world.centerX - 20 , game.world.centerY - 20 , 50 , 50);
+
 	game.player = new Player(game , game.world.centerX , game.world.centerY , 8);
 
-	var coor = game.player.getCoordinates();
-	console.log("player is ", coor);
+	game.camera.position = {x:game.world.centerX - 20, y:game.world.centerY - 20}
+	game.camera.follow(player);
+	//console.log("player is ", coor);
 	game.dragon = new Dragon(game , 50 , 100);
 
 	/*dragon = game.add.sprite(50,50, 'dragon');
