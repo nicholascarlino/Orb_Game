@@ -11,7 +11,7 @@ var speed;
 
 function preload(){
 	game.load.spritesheet('dragon', 'assets/enemySprites/dragon1.png', 24, 32);
-	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 24, 32);
+	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 32, 36);
 	game.load.spritesheet('player', 'assets/playerSprites/warrior_f.png', 24, 32);
 
 }
@@ -22,7 +22,7 @@ function create(){
 
 	//game.camera = new Camera(game , game.world.centerX - 20 , game.world.centerY - 20 , 50 , 50);
 
-	game.player = new Player(game , game.world.centerX , game.world.centerY , 3);
+	game.player = new Player(game , game.world.centerX , game.world.centerY , 8);
 
 	game.camera.position = {x:game.world.centerX - 20, y:game.world.centerY - 20}
 	game.camera.follow(player);
