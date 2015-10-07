@@ -15,7 +15,7 @@ function Dragon(game, x, y ) {
 
     dragon = new Enemy(game , x , y , 'dragon');
 
-   dragon.weapon = new Weapon(game , x , y , 'fire');
+    dragon.weapon = new Weapon(game , x , y , 'fire');
     game.add.existing(this);
     this.game = game;
     //Phaser.Sprite.call(this, game, x, y, spriteType);
