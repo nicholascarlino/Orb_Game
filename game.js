@@ -1,4 +1,4 @@
-var boundsx = 800, boundsy = 600;
+var boundsx = 800*.8, boundsy = 600*.8;
 var game = new Phaser.Game(boundsx, boundsy, Phaser.AUTO, "game", {preload:
 		preload, update:update, create:create});
 
@@ -9,6 +9,7 @@ var cursors;
 var position;
 var speed;
 
+
 function preload(){
 	game.load.spritesheet('dragon', 'assets/enemySprites/dragon1.png', 24, 32);
  
@@ -17,6 +18,9 @@ function preload(){
 	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 32, 36);
 	game.load.spritesheet('player', 'assets/playerSprites/warrior_f.png', 32, 36);
 
+	game.load.tilemap("Level1", 'assets/backgroundSprites/TileMaps/Level1.json', null, Phaser.Tilemap.TILED_JSON);
+	game.load.image('DesertTiles','assets/backgroundSprites/Tilesets/desert_1.png');
+	game.load.image("Collisiontile", 'assets/backgroundSprites/Tilesets/collision.png');
 }
 
 function create(){
@@ -28,12 +32,60 @@ function create(){
 
 	//game.camera = new Camera(game , game.world.centerX - 20 , game.world.centerY - 20 , 50 , 50);
 
-	game.player = new Player(game , game.world.centerX , game.world.centerY , 8);
+	// start the physics system 
+	//game.physics.startSystem(Phaser.Physics.P2JS);
+	
 
-	game.camera.position = {x:game.world.centerX - 20, y:game.world.centerY - 20}
-	game.camera.follow(player);
-	//console.log("player is ", coor);
+	//game.world.setBounds(0,0,959,959);
+	//game.physics.p2.setBoundsToWorld(true, true, true, true, false);
+
+
+	// START MAP CONSTRUCTION
+
+	map = game.add.tilemap('Level1');
+	// ADDS THE TILE SETS INTO THE MAP OBKECT 
+	map.addTilesetImage('collision', "Collisiontile");
+	map.addTilesetImage('desert_1', 'DesertTiles');
+	
+
+	// these lines begin drawing the different layers of the map in order
+	
+	background = map.createLayer('BackgroundLayer');
+	background2 = map.createLayer('Extra_Seaweed');
+	background3 = map.createLayer('Rock_Layer');
+	background4 = map.createLayer('Collision');
+	// sets the opacity for the collision layer at 40%
+	background4.alpha = .4;
+	
+
+
+	// resize the entire world bounds to fit the map that I created 
+	background.resizeWorld();
+	game.world.setBounds(0,0,960,960);
+
+	// start the new physics system
+	game.physics.startSystem(Phaser.Physics.P2JS);
+
+	// create player and enemy objects 
+	game.player = new Player(game ,600 , 480 , 8);
 	game.dragon = new Dragon(game , 50 , 100);
+	//draws the foreground so the player looks like they are walking behind objects
+	// example: the tops of the trees!
+	foreground = map.createLayer('Foreground');
+	
+	// these two lines set and define the collision objects, in this case
+	// it refers to the red squares that you can kind of see on the map 
+	map.setCollision(313, true, "Collision");
+	game.physics.p2.convertTilemap(map, 'Collision');
+
+	
+	
+
+	
+	//game.camera.position = {x:game.world.centerX - 20, y:game.world.centerY - 20}
+	//game.camera.follow(player);
+	//console.log("player is ", coor);
+	
 
 	/*dragon = game.add.sprite(50,50, 'dragon');
 
@@ -60,7 +112,7 @@ function create(){
 }
 
 function update(){
-
+	game.camera.follow(player);
 	/*dragon.body.velocity.x = 0;
 	dragon.body.velocity.y = 0;
 	if (cursors.left.isDown){

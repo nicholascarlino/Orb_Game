@@ -21,16 +21,21 @@ function Player(game, x, y, speed) {
 	//Phaser.Sprite.call(this, game, x, y, 'player');
 
 	player = this.game.add.sprite(x,y, 'player');
+
 	player.animations.add('left', [9, 10, 11, 10], speed, true);
 	player.animations.add('right', [3, 4, 5, 4], speed, true);
 	player.animations.add('up', [0, 1, 2, 1], speed, true);
 	player.animations.add('down', [6, 7, 8, 7], speed, true);
+	game.physics.p2.enable(player, true);
+	player.body.clearShapes();
+	player.body.addRectangle(25, 18, 0, 18);
+	player.body.fixedRotation = true;
 	player.scale.setTo(.7,.7);
 
-	game.physics.enable(this, Phaser.Physics.ARCADE);
 	this.game = game;
 	//this.body.allowRotation = false;
-	//this.body.collideWorldBounds = true;
+	player.body.collideWorldBounds = true;
+
 
 	//might need to look at this
 
@@ -75,17 +80,21 @@ function Player(game, x, y, speed) {
 
 Player.prototype.update = function() {
 
+	// reset the player's movement every loop to make sure they stay still 
+	player.body.setZeroVelocity();
+
 	console.log("in update", player.x , player.y);
 	if(this.isDead()){
 		player.x = 0;
 		player.y = 0;
 	}else{
 
-	this.HealthBar.setPosition(player.x , player.y);
+	this.HealthBar.setPosition(player.x , player.y -20);
 	if (wasd.down.isDown) {
 		player.animations.play('down');
 		
-		player.y += 3;
+		player.body.y += 3;
+		//player.body.velocity.y = 20;
 
 
 		position.faceLeft = false;
@@ -95,7 +104,8 @@ Player.prototype.update = function() {
 	}
 	else if (wasd.left.isDown) {
 		player.animations.play('left');
-		player.x -= 3;
+		player.body.x -= 3;
+		//player.body.velocity.x = -20
 		position.faceLeft = true;
  		position.faceRight = false;
  		position.faceUp = false;
@@ -103,7 +113,7 @@ Player.prototype.update = function() {
 	}
 	else if (wasd.right.isDown) {
 		player.animations.play('right');
-		player.x += 3;
+		player.body.x += 3;
 		position.faceLeft = false;
  		position.faceRight = true;
  		position.faceUp = false;
@@ -111,7 +121,7 @@ Player.prototype.update = function() {
 	}
 	else if (wasd.up.isDown) {
 		player.animations.play('up');
-		player.y -= 3;
+		player.body.y -= 3;
 		position.faceLeft = false;
  		position.faceRight = false;
  		position.faceUp = false;
