@@ -26,8 +26,6 @@ function preload(){
 
 function create(){
 
-<<<<<<< HEAD
-=======
 
 	//game.player = new Player(game , game.world.centerX , game.world.centerY , 8);
 
@@ -41,8 +39,6 @@ function create(){
 
 	//game.world.setBounds(0,0,959,959);
 
-
->>>>>>> 10622b7c8ab28b8b7aa2bc13c37b76395385ecdd
 	// START MAP CONSTRUCTION
 
 	map = game.add.tilemap('Level1');
@@ -87,10 +83,8 @@ function create(){
 
 function update(){
 	game.camera.follow(player);
-<<<<<<< HEAD
 
-=======
->>>>>>> 10622b7c8ab28b8b7aa2bc13c37b76395385ecdd
+	
 }
 
 
