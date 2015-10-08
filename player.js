@@ -236,9 +236,6 @@ Player.prototype.addHealth = function(power) {
 }
 
 
-Player.prototype.fire = function(){
-
-	this.weapon.sh
 
 Player.prototype.contactHandler = function(body, shape1, shape2, equation) {
 	if (body.sprite == null) {
