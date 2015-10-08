@@ -27,6 +27,7 @@ function Player(game, x, y, speed) {
 	player.animations.add('up', [0, 1, 2, 1], speed, true);
 	player.animations.add('down', [6, 7, 8, 7], speed, true);
 	game.physics.p2.enable(player, true);
+
 	player.body.clearShapes();
 	player.body.addRectangle(25, 18, 0, 18);
 	player.body.fixedRotation = true;
@@ -35,7 +36,6 @@ function Player(game, x, y, speed) {
 	this.game = game;
 	//this.body.allowRotation = false;
 	player.body.collideWorldBounds = true;
-
 
 	//might need to look at this
 

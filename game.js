@@ -37,7 +37,6 @@ function create(){
 	
 
 	//game.world.setBounds(0,0,959,959);
-	//game.physics.p2.setBoundsToWorld(true, true, true, true, false);
 
 
 	// START MAP CONSTRUCTION
@@ -63,8 +62,11 @@ function create(){
 	background.resizeWorld();
 	game.world.setBounds(0,0,960,960);
 
+
 	// start the new physics system
 	game.physics.startSystem(Phaser.Physics.P2JS);
+	game.physics.p2.setBoundsToWorld(true, true, true, true, false);
+
 
 	// create player and enemy objects 
 	game.player = new Player(game ,600 , 480 , 8);
