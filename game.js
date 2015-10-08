@@ -17,6 +17,7 @@ function preload(){
 	game.load.spritesheet('player', 'assets/playerSprites/warrior_m.png', 32, 36);
 	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 32, 36);
 	game.load.spritesheet('player', 'assets/playerSprites/warrior_f.png', 32, 36);
+     game.load.spritesheet('rock', 'assets/rock.png', 32, 36)
 
 	game.load.tilemap("Level1", 'assets/backgroundSprites/TileMaps/Level1.json', null, Phaser.Tilemap.TILED_JSON);
 	game.load.image('DesertTiles','assets/backgroundSprites/Tilesets/desert_1.png');
@@ -24,21 +25,6 @@ function preload(){
 }
 
 function create(){
-
-
-	//game.player = new Player(game , game.world.centerX , game.world.centerY , 8);
-
-	//game.debug.cameraInfo(game.camera, 32, 32);
-
-	//game.camera = new Camera(game , game.world.centerX - 20 , game.world.centerY - 20 , 50 , 50);
-
-	// start the physics system 
-	//game.physics.startSystem(Phaser.Physics.P2JS);
-	
-
-	//game.world.setBounds(0,0,959,959);
-	//game.physics.p2.setBoundsToWorld(true, true, true, true, false);
-
 
 	// START MAP CONSTRUCTION
 
@@ -56,8 +42,6 @@ function create(){
 	background4 = map.createLayer('Collision');
 	// sets the opacity for the collision layer at 40%
 	background4.alpha = .4;
-	
-
 
 	// resize the entire world bounds to fit the map that I created 
 	background.resizeWorld();
@@ -78,102 +62,12 @@ function create(){
 	map.setCollision(313, true, "Collision");
 	game.physics.p2.convertTilemap(map, 'Collision');
 
-	
-	
-
-	
-	//game.camera.position = {x:game.world.centerX - 20, y:game.world.centerY - 20}
-	//game.camera.follow(player);
-	//console.log("player is ", coor);
-	
-
-	/*dragon = game.add.sprite(50,50, 'dragon');
-
-	dragon.animations.add('left',[9,10,11,10], 12, true);
-	dragon.animations.add('right', [3,4,5,4], 12, true);
-	dragon.animations.add('up', [0,1,2,1], 12, true);
-	dragon.animations.add('down',[6,7,8,7], 12, true);
-
-	game.physics.arcade.enable(dragon);
-	cursors = game.input.keyboard.createCursorKeys();
-	wasd = {
-		up: game.input.keyboard.addKey(Phaser.Keyboard.W),
-		down: game.input.keyboard.addKey(Phaser.Keyboard.S),
-		left: game.input.keyboard.addKey(Phaser.Keyboard.A),
-		right: game.input.keyboard.addKey(Phaser.Keyboard.D),
-	}
-	position = {
-		faceLeft:false,
-		faceRight:false,
-		faceUp:false,
-		faceDown:true,
-	}
-	speed = 100;*/
+	//game.player.change_weapon('fire');
 }
 
 function update(){
 	game.camera.follow(player);
-	/*dragon.body.velocity.x = 0;
-	dragon.body.velocity.y = 0;
-	if (cursors.left.isDown){
 
-		dragon.body.velocity.x = -speed;
-
- 		dragon.animations.play('left');
-
- 		position.faceLeft = true;
- 		position.faceRight = false;
- 		position.faceUp = false;
- 		position.faceDown = false;
-	}	
-	else if (cursors.right.isDown){
-
-		dragon.body.velocity.x = speed;
-
-		dragon.animations.play('right');
-
-		position.faceRight = true;
-		position.faceLeft = false;
-		position.faceUp = false;
- 		position.faceDown = false;
-	}
-	else if (cursors.up.isDown){
-
-		dragon.body.velocity.y = -speed;
-
-		dragon.animations.play('up');
-
-		position.faceUp = true;
-		position.faceDown = false;
-		position.faceLeft = false;
-		position.faceRight = false;
-	}
-	else if (cursors.down.isDown){
-
-		dragon.body.velocity.y = speed;
-
-		dragon.animations.play('down');
-
-		position.faceDown = true;
-		position.faceUp = false;
-		position.faceLeft = false;
-		position.faceRight = false;
-	}
-	else{
-		if (position.faceLeft==true){
-			dragon.animations.play('left');
-		}
-		else if(position.faceRight==true){
-			dragon.animations.play('right');
-		}
-		else if (position.faceUp==true){
-			dragon.animations.play('up');
-		}
-		else if (position.faceDown==true){
-			dragon.animations.play('down');
-		}
-
-	}*/
 }
 
 

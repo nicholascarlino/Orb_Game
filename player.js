@@ -36,7 +36,7 @@ function Player(game, x, y, speed) {
 	//this.body.allowRotation = false;
 	player.body.collideWorldBounds = true;
 
-
+	player.weapon = new WeaponGroup(this.game , player.x , player.y ,'rock');
 	//might need to look at this
 
 	 var barConfig ={
@@ -72,7 +72,7 @@ function Player(game, x, y, speed) {
            faceDown:true,
        }
 
-	fire = game.input.keyboard.addKey(Phaser.Keyboard.SPACE);
+	fire = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	action = game.input.keyboard.addKey(Phaser.Keyboard.E);
 
 	game.add.existing(this);	
@@ -124,8 +124,24 @@ Player.prototype.update = function() {
 		player.body.y -= 3;
 		position.faceLeft = false;
  		position.faceRight = false;
- 		position.faceUp = false;
- 		position.faceDown = true;
+ 		position.faceUp = true;
+ 		position.faceDown = false;;
+
+	} else if (fire.isDown) {
+		console.log("shooting ...");
+
+		if(position.faceLeft == true){
+		     player.weapon.fire(player.x , player.y , 0 , -400);
+		} 
+		else if (position.faceRight == true){
+		     player.weapon.fire(player.x , player.y , 0 , 400);
+		}
+		else if (position.faceUp == true){
+		     player.weapon.fire(player.x , player.y , -400 , 0);
+		}
+		else if(position.faceDown == true){
+		     player.weapon.fire(player.x , player.y , 400 , 0);
+		}         
 	}
     /* var bool = game.physics.arcade.overlap(player, this.game.enemy, function(){
      		console.log("reduceHealth ", this.HeathValue);
@@ -159,9 +175,6 @@ Player.prototype.update = function() {
 }
 
 	// Find specific name of function
-	if (fire.isDown) {
-		this.weapon.fire(this.x, this.y); 
-	}
 	//scroll thru text, talk to npc, build shelter
 	if (action.isDown) {
 		
@@ -179,8 +192,10 @@ Player.prototype.getCoordinates = function() {
 	return location;
 }
 
+//weapon has to be a sprite
 Player.prototype.change_weapon = function(weapon) {
-	this.weapon = weapon;
+	
+	this.weapon = new WeaponGroup(weapon);
 }
 Player.prototype.reduceHealth = function(power) {
 	
@@ -213,4 +228,11 @@ Player.prototype.isDead = function(){
 
 Player.prototype.addHealth = function(power) {
 	this.HealthBar.increase(power);
+}
+
+Player.prototype.fire = function(){
+
+	this.weapon.sh
+
+
 }
