@@ -26,6 +26,23 @@ function preload(){
 
 function create(){
 
+<<<<<<< HEAD
+=======
+
+	//game.player = new Player(game , game.world.centerX , game.world.centerY , 8);
+
+	//game.debug.cameraInfo(game.camera, 32, 32);
+
+	//game.camera = new Camera(game , game.world.centerX - 20 , game.world.centerY - 20 , 50 , 50);
+
+	// start the physics system 
+	//game.physics.startSystem(Phaser.Physics.P2JS);
+	
+
+	//game.world.setBounds(0,0,959,959);
+
+
+>>>>>>> 10622b7c8ab28b8b7aa2bc13c37b76395385ecdd
 	// START MAP CONSTRUCTION
 
 	map = game.add.tilemap('Level1');
@@ -47,8 +64,11 @@ function create(){
 	background.resizeWorld();
 	game.world.setBounds(0,0,960,960);
 
+
 	// start the new physics system
 	game.physics.startSystem(Phaser.Physics.P2JS);
+	game.physics.p2.setBoundsToWorld(true, true, true, true, false);
+
 
 	// create player and enemy objects 
 	game.player = new Player(game ,600 , 480 , 8);
@@ -67,11 +87,10 @@ function create(){
 
 function update(){
 	game.camera.follow(player);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 10622b7c8ab28b8b7aa2bc13c37b76395385ecdd
 }
-
-
-
-
 
 
