@@ -32,9 +32,9 @@ function Player(game, x, y, speed) {
 	player.body.addRectangle(25, 18, 0, 18);
 	player.body.fixedRotation = true;
 	player.scale.setTo(.7,.7);
-	this.wood = 0;
+	player.wood = 0;
 
-	this.body.onBeginContact.add(this.contactHandler);
+	player.body.onBeginContact.add(this.contactHandler);
 
 	this.game = game;
 	//this.body.allowRotation = false;
@@ -241,7 +241,10 @@ Player.prototype.fire = function(){
 	this.weapon.sh
 
 Player.prototype.contactHandler = function(body, shape1, shape2, equation) {
-	if (body.sprite.name == 'wood') {
+	if (body.sprite == null) {
+		return;
+	}
+	else if (body.sprite.name == 'wood') {
 		this.wood++;
 	}
 	else if (body.sprite.name == 'water') {
