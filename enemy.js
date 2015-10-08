@@ -14,10 +14,13 @@ function Enemy(game, x, y , sprite) {
     Phaser.Sprite.call(this, game);
 
     
-    game.physics.arcade.enable(this);
+    game.physics.p2.enable(this, true);
     this.scale.setTo(0.09, 0.09);
     this.anchor.setTo(0.5, 0.5);
     this.spriteType = sprite;
+    this.body.clearShapes();
+    this.body.addRectangle(this.width, this.height/3, 0, this.height(2/3));
+    this.body.fixedRotation = true;
 
     this.game = game;
     var barConfig ={
