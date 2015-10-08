@@ -238,7 +238,7 @@ Player.prototype.addHealth = function(power) {
 
 
 Player.prototype.contactHandler = function(body, shape1, shape2, equation) {
-	if (body.sprite == null) {
+	if (body.sprite == null or body == null) {
 		return;
 	}
 	else if (body.sprite.name == 'wood') {
