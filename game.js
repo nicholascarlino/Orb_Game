@@ -54,7 +54,7 @@ function create(){
 	background3 = map.createLayer('Rock_Layer');
 	background4 = map.createLayer('Collision');
 	// sets the opacity for the collision layer at 40%
-	background4.alpha = .4;
+	background4.alpha = 0;
 
 	// resize the entire world bounds to fit the map that I created 
 	background.resizeWorld();
@@ -67,8 +67,8 @@ function create(){
 
 
 	// create player and enemy objects 
-	game.player = new Player(game ,600 , 480 , 8);
-	game.dragon = new Dragon(game , 50 , 100);
+	game.player = new Player(game ,148 , 757, 8);
+	game.dragon = new Dragon(game , 100 , 100);
 	//draws the foreground so the player looks like they are walking behind objects
 	// example: the tops of the trees!
 	foreground = map.createLayer('Foreground');
@@ -76,6 +76,7 @@ function create(){
 	// these two lines set and define the collision objects, in this case
 	// it refers to the red squares that you can kind of see on the map 
 	map.setCollision(313, true, "Collision");
+	console.log("set collision!");
 	game.physics.p2.convertTilemap(map, 'Collision');
 
 	//game.player.change_weapon('fire');

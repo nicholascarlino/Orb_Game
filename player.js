@@ -26,7 +26,7 @@ function Player(game, x, y, speed) {
 	player.animations.add('right', [3, 4, 5, 4], speed, true);
 	player.animations.add('up', [0, 1, 2, 1], speed, true);
 	player.animations.add('down', [6, 7, 8, 7], speed, true);
-	game.physics.p2.enable(player, true);
+	game.physics.p2.enable(player);
 
 	player.body.clearShapes();
 	player.body.addRectangle(25, 18, 0, 18);
@@ -34,7 +34,7 @@ function Player(game, x, y, speed) {
 	player.scale.setTo(.7,.7);
 	player.wood = 0;
 
-	player.body.onBeginContact.add(this.contactHandler);
+	//player.body.onBeginContact.add(this.contactHandler);
 
 	this.game = game;
 	//this.body.allowRotation = false;
@@ -132,7 +132,8 @@ Player.prototype.update = function() {
  		position.faceUp = true;
  		position.faceDown = false;;
 
-	} else if (fire.isDown) {
+	} 
+	if (fire.isDown) {
 		console.log("shooting ...");
 
 		if(position.faceLeft == true){
@@ -238,7 +239,7 @@ Player.prototype.addHealth = function(power) {
 
 
 Player.prototype.contactHandler = function(body, shape1, shape2, equation) {
-	if (body.sprite == null or body == null) {
+	if (body.sprite == null) {
 		return;
 	}
 	else if (body.sprite.name == 'wood') {

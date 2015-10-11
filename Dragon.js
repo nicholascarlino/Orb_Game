@@ -15,7 +15,12 @@ function Dragon(game, x, y ) {
 
     dragon = new Enemy(game , x , y , 'dragon');
 
+    game.physics.p2.enable(dragon);
+    dragon.body.clearShapes(); // this
+    dragon.body.addRectangle(24,24,0,12);// this 
+    dragon.body.fixedRotation = true;// this 
     //dragon.weapon = new Weapon(game , x , y , 'fire');
+    dragon.anchor.setTo(.5,.5);
     game.add.existing(this);
     this.game = game;
     //Phaser.Sprite.call(this, game, x, y, spriteType);
@@ -45,7 +50,7 @@ Dragon.prototype.attack= function(){
 }
 
 Dragon.prototype.update = function(){
-
+    dragon.body.setZeroVelocity();
 //	game.time.events.add(Phaser.Timer.SECOND , this.attack, this);
 
 	/*if(dragon.inCamera){
