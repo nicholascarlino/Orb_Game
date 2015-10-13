@@ -35,7 +35,11 @@ collectable.prototype.pick_up = function()
 
 	var collect_coord = this.getCollectCoordinates();
 
-	if (collect_coord.x == player_coord.x && collect_coord.y == player_coord.y) {
+	var distx = player_coord.x - collect_coord.x;
+
+	var disty = player_coord.y - collect_coord.y;
+
+	if ((distx > -2) && (distx < 2) && (disty > -2) && (disty < 2)) {
 		this.kill();
 		if (this.name == 'water') {
 			game.player.addHealth(20);

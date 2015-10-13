@@ -83,10 +83,16 @@ WeaponGroup.prototype.damage_enemy = function(group)
 {
 	var enemy;
 
+	var distx;
+	var disty;
+
 	for (var i = 0; i < group.length; i++) {
 		enemy = group.getAt(i);
 
-		if (this.x == enemy.x && this.y == enemy.y){
+		distx = this.x - enemy.x;
+		disty = this.y - enemy.y;
+
+		if ((distx > -2) && (distx < 2) && (disty > -2) && (disty < 2)){
 			this.kill();
 			enemy.reduceLife(this.power);
 		}
