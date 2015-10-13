@@ -9,7 +9,7 @@ var weaponGroup;
 var weapon;
 var weaponTime = 0;
 
-function WeaponGroup(game, x, y , sprite) {
+function WeaponGroup(game, x, y , power, sprite) {
     console.log("Creating WeaponGroup");
 
     Phaser.Sprite.call(this, game);
@@ -33,6 +33,8 @@ function WeaponGroup(game, x, y , sprite) {
     //this.spriteType = sprite;
 
     this.game = game;
+    this.power = power;
+
     game.add.existing(this);
 
     //WeaponGroup = game.add.sprite(x,y, this.spriteType);
@@ -76,4 +78,17 @@ WeaponGroup.prototype.update = function(){
 	  //WeaponGroup.move();
 
 	
+}
+WeaponGroup.prototype.damage_enemy = function(group)
+{
+	var enemy;
+
+	for (var i = 0; i < group.length; i++) {
+		enemy = group.getAt(i);
+
+		if (this.x == enemy.x && this.y == enemy.y){
+			this.kill();
+			enemy.reduceLife(this.power);
+		}
+	}
 }

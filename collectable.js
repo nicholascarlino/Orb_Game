@@ -19,5 +19,35 @@ function Collectable(game, x, y, type) {
 
 	this.game = game;
 
+	this.name = type;
+
 	game.add.existing(this);
-}	
+}
+collectable.prototype.getCollectCoordinates = function() 
+{
+	var location = {x:this.x, y:this.y};
+
+	return location;
+}
+collectable.prototype.pick_up = function()
+{
+	var player_coord = this.game.player.getCoordinates();
+
+	var collect_coord = this.getCollectCoordinates();
+
+	if (collect_coord.x == player_coord.x && collect_coord.y == player_coord.y) {
+		this.kill();
+		if (this.name == 'water') {
+			game.player.addHealth(20);
+		}
+		else if (this.name == 'food') {
+			game.player.addHealth(40);
+		}
+		else if (this.name == 'wep_part') {
+			game.player.weapon_part++;
+		}
+		else {
+			game.player.wood++;
+		}
+	}
+}
