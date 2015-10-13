@@ -40,7 +40,7 @@ function Player(game, x, y, speed) {
 	//this.body.allowRotation = false;
 	player.body.collideWorldBounds = true;
 
-	player.weapon = new WeaponGroup(this.game , player.x , player.y ,'rock');
+	player.weapon = new WeaponGroup(this.game , player.x , player.y , 10, 'rock');
 
 	//might need to look at this
 

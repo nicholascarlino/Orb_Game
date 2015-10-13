@@ -82,7 +82,7 @@ Enemy.prototype.attack= function(){
     // does something to kill the enemy
 }
 
-Enemy.prototype.reduceLife= function reduce(amount){
+Enemy.prototype.reduceLife= function(amount){
 
     if(this.HealthValue <= 1){
         console.log("enemy health very down", this.HeathValue)

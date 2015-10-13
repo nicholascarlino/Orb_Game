@@ -77,11 +77,11 @@ WeaponGroup.prototype.update = function(){
 	  //console.log("about to move WeaponGroup")
 	  //WeaponGroup.move();
 
-	
+	this.damage_enemy(this.game.dragon);	
 }
 WeaponGroup.prototype.damage_enemy = function(group)
 {
-	var enemy;
+/*	var enemy;
 
 	var distx;
 	var disty;
@@ -97,4 +97,13 @@ WeaponGroup.prototype.damage_enemy = function(group)
 			enemy.reduceLife(this.power);
 		}
 	}
+*/
+	var distx = this.x - group.x;
+	var disty = this.y - group.y;
+
+	
+	if ((distx > -2) && (distx < 2) && (disty > -2) && (disty < 2)){
+			this.kill();
+			this.game.enemy.reduceLife(this.power);
+		}
 }
