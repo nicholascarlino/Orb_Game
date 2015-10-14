@@ -1,5 +1,3 @@
-
-
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 
 Player.prototype.constructor = Player;
@@ -26,13 +24,15 @@ function Player(game, x, y, speed) {
 	player.animations.add('right', [3, 4, 5, 4], speed, true);
 	player.animations.add('up', [0, 1, 2, 1], speed, true);
 	player.animations.add('down', [6, 7, 8, 7], speed, true);
-	game.physics.p2.enable(player);
-
+	game.physics.p2.enable(player, true);
+	//game.physics.enable(player, Phaser.Physics.ARCADE);
+	player.anchor.setTo(.5,.5);
 	player.body.clearShapes();
 	player.body.addRectangle(25, 18, 0, 18);
 	player.body.fixedRotation = true;
 	player.scale.setTo(.7,.7);
 	player.wood = 0;
+
 
 	//player.body.onBeginContact.add(this.contactHandler);
 
@@ -40,7 +40,7 @@ function Player(game, x, y, speed) {
 	//this.body.allowRotation = false;
 	player.body.collideWorldBounds = true;
 
-	player.weapon = new WeaponGroup(this.game , player.x , player.y ,'rock');
+	player.weapon = new WeaponGroup(this.game , player.x , player.y ,10, 'rock');
 
 	//might need to look at this
 
@@ -85,6 +85,7 @@ function Player(game, x, y, speed) {
 
 Player.prototype.update = function() {
 
+	
 	// reset the player's movement every loop to make sure they stay still 
 	player.body.setZeroVelocity();
 

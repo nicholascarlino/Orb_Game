@@ -13,9 +13,6 @@ function Enemy(game, x, y , sprite) {
     console.log("Creating enemy");
     Phaser.Sprite.call(this, game);
 
-    //THIS WAS AFTER ANCHOR SETTO and NOT COMMENTED 
-    //enemy.spriteType = sprite;
-
     //CHANGE: THIS WAS AFTER GAME>ADD>EXISTING>THIS
     if(this.spriteType != 'worm'){
         enemy = game.add.sprite(x,y, sprite);
@@ -39,12 +36,15 @@ function Enemy(game, x, y , sprite) {
 
     }
     
-    this.anchor.setTo(0.5, 0.5);
-    
-    //this.spriteType = sprite;
-    
-
+    game.physics.p2.enable(enemy, true); 
+   // game.physics.enable(enemy, Phaser.Physics.ARCADE);
+    enemy.anchor.setTo(0.5, 0.5);
+    enemy.body.clearShapes();
+    enemy.body.addRectangle(24,24,0,12);
+    enemy.body.fixedRotation = true;
+    game.add.existing(this);
     this.game = game;
+
     var barConfig ={
        width: 40,
        height: 10,
@@ -65,11 +65,10 @@ function Enemy(game, x, y , sprite) {
     this.HealthBar.setPercent(100);
 
     //this.addChild(HealthBar);
-    game.add.existing(this); //THIS WAS UNCOMMENTED
+    //THIS WAS UNCOMMENTED
 
 
     
-     game.physics.p2.enable(this); 
     //this.body.clearShapes(); // this
     //this.body.addRectangle(24,24,0,12);// this 
     //this.body.fixedRotation = true;// this 
@@ -102,6 +101,7 @@ Enemy.prototype.move = function move() {
 
 
     var speed = 1;
+    var painDist = 15;
 
     var coor = this.game.player.getCoordinates();
 
@@ -110,30 +110,30 @@ Enemy.prototype.move = function move() {
     var dist1 = enemy.x - coor.x;
     var dist2 = enemy.y - coor.y;
 
-    this.HealthBar.setPosition(enemy.x , enemy.y);
+    this.HealthBar.setPosition(enemy.x , enemy.y - 20);
 
   if( Math.abs(dist1) > Math.abs(dist2)){
-        if(dist1 > 1 ){
+        if(dist1 > painDist ){
         //move to the left
-        //console.log("move to the left");
-
-        moveHorizontal(-speed);
-        this.body.x += -speed;
-
+        console.log("enemy move left");
         enemy.animations.play('left');
+        moveHorizontal(-speed);
+        //enemy.body.x += -speed;
+
+      
 
         this.position.faceLeft = true;
         this.position.faceRight = false;
         this.position.faceUp = false;
         this.position.faceDown = false;
 
-    }else if (dist1 < -1){
-       // console.log("move to the right");
+    }else if (dist1 < -painDist){
+        console.log("enemy move right");
 
         enemy.animations.play('right');
 
         moveHorizontal(speed);
-        this.body.x += speed;
+       // enemy.body.x += speed;
 
         this.position.faceRight = true;
         this.position.faceLeft = false;
@@ -141,32 +141,32 @@ Enemy.prototype.move = function move() {
         this.position.faceDown = false;
     }
   }else{
-        if(dist2> 1){
+        if(dist2> painDist){
         //move up
-       //  console.log("move up");
+        console.log("enemy move up");
         enemy.animations.play('up');
 
         moveVertical(-speed);
-        this.body.y += -speed;
+       // enemy.body.y += -speed;
 
         this.position.faceUp = true;
         this.position.faceDown = false;
         this.position.faceLeft = false;
         this.position.faceRight = false;
-    }else if (dist2 < -1){
+    }else if (dist2 < -painDist){
         // move down
-        //console.log("move down");
+        console.log("enemy move down");
         enemy.animations.play('down');
 
         moveVertical(speed);
-        this.body.y += speed;
+        //enemy.body.y += speed;
 
         this.position.faceDown = true;
         this.position.faceUp = false;
         this.position.faceLeft = false;
         this.position.faceRight = false;
     }
-    else if ((dist1> -1) && (dist1 < 1) && (dist2 >-1) && (dist2 < 1)){
+    else if ((dist1> -painDist) && (dist1 < painDist) && (dist2 >-painDist) && (dist2 < painDist)){
         if (this.position.faceLeft==true){
             enemy.animations.play('left');
         }
@@ -180,7 +180,7 @@ Enemy.prototype.move = function move() {
             enemy.animations.play('down');
         }
 
-        this.game.player.reduceHealth(1);
+        this.game.player.reduceHealth(.5);
 
     }
 
@@ -217,29 +217,54 @@ Enemy.prototype.move = function move() {
 function moveVertical(speed){
 
     enemy.y += speed;
-    //enemy.body.y += speed;
+    //enemy.body.y += -speed;
+    enemy.body.y += speed;
 
 }
 
 function moveHorizontal(speed){
 
     enemy.x += speed;
-    //enemy.body.x += speed;
+   // enemy.body.x += speed;
+    enemy.body.x += speed;
 
 }
 
 Enemy.prototype.update = function() {
-
+    //game.physics.arcade.overlap(this, this.game.player.body, this.game.player.reduceHealth(.1));
     
-
+    enemy.body.setZeroVelocity();
+    if (!this.game.player.isDead()){
+        this.move();
+    }
     if(this.HealthValue<= 0){
         this.dies();
     }
-    console.log("in update enemy");
     /*var bool = game.physics.arcade.overlap(this.game.player, enemy, this.game.player.reduceHealth()  , null , this);
     console.log(bool);*/
 }
 
+/*
+Enemy.prototype.attack= function(){
 
+    //console.log("attack", dragon.weapon.x , dragon.weapon.y)
+    
+    //var weapon = new Weapon(game , this.x , this.y , 'fire');
+
+    if(dragon.position.faceLeft == true){
+        dragon.weapon.shoot('left', 1);
+        //dragon.weapon.x = dragon.x;
+     }else if(dragon.position.faceRight == true){
+        dragon.weapon.shoot('right', 1);
+     // dragon.weapon.setPos(dragon.x , dragon.y);
+     }else  if(dragon.position.faceUp == true){
+        dragon.weapon.shoot('up', 1);
+        //dragon.weapon.y = dragon.y;
+     }else if(dragon.position.faceDown == true){
+     dragon.weapon.shoot('down', 1);
+        //dragon.weapon.y = dragon.y;
+     }// does something that the Dragon does
+    // dragon.weapon.setPos(dragon.x , dragon.y);
+} */
 
 
