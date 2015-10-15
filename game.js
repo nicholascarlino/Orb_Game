@@ -26,19 +26,6 @@ function preload(){
 
 function create(){
 
-
-	//game.player = new Player(game , game.world.centerX , game.world.centerY , 8);
-
-	//game.debug.cameraInfo(game.camera, 32, 32);
-
-	//game.camera = new Camera(game , game.world.centerX - 20 , game.world.centerY - 20 , 50 , 50);
-
-	// start the physics system 
-	//game.physics.startSystem(Phaser.Physics.P2JS);
-	
-
-	//game.world.setBounds(0,0,959,959);
-
 	// START MAP CONSTRUCTION
 
 	map = game.add.tilemap('Level1');

@@ -24,22 +24,12 @@ function WeaponGroup(game, x, y , power, sprite) {
     weaponGroup.setAll('outOfBoundsKill', true);
     weaponGroup.setAll('checkWorldBounds', true);
 
-    //this.enemy = game.enemy;
-  //  WeaponGroup = new Enemy(game , x , y , 'WeaponGroup');
-    //game.physics.startSystem(Phaser.Physics.P2JS);
     game.physics.p2.enable(this);
-    
-    //this.scale.setTo(0.09, 0.09);
-    //this.anchor.setTo(0.5, 0.5);
-    //this.spriteType = sprite;
 
     this.game = game;
     this.power = power;
 
     game.add.existing(this);
-
-    //WeaponGroup = game.add.sprite(x,y, this.spriteType);
-    //Phaser.Sprite.call(this, game, x, y, spriteType);
 }
 
 
@@ -69,15 +59,6 @@ WeaponGroup.prototype.setPos = function(x , y){
 }	
 WeaponGroup.prototype.update = function(){
 
-	/*if(WeaponGroup.inCamera){
-		//console.log("in update WeaponGroup")
-		if(!this.game.player.isDead()){
-	          WeaponGroup.move();
-	      }
-	  }*/
-	  //console.log("about to move WeaponGroup")
-	  //WeaponGroup.move();
-
 	this.damage_enemy(this.game.dragon);	
 }
 WeaponGroup.prototype.damage_enemy = function(group)
@@ -99,15 +80,4 @@ WeaponGroup.prototype.damage_enemy = function(group)
 			this.kill();
 		}
 	}
-/*
-	var distx = this.x - group.x;
-	var disty = this.y - group.y;
-
-	
-	if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
-			this.game.dragon.reduceLife(this.power);
-			this.kill();
-			this.game.dragon.reduceLife(this.power);
-		}
-*/
 }
