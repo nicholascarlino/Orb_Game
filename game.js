@@ -57,8 +57,6 @@ function create(){
 
 	game.player = new Player(game ,148 , 757, 8);
 	game.dragon = new Enemy(game , 300 , 100, 'dragon');
-	//game.dragon = new Dragon(game , 100 , 100);
-	//game.player = new Player(game ,148 , 757, 8);
 
 	//draws the foreground so the player looks like they are walking behind objects
 	// example: the tops of the trees!
@@ -70,7 +68,6 @@ function create(){
 	console.log("set collision!");
 	game.physics.p2.convertTilemap(map, 'Collision');
 
-	//game.player.change_weapon('fire');
 }
 
 function update(){

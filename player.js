@@ -16,8 +16,6 @@ function Player(game, x, y, speed) {
 
 	Phaser.Sprite.call(this, game);
 
-	//Phaser.Sprite.call(this, game, x, y, 'player');
-
 	player = this.game.add.sprite(x,y, 'player');
 
 	player.animations.add('left', [9, 10, 11, 10], speed, true);
@@ -25,7 +23,6 @@ function Player(game, x, y, speed) {
 	player.animations.add('up', [0, 1, 2, 1], speed, true);
 	player.animations.add('down', [6, 7, 8, 7], speed, true);
 	game.physics.p2.enable(player, true);
-	//game.physics.enable(player, Phaser.Physics.ARCADE);
 	player.anchor.setTo(.5,.5);
 	player.body.clearShapes();
 	player.body.addRectangle(25, 18, 0, 18);
@@ -33,11 +30,7 @@ function Player(game, x, y, speed) {
 	player.scale.setTo(.7,.7);
 	player.wood = 0;
 
-
-	//player.body.onBeginContact.add(this.contactHandler);
-
 	this.game = game;
-	//this.body.allowRotation = false;
 	player.body.collideWorldBounds = true;
 
 	player.weapon = new WeaponGroup(this.game , player.x , player.y ,10, 'rock');
@@ -63,7 +56,6 @@ function Player(game, x, y, speed) {
 	this.HealthBar = new HealthBar(game, barConfig);
 	HealthValue = 100;
 	this.HealthBar.setPercent(100);
-	//this.weapon = new Weapon(game);
 
 	wasd = {
 		up: game.input.keyboard.addKey(Phaser.Keyboard.W),
@@ -102,8 +94,6 @@ Player.prototype.update = function() {
 		player.animations.play('down');
 		
 		player.body.y += 3;
-		//player.body.velocity.y = 20;
-
 
 		position.faceLeft = false;
  		position.faceRight = false;
@@ -113,7 +103,6 @@ Player.prototype.update = function() {
 	else if (wasd.left.isDown) {
 		player.animations.play('left');
 		player.body.x -= 3;
-		//player.body.velocity.x = -20
 		position.faceLeft = true;
  		position.faceRight = false;
  		position.faceUp = false;
@@ -152,46 +141,9 @@ Player.prototype.update = function() {
 		     player.weapon.fire(player.x , player.y , 400 , 0);
 		}         
 	}
-    /* var bool = game.physics.arcade.overlap(player, this.game.enemy, function(){
-     		console.log("reduceHealth ", this.HeathValue);
-			this.HealthValue -= 2;
-			this.HealthBar.setPercent(this.HealthValue);		
-     }  , this);
-
-
-    console.log(bool);*/
-
-	
-
-	/*
-	else{
-		if (position.faceLeft==true){
-			player.animations.play('left');
-		}
-		else if(position.faceRight==true){
-			player.animations.play('right');
-		}
-		else if (position.faceUp==true){
-			player.animations.play('up');
-		}
-		else if (position.faceDown==true){
-			player.animations.play('down');
-		}
-
-	}*/
-
 
 }
 
-	// Find specific name of function
-	//scroll thru text, talk to npc, build shelter
-	if (action.isDown) {
-		
-	}
-}
-
-//Player.prototype.locationX = player.x;
-//Player.prototype.locationY = player.y;
 
 Player.prototype.getCoordinates = function() {
 
@@ -216,7 +168,6 @@ Player.prototype.reduceHealth = function(power) {
 	console.log("reduceHealth ", HealthValue);
 	HealthValue -= power;
 	this.HealthBar.setPercent(HealthValue);
-	//console.log("reduceHealth ", HealthValue);
 
 }
 
@@ -226,7 +177,6 @@ Player.prototype.dies = function(){
    this.HealthBar.setPosition(-1 , -1); // not good
    player.x = 0 ;
    player.y = 0;
-   //this.destroy();
 }
 
 Player.prototype.isDead = function(){
