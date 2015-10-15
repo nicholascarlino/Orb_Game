@@ -106,10 +106,5 @@ WeaponGroup.prototype.damage_enemy = function(group)
 	if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
 			this.game.dragon.reduceLife(this.power);
 			this.kill();
-<<<<<<< HEAD
-			this.game.dragon.reduceLife(this.power);
-=======
->>>>>>> a2818e650b1eb52ed182effe2e712d780ae87fbc
-		}
 */
 }

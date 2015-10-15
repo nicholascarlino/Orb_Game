@@ -4,7 +4,7 @@ var game = new Phaser.Game(boundsx, boundsy, Phaser.AUTO, "game", {preload:
 
 
 var wasd;
-var dragon;
+var enemy;
 var cursors;
 var position;
 var speed;
@@ -69,7 +69,15 @@ function create(){
 	// create player and enemy objects 
 
 	game.player = new Player(game ,148 , 757, 8);
-	game.dragon = new Enemy(game , 300 , 100, 'dragon');
+
+
+	game.dragon = game.add.group();
+	for (var i = 0; i<4;i++ ){
+
+		 enemy = new Enemy(game , 300 , 100, 'dragon');
+		 game.dragon.add(enemy);
+	}
+	
 
 	//draws the foreground so the player looks like they are walking behind objects
 	// example: the tops of the trees!
