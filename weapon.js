@@ -24,6 +24,7 @@ function WeaponGroup(game, x, y , power, sprite) {
     weaponGroup.setAll('outOfBoundsKill', true);
     weaponGroup.setAll('checkWorldBounds', true);
 
+    //this.enemy = game.enemy;
   //  WeaponGroup = new Enemy(game , x , y , 'WeaponGroup');
     //game.physics.startSystem(Phaser.Physics.P2JS);
     game.physics.p2.enable(this);
@@ -104,6 +105,6 @@ WeaponGroup.prototype.damage_enemy = function(group)
 	
 	if ((distx > -2) && (distx < 2) && (disty > -2) && (disty < 2)){
 			this.kill();
-			this.game.enemy.reduceLife(this.power);
+			this.game.dragon.reduceLife(this.power);
 		}
 }

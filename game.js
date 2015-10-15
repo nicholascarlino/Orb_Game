@@ -67,13 +67,12 @@ function create(){
 
 
 	// create player and enemy objects 
-<<<<<<< HEAD
+
 	game.player = new Player(game ,148 , 757, 8);
 	game.dragon = new Enemy(game , 300 , 100, 'dragon');
-=======
-	game.dragon = new Dragon(game , 100 , 100);
-	game.player = new Player(game ,148 , 757, 8);
->>>>>>> 7e6fc4f962e43e5ccaf0fcefad4cbbf512280afd
+	//game.dragon = new Dragon(game , 100 , 100);
+	//game.player = new Player(game ,148 , 757, 8);
+
 	//draws the foreground so the player looks like they are walking behind objects
 	// example: the tops of the trees!
 	foreground = map.createLayer('Foreground');

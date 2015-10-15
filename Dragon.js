@@ -34,16 +34,16 @@ Dragon.prototype.attack= function(){
 	//var weapon = new Weapon(game , this.x , this.y , 'fire');
 
     if(dragon.position.faceLeft == true){
-     	dragon.weapon.shoot('left', 1);
+     	dragon.weapon.shoot(dragon, 'left', 1);
      	//dragon.weapon.x = dragon.x;
      }else if(dragon.position.faceRight == true){
-     	dragon.weapon.shoot('right', 1);
+     	dragon.weapon.shoot( dragon ,'right', 1);
      //	dragon.weapon.setPos(dragon.x , dragon.y);
      }else  if(dragon.position.faceUp == true){
-     	dragon.weapon.shoot('up', 1);
+     	dragon.weapon.shoot(dragon, 'up', 1);
      	//dragon.weapon.y = dragon.y;
      }else if(dragon.position.faceDown == true){
-     dragon.weapon.shoot('down', 1);
+     dragon.weapon.shoot(dragon ,'down', 1);
      	//dragon.weapon.y = dragon.y;
      }// does something that the Dragon does
     // dragon.weapon.setPos(dragon.x , dragon.y);
