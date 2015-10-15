@@ -16,6 +16,7 @@ function WeaponGroup(game, x, y , power, sprite) {
 
     weaponGroup = game.add.group();
 
+    // CONFUSING PHYSICS SYSTEMS 
     weaponGroup.enableBody = true;
     weaponGroup.physicsBodyType = Phaser.Physics.ARCADE;
     weaponGroup.createMultiple(30, sprite);
@@ -24,8 +25,7 @@ function WeaponGroup(game, x, y , power, sprite) {
     weaponGroup.setAll('outOfBoundsKill', true);
     weaponGroup.setAll('checkWorldBounds', true);
 
-  //  WeaponGroup = new Enemy(game , x , y , 'WeaponGroup');
-    //game.physics.startSystem(Phaser.Physics.P2JS);
+
     game.physics.p2.enable(this);
     
     //this.scale.setTo(0.09, 0.09);
@@ -104,6 +104,6 @@ WeaponGroup.prototype.damage_enemy = function(group)
 	
 	if ((distx > -2) && (distx < 2) && (disty > -2) && (disty < 2)){
 			this.kill();
-			this.game.enemy.reduceLife(this.power);
+			this.game.dragon.reduceLife(this.power);
 		}
 }
