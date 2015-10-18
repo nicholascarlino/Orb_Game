@@ -1,32 +1,31 @@
-WeaponGroup.prototype = Object.create(Phaser.Sprite.prototype);
+Weapon.prototype = Object.create(Phaser.Sprite.prototype);
 
-WeaponGroup.prototype.constructor = WeaponGroup;
+Weapon.prototype.constructor = Weapon;
 
-WeaponGroup.prototype.force = {x:0.0, y:0.0}; 
+Weapon.prototype.force = {x:0.0, y:0.0}; 
 
-
-var weaponGroup;
 var weapon;
 var weaponTime = 0;
 
-function WeaponGroup(game, x, y , power, sprite) {
-    console.log("Creating WeaponGroup");
+function Weapon(game, x, y , power, sprite) {
+    console.log("Creating Weapon");
 
-    Phaser.Sprite.call(this, game);
+    Phaser.Sprite.call(this, game, x, y, sprite);
 
-    weaponGroup = game.add.group();
+    //weaponGroup = game.add.group();
 
     // CONFUSING PHYSICS SYSTEMS 
-    weaponGroup.enableBody = true;
-    weaponGroup.physicsBodyType = Phaser.Physics.ARCADE;
-    weaponGroup.createMultiple(30, sprite);
-    weaponGroup.setAll('anchor.x', 0.5);
-    weaponGroup.setAll('anchor.y', 1);
-    weaponGroup.setAll('outOfBoundsKill', true);
-    weaponGroup.setAll('checkWorldBounds', true);
+   // weaponGroup.enableBody = true;
+    //weaponGroup.physicsBodyType = Phaser.Physics.ARCADE;
+    //weaponGroup.createMultiple(30, sprite);
+    //weaponGroup.setAll('anchor.x', 0.5);
+    //weaponGroup.setAll('anchor.y', 1);
+    //weaponGroup.setAll('outOfBoundsKill', true);
+    //weaponGroup.setAll('checkWorldBounds', true);
 
 
     game.physics.p2.enable(this);
+    this.body.fixedRotation = true;
     
     //this.scale.setTo(0.09, 0.09);
     //this.anchor.setTo(0.5, 0.5);
@@ -42,8 +41,8 @@ function WeaponGroup(game, x, y , power, sprite) {
 }
 
 
-WeaponGroup.prototype.fire= function(x , y , speedY , speedX){
-
+Weapon.prototype.fire= function(x , y , speedY , speedX){
+/*
     if (game.time.now > weaponTime)
     {
         //  Grab the first bullet we can from the pool
@@ -57,16 +56,22 @@ WeaponGroup.prototype.fire= function(x , y , speedY , speedX){
             weapon.body.velocity.x = speedX;
             weaponTime = game.time.now + 200;
         }
-    }
+    } */
+    this.reset(x, y+8);
+    this.body.velocity.y = speedY;
+    this.body.velocity.x = speedX;
+
     // does something that the WeaponGroup does
 }
 
-WeaponGroup.prototype.setPos = function(x , y){
-     WeaponGroup.x = x;
-     WeaponGroup.y = y;
+Weapon.prototype.setPos = function(x , y){
+     this.x = x;
+     this.body.x = x;
+     this.y = y;
+     this.body.y = y;
 
 }	
-WeaponGroup.prototype.update = function(){
+Weapon.prototype.update = function(){
 
 	/*if(WeaponGroup.inCamera){
 		//console.log("in update WeaponGroup")
@@ -79,7 +84,7 @@ WeaponGroup.prototype.update = function(){
 
 	this.damage_enemy(this.game.dragon);	
 }
-WeaponGroup.prototype.damage_enemy = function(group)
+Weapon.prototype.damage_enemy = function(group)
 {
 	var enemy;
 	var dam_dist = 15;

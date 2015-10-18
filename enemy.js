@@ -5,7 +5,7 @@ Enemy.prototype.constructor = Enemy;
 Enemy.prototype.force = {x:0.0, y:0.0}; 
 
 
-var velocity;
+//var velocity;
 //var this.position;
 
 function Enemy(game, x, y , sprite) {
@@ -15,6 +15,7 @@ function Enemy(game, x, y , sprite) {
     //CHANGE: THIS WAS AFTER GAME>ADD>EXISTING>THIS
     if(this.spriteType != 'worm'){
         //this = game.add.sprite(x,y, sprite);
+        console.log("enemy sprite created");
 
         this.animations.add('left',[9,10,11,10], 12, true);
         this.animations.add('right', [3,4,5,4], 12, true);
@@ -31,8 +32,9 @@ function Enemy(game, x, y , sprite) {
            faceRight:false,
            faceUp:false,
            faceDown:true,
+        
        }
-
+        console.log("worm created");
     }
     
     game.physics.p2.enable(this, true); 
@@ -43,6 +45,8 @@ function Enemy(game, x, y , sprite) {
     this.body.fixedRotation = true;
     game.add.existing(this);
     this.game = game;
+   // this.body.velocity.x = 0;
+    //this.body.velocity.y = 0;
 
     var barConfig ={
        width: 40,
@@ -62,17 +66,6 @@ function Enemy(game, x, y , sprite) {
     this.HealthBar = new HealthBar(game , barConfig);
     this.HeathValue = 100;
     this.HealthBar.setPercent(100);
-
-    //this.addChild(HealthBar);
-    //THIS WAS UNCOMMENTED
-
-
-    
-    //this.body.clearShapes(); // this
-    //this.body.addRectangle(24,24,0,12);// this 
-    //this.body.fixedRotation = true;// this 
-   // this.scale.setTo(0.09, 0.09);
- //   game.this = this;
 }
 
 
@@ -83,7 +76,7 @@ Enemy.prototype.attack= function(){
 Enemy.prototype.reduceLife= function(amount){
 
     if(this.HealthValue <= 1){
-        console.log("enemy health very down", this.HeathValue)
+        console.log("enemy health very down", this.HeathValue);
         this.destroy();
     }
     // does something to kill the this
@@ -117,7 +110,7 @@ Enemy.prototype.move = function move() {
         console.log("this move left");
         this.animations.play('left');
         moveHorizontal(-speed);
-        //this.body.x += -speed;
+        this.body.x -= speed;
 
       
 
@@ -132,7 +125,7 @@ Enemy.prototype.move = function move() {
         this.animations.play('right');
 
         moveHorizontal(speed);
-       // this.body.x += speed;
+        this.body.x += speed;
 
         this.position.faceRight = true;
         this.position.faceLeft = false;
@@ -146,7 +139,7 @@ Enemy.prototype.move = function move() {
         this.animations.play('up');
 
         moveVertical(-speed);
-       // this.body.y += -speed;
+        this.body.y-= speed;
 
         this.position.faceUp = true;
         this.position.faceDown = false;
@@ -158,7 +151,7 @@ Enemy.prototype.move = function move() {
         this.animations.play('down');
 
         moveVertical(speed);
-        //this.body.y += speed;
+        this.body.y += speed;
 
         this.position.faceDown = true;
         this.position.faceUp = false;
@@ -216,19 +209,17 @@ Enemy.prototype.move = function move() {
 function moveVertical(speed){
 
     this.y += speed;
-    //this.body.y += -speed;
-    this.body.y += speed;
+    //this.body.y = speed;
+   // this.body.y += speed;
 
 }
-
 function moveHorizontal(speed){
 
     this.x += speed;
    // this.body.x += speed;
-    this.body.x += speed;
+    //this.body.x = speed;
 
-}
-
+} 
 Enemy.prototype.update = function() {
     //game.physics.arcade.overlap(this, this.game.player.body, this.game.player.reduceHealth(.1));
     
@@ -253,7 +244,7 @@ this.prototype.attack= function(){
     if(dragon.position.faceLeft == true){
         dragon.weapon.shoot('left', 1);
         //dragon.weapon.x = dragon.x;
-     }else if(dragon.position.faceRight == true){
+     }else if(dragon.position.faceRight == t){
         dragon.weapon.shoot('right', 1);
      // dragon.weapon.setPos(dragon.x , dragon.y);
      }else  if(dragon.position.faceUp == true){

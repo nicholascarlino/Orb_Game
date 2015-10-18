@@ -4,7 +4,6 @@ var game = new Phaser.Game(boundsx, boundsy, Phaser.AUTO, "game", {preload:
 
 
 var wasd;
-var enemy;
 var cursors;
 var position;
 var speed;
@@ -72,9 +71,9 @@ function create(){
 
 
 	game.dragon = game.add.group();
-	for (var i = 0; i<4;i++ ){
+	for (var i = 0; i< 2;i++ ){
 
-		 enemy = new Enemy(game , 300 , 100, 'dragon');
+		 var enemy = new Enemy(game , 300 , 100, 'dragon');
 		 game.dragon.add(enemy);
 	}
 	

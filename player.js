@@ -41,7 +41,7 @@ function Player(game, x, y, speed) {
 	player.body.collideWorldBounds = true;
 
 
-	player.weapon = new WeaponGroup(this.game , player.x , player.y ,10, 'rock');
+	player.weapon = new Weapon(this.game , player.x , player.y ,10, 'rock');
 
 
 	//might need to look at this
@@ -204,7 +204,7 @@ Player.prototype.getCoordinates = function() {
 //weapon has to be a sprite
 Player.prototype.change_weapon = function(weapon) {
 	
-	this.weapon = new WeaponGroup(weapon);
+	this.weapon = new Weapon(weapon);
 }
 Player.prototype.reduceHealth = function(power) {
 	
