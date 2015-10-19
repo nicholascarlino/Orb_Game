@@ -22,7 +22,9 @@ function preload(){
 	game.load.tilemap("Level1", 'assets/backgroundSprites/TileMaps/Level1.json', null, Phaser.Tilemap.TILED_JSON);
 	game.load.image('DesertTiles','assets/backgroundSprites/Tilesets/desert_1.png');
 	game.load.image("Collisiontile", 'assets/backgroundSprites/Tilesets/collision.png');
-	game.load.image('food', 'assets/burger.png');	
+	game.load.image('food', 'assets/burger.png');
+	game.load.image('water', 'assets/water.png');
+	game.load.image('wood', 'assets/wood.png');	
 }
 
 function create(){
@@ -69,11 +71,12 @@ function create(){
 	console.log("set collision!");
 	game.physics.p2.convertTilemap(map, 'Collision');
 	game.food = new Collectible(game, 500, 500, 'food');
-
+	game.water = new Collectible(game, 540, 500, 'water');
+	game.wood = new Collectible(game, 460, 500, 'wood');
 }
 
 function update(){
-	game.camera.follow(player);
+	game.camera.follow(game.player);
 	
 	
 }
