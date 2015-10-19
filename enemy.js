@@ -84,7 +84,7 @@ Enemy.prototype.attack= function(){
 Enemy.prototype.reduceLife= function(amount){
 
     if(this.HealthValue <= 1){
-        console.log("enemy health very down", this.HeathValue)
+        console.log("enemy health very down", this.HeathValue);
         this.destroy();
     }
     // does something to kill the enemy
@@ -101,7 +101,7 @@ Enemy.prototype.move = function move() {
 
 
     var speed = 1;
-    var painDist = 15;
+    var painDist = 30;
 
     var coor = this.game.player.getCoordinates();
 
