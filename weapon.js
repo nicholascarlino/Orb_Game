@@ -82,18 +82,14 @@ Weapon.prototype.update= function(){
 }
 Weapon.prototype.damage_enemy = function(group)
 {
-	var enemy;
-	var dam_dist = 35;
+    var enemy;
+    var dam_dist = 35;
 
-	var distx;
-	var disty;
+    var distx;
+    var disty;
 
-
-	for (var i = 0; i < group.length; i++) {
-		enemy = group.getAt(i);
-
-		distx = this.x - enemy.x;
-		disty = this.y - enemy.y;
+    for (var i = 0; i < group.length; i++) {
+        enemy = group.getAt(i);
 
 		if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
 			enemy.reduceLife(this.power);
@@ -108,5 +104,22 @@ Weapon.prototype.damage_enemy = function(group)
 	if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
 			this.game.dragon.reduceLife(this.power);
 			this.kill();
+=======
+        distx = this.x - enemy.x;
+        disty = this.y - enemy.y;
+
+        if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
+            enemy.reduceLife(this.power);
+            this.destroy();
+        }
+    }
+/*
+    var distx = this.x - group.x;
+    var disty = this.y - group.y;
+    
+    if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
+            this.game.dragon.reduceLife(this.power);
+            this.kill();
+>>>>>>> 4d914c161349219c25186faf3fdec87f0ad7428d
 */
 }

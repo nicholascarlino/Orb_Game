@@ -15,7 +15,7 @@ function preload(){
 	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 24, 32);
 	game.load.spritesheet('player', 'assets/playerSprites/warrior_m.png', 32, 36);
 	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 32, 36);
-	game.load.spritesheet('player', 'assets/playerSprites/warrior_f.png', 32, 36);
+	game.load.spritesheet('npc', 'assets/playerSprites/warrior_f.png', 32, 36);
      game.load.spritesheet('rock', 'assets/rock.png', 32, 36)
 
 	game.load.tilemap("Level1Day", 'assets/backgroundSprites/TileMaps/Level1Day.json', null, Phaser.Tilemap.TILED_JSON);
@@ -23,32 +23,26 @@ function preload(){
 
 	game.load.image('DesertTiles','assets/backgroundSprites/Tilesets/desert_1.png');
 	game.load.image("Collisiontile", 'assets/backgroundSprites/Tilesets/collision.png');
+
 	game.load.image("NightTile", 'assets/backgroundSprites/Tilesets/night.png');
 
+
+	game.load.image('food', 'assets/burger.png');
+	game.load.image('water', 'assets/water.png');
+	game.load.image('wood', 'assets/wood.png');	
 }
 
 function create(){
 
-
-	//game.player = new Player(game , game.world.centerX , game.world.centerY , 8);
-
-	//game.debug.cameraInfo(game.camera, 32, 32);
-
-	//game.camera = new Camera(game , game.world.centerX - 20 , game.world.centerY - 20 , 50 , 50);
-
-	// start the physics system 
-	//game.physics.startSystem(Phaser.Physics.P2JS);
-	
-
-	//game.world.setBounds(0,0,959,959);
-
 	// START MAP CONSTRUCTION
+
 
 	game.map = game.add.tilemap('Level1Day');
 	// ADDS THE TILE SETS INTO THE MAP OBKECT 
 	game.map.addTilesetImage('collision', "Collisiontile");
 	game.map.addTilesetImage('desert_1', 'DesertTiles');
 	game.map.addTilesetImage('Night', 'NightTile');
+
 	
 
 	// these lines begin drawing the different layers of the map in order
@@ -75,6 +69,7 @@ function create(){
 
 	// create player and enemy objects 
 
+    game.npc = new Npc(game , 200 , 100 , 8,'npc');
 	game.player = new Player(game ,148 , 757, 8);
 
 
@@ -95,14 +90,18 @@ function create(){
 	game.map.setCollision(313, true, "Collision");
 	console.log("set collision!");
 	game.physics.p2.convertTilemap(game.map, 'Collision');
+
 	background5 = game.map.createLayer('Night');
 	background5.alpha = .7;
-
-	//game.player.change_weapon('fire');
+	// these two lines set and define the collision objects, in this case
+	// it refers to the red squares that you can kind of see on the map 
+	game.food = new Collectible(game, 500, 500, 'food');
+	game.water = new Collectible(game, 540, 500, 'water');
+	game.wood = new Collectible(game, 460, 500, 'wood');
 }
 
 function update(){
-	game.camera.follow(player);
+	game.camera.follow(game.player);
 	
 	
 }

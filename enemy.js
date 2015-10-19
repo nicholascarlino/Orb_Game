@@ -206,7 +206,6 @@ Enemy.prototype.update = function() {
     }
     /*var bool = game.physics.arcade.overlap(this.game.player, this, this.game.player.reduceHealth()  , null , this);
     console.log(bool);*/
+
 }
-
-
 
