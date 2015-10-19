@@ -10,6 +10,9 @@ var action;
 var player;
 var position;
 var HealthValue;
+var weaponTime = 0;
+var weaponDelay = 400;
+
 
 function Player(game, x, y, speed) {
 	console.log("Creating Player");
@@ -39,9 +42,6 @@ function Player(game, x, y, speed) {
 	this.game = game;
 	//this.body.allowRotation = false;
 	player.body.collideWorldBounds = true;
-
-
-	player.weapon = new Weapon(this.game , player.x , player.y ,10, 'rock');
 
 
 	//might need to look at this
@@ -91,7 +91,7 @@ Player.prototype.update = function() {
 	// reset the player's movement every loop to make sure they stay still 
 	player.body.setZeroVelocity();
 
-	console.log("in update", player.x , player.y);
+	//console.log("in update", player.x , player.y);
 	if(this.isDead()){
 		player.x = 0;
 		player.y = 0;
@@ -137,20 +137,31 @@ Player.prototype.update = function() {
 
 	} 
 	if (fire.isDown) {
-		console.log("shooting ...");
+		
+		if(game.time.now > weaponTime){
+			console.log("shooting ...");
 
-		if(position.faceLeft == true){
-		     player.weapon.fire(player.x , player.y , 0 , -400);
-		} 
-		else if (position.faceRight == true){
-		     player.weapon.fire(player.x , player.y , 0 , 400);
-		}
-		else if (position.faceUp == true){
-		     player.weapon.fire(player.x , player.y , -400 , 0);
-		}
-		else if(position.faceDown == true){
-		     player.weapon.fire(player.x , player.y , 400 , 0);
-		}         
+			if(position.faceLeft == true){
+				player.weapon = new Weapon(this.game , player.x -8, player.y ,10, 'rock', -400, 0);
+		     //player.weapon.fire(player.x , player.y , 0 , -400);
+			} 
+			else if (position.faceRight == true){
+				player.weapon = new Weapon(this.game , player.x +8, player.y ,10, 'rock', 400, 0);
+
+		    // player.weapon.fire(player.x , player.y , 0 , 400);
+			}
+			else if (position.faceUp == true){
+				player.weapon = new Weapon(this.game , player.x , player.y -8,10, 'rock', 0, -400);
+
+		    // player.weapon.fire(player.x , player.y , -400 , 0);
+			}
+			else if(position.faceDown == true){
+			player.weapon = new Weapon(this.game , player.x , player.y+15 ,10, 'rock', 0, 400);
+
+		    // player.weapon.fire(player.x , player.y , 400 , 0);
+			}  
+			weaponTime = game.time.now + weaponDelay;
+		}       
 	}
     /* var bool = game.physics.arcade.overlap(player, this.game.enemy, function(){
      		console.log("reduceHealth ", this.HeathValue);

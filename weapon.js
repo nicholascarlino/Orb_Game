@@ -4,18 +4,21 @@ Weapon.prototype.constructor = Weapon;
 
 Weapon.prototype.force = {x:0.0, y:0.0}; 
 
-var weapon;
-var weaponTime = 0;
 
-function Weapon(game, x, y , power, sprite) {
+
+function Weapon(game, x, y , power, sprite, speedX, speedY) {
     console.log("Creating Weapon");
 
     Phaser.Sprite.call(this, game, x, y, sprite);
 
-    //weaponGroup = game.add.group();
+  //  weaponGroup = game.add.group();
+    this.velocityY = speedY;
+    this.velocityX = speedX;
+    this.x = x;
+    this.y = y;
 
     // CONFUSING PHYSICS SYSTEMS 
-   // weaponGroup.enableBody = true;
+  //  weaponGroup.enableBody = true;
     //weaponGroup.physicsBodyType = Phaser.Physics.ARCADE;
     //weaponGroup.createMultiple(30, sprite);
     //weaponGroup.setAll('anchor.x', 0.5);
@@ -23,8 +26,13 @@ function Weapon(game, x, y , power, sprite) {
     //weaponGroup.setAll('outOfBoundsKill', true);
     //weaponGroup.setAll('checkWorldBounds', true);
 
+    this.checkWorldBounds = true;
+    this.outOfBoundsKill = true;
+    
 
-    game.physics.p2.enable(this);
+
+
+    game.physics.p2.enable(this, true);
     this.body.fixedRotation = true;
     
     //this.scale.setTo(0.09, 0.09);
@@ -41,56 +49,45 @@ function Weapon(game, x, y , power, sprite) {
 }
 
 
-Weapon.prototype.fire= function(x , y , speedY , speedX){
-/*
-    if (game.time.now > weaponTime)
-    {
-        //  Grab the first bullet we can from the pool
-        weapon = weaponGroup.getFirstExists(false);
+Weapon.prototype.update= function(){
 
-        if (weapon)
-        {
+    console.log("in shooting update");
+    
+        //  Grab the first bullet we can from the poo
             //  And fire it
-            weapon.reset(x, y + 8);
-            weapon.body.velocity.y = speedY;
-            weapon.body.velocity.x = speedX;
-            weaponTime = game.time.now + 200;
-        }
+       // this.reset(this.x, this.y);
+    this.body.velocity.y = this.velocityY;
+    this.body.velocity.x = this.velocityX;
+
+   /* var tile;
+    if (this.velocityX > 0){
+        tile = game.map.getTileWorldXY(this.x + 32, this.y, "Collision");
+    }
+    else if (this.velocityX < 0){
+        tile = game.map.getTileWorldXY(this.x-32, this.y, "Collision");   
+    }
+    else if (this.velocityY < 0){
+         tile = game.map.getTileWorldXY(this.x, this.y-32,'Collision');
+    }
+    else if (this.velocityY > 0){
+        tile = game.map.getTileWorldXY(this.x, this.y+32,'Collision');
     } */
-    this.reset(x, y+8);
-    this.body.velocity.y = speedY;
-    this.body.velocity.x = speedX;
-
-    // does something that the WeaponGroup does
-}
-
-Weapon.prototype.setPos = function(x , y){
-     this.x = x;
-     this.body.x = x;
-     this.y = y;
-     this.body.y = y;
-
-}	
-Weapon.prototype.update = function(){
-
-	/*if(WeaponGroup.inCamera){
-		//console.log("in update WeaponGroup")
-		if(!this.game.player.isDead()){
-	          WeaponGroup.move();
-	      }
-	  }*/
-	  //console.log("about to move WeaponGroup")
-	  //WeaponGroup.move();
-
-	this.damage_enemy(this.game.dragon);	
+    var tile = game.map.getTileWorldXY(this.x + (this.velocityX / 22), this.y + (this.velocityY / 22), 16, 16, "Collision");
+    if (tile == null){
+        this.damage_enemy(this.game.dragon);
+    }
+    else if (tile.collides == true){
+        this.destroy();
+    }
 }
 Weapon.prototype.damage_enemy = function(group)
 {
 	var enemy;
-	var dam_dist = 15;
+	var dam_dist = 35;
 
 	var distx;
 	var disty;
+
 
 	for (var i = 0; i < group.length; i++) {
 		enemy = group.getAt(i);
@@ -100,7 +97,7 @@ Weapon.prototype.damage_enemy = function(group)
 
 		if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
 			enemy.reduceLife(this.power);
-			this.kill();
+			this.destroy();
 		}
 	}
 /*

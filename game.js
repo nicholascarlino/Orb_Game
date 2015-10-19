@@ -18,9 +18,13 @@ function preload(){
 	game.load.spritesheet('player', 'assets/playerSprites/warrior_f.png', 32, 36);
      game.load.spritesheet('rock', 'assets/rock.png', 32, 36)
 
-	game.load.tilemap("Level1", 'assets/backgroundSprites/TileMaps/Level1.json', null, Phaser.Tilemap.TILED_JSON);
+	game.load.tilemap("Level1Day", 'assets/backgroundSprites/TileMaps/Level1Day.json', null, Phaser.Tilemap.TILED_JSON);
+	game.load.tilemap("Level1Night", 'assets/backgroundSprites/TileMaps/Level1Night.json', null, Phaser.Tilemap.TILED_JSON);
+
 	game.load.image('DesertTiles','assets/backgroundSprites/Tilesets/desert_1.png');
 	game.load.image("Collisiontile", 'assets/backgroundSprites/Tilesets/collision.png');
+	game.load.image("NightTile", 'assets/backgroundSprites/Tilesets/night.png');
+
 }
 
 function create(){
@@ -40,20 +44,23 @@ function create(){
 
 	// START MAP CONSTRUCTION
 
-	map = game.add.tilemap('Level1');
+	game.map = game.add.tilemap('Level1Day');
 	// ADDS THE TILE SETS INTO THE MAP OBKECT 
-	map.addTilesetImage('collision', "Collisiontile");
-	map.addTilesetImage('desert_1', 'DesertTiles');
+	game.map.addTilesetImage('collision', "Collisiontile");
+	game.map.addTilesetImage('desert_1', 'DesertTiles');
+	game.map.addTilesetImage('Night', 'NightTile');
 	
 
 	// these lines begin drawing the different layers of the map in order
 	
-	background = map.createLayer('BackgroundLayer');
-	background2 = map.createLayer('Extra_Seaweed');
-	background3 = map.createLayer('Rock_Layer');
-	background4 = map.createLayer('Collision');
+	background = game.map.createLayer('BackgroundLayer');
+	background2 = game.map.createLayer('Extra_Seaweed');
+	background3 = game.map.createLayer('Rock_Layer');
+	background4 = game.map.createLayer('Collision');
+	
 	// sets the opacity for the collision layer at 40%
 	background4.alpha = 0;
+	
 
 	// resize the entire world bounds to fit the map that I created 
 	background.resizeWorld();
@@ -62,7 +69,8 @@ function create(){
 
 	// start the new physics system
 	game.physics.startSystem(Phaser.Physics.P2JS);
-	game.physics.p2.setBoundsToWorld(true, true, true, true, false);
+	//game.physics.startSystem(Phaser.Physics.ARCADE);
+	//game.physics.p2.setBoundsToWorld(true, true, true, true, false);
 
 
 	// create player and enemy objects 
@@ -71,7 +79,7 @@ function create(){
 
 
 	game.dragon = game.add.group();
-	for (var i = 0; i< 2;i++ ){
+	for (var i = 0; i< 4;i++ ){
 
 		 var enemy = new Enemy(game , 300 , 100, 'dragon');
 		 game.dragon.add(enemy);
@@ -80,13 +88,15 @@ function create(){
 
 	//draws the foreground so the player looks like they are walking behind objects
 	// example: the tops of the trees!
-	foreground = map.createLayer('Foreground');
+	foreground = game.map.createLayer('Foreground');
 	
 	// these two lines set and define the collision objects, in this case
 	// it refers to the red squares that you can kind of see on the map 
-	map.setCollision(313, true, "Collision");
+	game.map.setCollision(313, true, "Collision");
 	console.log("set collision!");
-	game.physics.p2.convertTilemap(map, 'Collision');
+	game.physics.p2.convertTilemap(game.map, 'Collision');
+	background5 = game.map.createLayer('Night');
+	background5.alpha = .7;
 
 	//game.player.change_weapon('fire');
 }

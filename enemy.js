@@ -64,7 +64,7 @@ function Enemy(game, x, y , sprite) {
   };
 
     this.HealthBar = new HealthBar(game , barConfig);
-    this.HeathValue = 100;
+    this.HealthValue = 100;
     this.HealthBar.setPercent(100);
 }
 
@@ -80,8 +80,9 @@ Enemy.prototype.reduceLife= function(amount){
         this.destroy();
     }
     // does something to kill the this
-    this.HeathValue -=amount;
-    this.HealthBar.setPercent( this.HeathValue - amount);
+    this.HealthValue -=amount;
+    this.HealthBar.setPercent(this.HealthValue);
+    console.log("enemy health", HealthValue);
     //this.destroy();
 }
 
@@ -93,7 +94,7 @@ Enemy.prototype.move = function move() {
 
 
     var speed = 1;
-    var painDist = 15;
+    var painDist = 25;
 
     var coor = this.game.player.getCoordinates();
 
@@ -107,7 +108,7 @@ Enemy.prototype.move = function move() {
   if( Math.abs(dist1) > Math.abs(dist2)){
         if(dist1 > painDist ){
         //move to the left
-        console.log("this move left");
+     //   console.log("this move left");
         this.animations.play('left');
         moveHorizontal(-speed);
         this.body.x -= speed;
@@ -120,7 +121,7 @@ Enemy.prototype.move = function move() {
         this.position.faceDown = false;
 
     }else if (dist1 < -painDist){
-        console.log("this move right");
+        //console.log("this move right");
 
         this.animations.play('right');
 
@@ -135,7 +136,7 @@ Enemy.prototype.move = function move() {
   }else{
         if(dist2> painDist){
         //move up
-        console.log("this move up");
+        //console.log("this move up");
         this.animations.play('up');
 
         moveVertical(-speed);
@@ -145,9 +146,9 @@ Enemy.prototype.move = function move() {
         this.position.faceDown = false;
         this.position.faceLeft = false;
         this.position.faceRight = false;
-    }else if (dist2 < -painDist){
+    } else if (dist2 < -painDist){
         // move down
-        console.log("this move down");
+       // console.log("this move down");
         this.animations.play('down');
 
         moveVertical(speed);
@@ -175,36 +176,8 @@ Enemy.prototype.move = function move() {
         this.game.player.reduceHealth(.5);
 
     }
-
     }
 }    
-
-
-/*
-    if(dist1 < 1 ){
-
-         if (this.position.faceLeft==true){
-            this.animations.play('left');
-        }
-        else if(this.position.faceRight==true){
-            this.animations.play('right');
-        }
-        else if (this.position.faceUp==true){
-            this.animations.play('up');
-        }
-        else if (this.position.faceDown==true){
-            this.animations.play('down');
-        }
-
-        this.game.player.reduceHealth(.2);
-       /* if(this.game.player.isDead()){
-            this.x = 50;
-            this.y = 50;
-        }else{
-            this.game.player.reduceHealth(1);
-        } //
-
-    }  */
 
 function moveVertical(speed){
 
@@ -228,33 +201,12 @@ Enemy.prototype.update = function() {
         this.move();
     }
     if(this.HealthValue<= 0){
-        this.dies();
+        this.destroy();
+
     }
     /*var bool = game.physics.arcade.overlap(this.game.player, this, this.game.player.reduceHealth()  , null , this);
     console.log(bool);*/
 }
 
-/*
-this.prototype.attack= function(){
-
-    //console.log("attack", dragon.weapon.x , dragon.weapon.y)
-    
-    //var weapon = new Weapon(game , this.x , this.y , 'fire');
-
-    if(dragon.position.faceLeft == true){
-        dragon.weapon.shoot('left', 1);
-        //dragon.weapon.x = dragon.x;
-     }else if(dragon.position.faceRight == t){
-        dragon.weapon.shoot('right', 1);
-     // dragon.weapon.setPos(dragon.x , dragon.y);
-     }else  if(dragon.position.faceUp == true){
-        dragon.weapon.shoot('up', 1);
-        //dragon.weapon.y = dragon.y;
-     }else if(dragon.position.faceDown == true){
-     dragon.weapon.shoot('down', 1);
-        //dragon.weapon.y = dragon.y;
-     }// does something that the Dragon does
-    // dragon.weapon.setPos(dragon.x , dragon.y);
-} */
 
 
