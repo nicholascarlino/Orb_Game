@@ -29,7 +29,7 @@ function Player(game, x, y, speed) {
 	this.body.fixedRotation = true;
 	this.scale.setTo(.7,.7);
 	console.log("Scale/rotation");
-	this.weapon_part = 0;
+	this.wood = false;
 	console.log("Weapon_part");
 
 	this.game = game;

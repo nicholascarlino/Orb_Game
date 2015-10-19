@@ -1,8 +1,45 @@
 var boundsx = 800*.8, boundsy = 600*.8;
-var game = new Phaser.Game(boundsx, boundsy, Phaser.AUTO, "game", {preload:
-		preload, update:update, create:create});
+var game = new Phaser.Game(boundsx, boundsy, Phaser.AUTO, "game");
+
+game.state.add('boot', bootState);
+game.state.add('load', loadState);
+game.state.add('menu', menuState);
+game.state.add('instr', instructState);
+game.state.add('lvl1_d', level1DayState);
+game.state.add('lvl1_n', level1NightState);
+/*game.state.add('lvl2_d', level2DayState);
+game.state.add('lvl2_n', level2NightState);
+game.state.add('lvl3_d', level3DayState);
+game.state.add('lvl3_n', level3NightState);
+game.state.add('lvl4', level4State);
+game.state.add('end', gameOverState); */
+
+game.state.start('boot');
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 var wasd;
 var dragon;
 var cursors;
@@ -55,7 +92,6 @@ function create(){
 	game.physics.startSystem(Phaser.Physics.P2JS);
 	game.physics.p2.setBoundsToWorld(true, true, true, true, false);
 
-
 	// create player and enemy objects 
 
 	game.player = new Player(game ,148 , 757, 8);
@@ -81,4 +117,4 @@ function update(){
 	
 }
 
-
+*/
