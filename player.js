@@ -10,6 +10,8 @@ var action;
 var player;
 var position;
 var HealthValue;
+var npc;
+var distNpc;
 
 function Player(game, x, y, speed) {
 	console.log("Creating Player");
@@ -30,6 +32,7 @@ function Player(game, x, y, speed) {
 	player.scale.setTo(.7,.7);
 	player.wood = 0;
 
+	npc = game.npc;
 	this.game = game;
 	player.body.collideWorldBounds = true;
 
@@ -72,7 +75,7 @@ function Player(game, x, y, speed) {
        }
 
 	fire = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-	action = game.input.keyboard.addKey(Phaser.Keyboard.E);
+	talk = game.input.keyboard.addKey(Phaser.Keyboard.E);
 
 	game.add.existing(this);	
 }
@@ -87,7 +90,11 @@ Player.prototype.update = function() {
 		player.x = 0;
 		player.y = 0;
 	}else{
+		distNpc = Math.sqrt( (player.x- npc.body.x)*(player.x- npc.body.x) + 
+			                 (player.y- npc.body.y)*(player.y- npc.body.y) );
+		
 
+		//console.log("dist NPC is ", distNpc);
 	this.HealthBar.setPosition(player.x , player.y -20);
 	}
 	if (wasd.down.isDown) {
@@ -141,6 +148,10 @@ Player.prototype.update = function() {
 		     player.weapon.fire(player.x , player.y , 400 , 0);
 		}         
 	}
+	if(talk.isDown && distNpc < 50){
+		console.log("about to talk");
+		npc.talk(this.game , 1);
+	}
 
 }
 
@@ -161,18 +172,18 @@ Player.prototype.change_weapon = function(weapon) {
 Player.prototype.reduceHealth = function(power) {
 	
 	if(HealthValue <= 1){
-		console.log("very down", HealthValue)
+		//console.log("very down", HealthValue)
 		this.dies();
 	}
 
-	console.log("reduceHealth ", HealthValue);
+	//console.log("reduceHealth ", HealthValue);
 	HealthValue -= power;
 	this.HealthBar.setPercent(HealthValue);
 
 }
 
 Player.prototype.dies = function(){
-	console.log("is about to die")
+	//console.log("is about to die")
    player.destroy();
    this.HealthBar.setPosition(-1 , -1); // not good
    player.x = 0 ;
@@ -190,3 +201,6 @@ Player.prototype.addHealth = function(power) {
 	this.HealthBar.setPercent(HealthValue);
 }
 
+Player.prototype.addNPC = function(New_npc) {
+	player.npc = New_npc;
+}

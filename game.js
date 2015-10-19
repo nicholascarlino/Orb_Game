@@ -16,7 +16,7 @@ function preload(){
 	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 24, 32);
 	game.load.spritesheet('player', 'assets/playerSprites/warrior_m.png', 32, 36);
 	game.load.spritesheet('dragon', 'assets/enemySprites/skyll-spriteLeft.png', 32, 36);
-	game.load.spritesheet('player', 'assets/playerSprites/warrior_f.png', 32, 36);
+	game.load.spritesheet('npc', 'assets/playerSprites/warrior_f.png', 32, 36);
      game.load.spritesheet('rock', 'assets/rock.png', 32, 36)
 
 	game.load.tilemap("Level1", 'assets/backgroundSprites/TileMaps/Level1.json', null, Phaser.Tilemap.TILED_JSON);
@@ -55,8 +55,9 @@ function create(){
 
 
 	// create player and enemy objects 
-
-	game.player = new Player(game ,148 , 757, 8);
+    game.npc = new Npc(game , 200 , 100 , 'npc');
+	game.player = new Player(game , 148 , 757, 8);
+	console.log(game.npc);
 	game.dragon = new Enemy(game , 300 , 100, 'dragon');
 
 	//draws the foreground so the player looks like they are walking behind objects
