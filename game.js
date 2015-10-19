@@ -22,6 +22,7 @@ function preload(){
 	game.load.tilemap("Level1", 'assets/backgroundSprites/TileMaps/Level1.json', null, Phaser.Tilemap.TILED_JSON);
 	game.load.image('DesertTiles','assets/backgroundSprites/Tilesets/desert_1.png');
 	game.load.image("Collisiontile", 'assets/backgroundSprites/Tilesets/collision.png');
+	game.load.image('food', 'assets/burger.png');	
 }
 
 function create(){
@@ -67,6 +68,7 @@ function create(){
 	map.setCollision(313, true, "Collision");
 	console.log("set collision!");
 	game.physics.p2.convertTilemap(map, 'Collision');
+	game.food = new Collectible(game, 500, 500, 'food');
 
 }
 

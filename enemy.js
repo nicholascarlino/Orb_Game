@@ -115,7 +115,6 @@ Enemy.prototype.move = function move() {
   if( Math.abs(dist1) > Math.abs(dist2)){
         if(dist1 > painDist ){
         //move to the left
-        console.log("enemy move left");
         enemy.animations.play('left');
         moveHorizontal(-speed);
         //enemy.body.x += -speed;
@@ -128,7 +127,6 @@ Enemy.prototype.move = function move() {
         this.position.faceDown = false;
 
     }else if (dist1 < -painDist){
-        console.log("enemy move right");
 
         enemy.animations.play('right');
 
@@ -143,7 +141,6 @@ Enemy.prototype.move = function move() {
   }else{
         if(dist2> painDist){
         //move up
-        console.log("enemy move up");
         enemy.animations.play('up');
 
         moveVertical(-speed);
@@ -155,7 +152,6 @@ Enemy.prototype.move = function move() {
         this.position.faceRight = false;
     }else if (dist2 < -painDist){
         // move down
-        console.log("enemy move down");
         enemy.animations.play('down');
 
         moveVertical(speed);

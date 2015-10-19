@@ -83,13 +83,13 @@ Player.prototype.update = function() {
 	// reset the player's movement every loop to make sure they stay still 
 	player.body.setZeroVelocity();
 
-	console.log("in update", player.x , player.y);
 	if(this.isDead()){
 		player.x = 0;
 		player.y = 0;
 	}else{
 
 	this.HealthBar.setPosition(player.x , player.y -20);
+	}
 	if (wasd.down.isDown) {
 		player.animations.play('down');
 		
@@ -186,25 +186,7 @@ Player.prototype.isDead = function(){
 }
 
 Player.prototype.addHealth = function(power) {
-	this.HealthBar.increase(power);
+	HealthValue += power;
+	this.HealthBar.setPercent(HealthValue);
 }
 
-
-
-Player.prototype.contactHandler = function(body, shape1, shape2, equation) {
-	if (body.sprite == null) {
-		return;
-	}
-	else if (body.sprite.name == 'wood') {
-		this.wood++;
-	}
-	else if (body.sprite.name == 'water') {
-		this.addHealth(10);
-	}
-	else if (body.sprite.name == 'food') {
-		this.addHealth(20);
-	}
-	else {
-		this.reduceHealth(body.power);
-	}
-}
