@@ -105,10 +105,10 @@ Npc.prototype.update = function(){
 		console.log(this.body.x , this.body.y);
 		this.followPlayer();
 	}else{
-		console.log("Before",this.body.x , this.body.y);
+		//console.log("Before",this.body.x , this.body.y);
 		this.body.x = initialX;
 		this.body.y = initialY;
-		console.log("After",this.body.x , this.body.y);
+		//console.log("After",this.body.x , this.body.y);
 	}
 }
 
