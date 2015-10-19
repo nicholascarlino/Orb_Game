@@ -113,7 +113,6 @@ Enemy.prototype.move = function move() {
         moveHorizontal(-speed);
         this.body.x -= speed;
 
-      
 
         this.position.faceLeft = true;
         this.position.faceRight = false;
@@ -195,15 +194,16 @@ function moveHorizontal(speed){
 } 
 Enemy.prototype.update = function() {
     //game.physics.arcade.overlap(this, this.game.player.body, this.game.player.reduceHealth(.1));
-     console.log("HealthBar", this.HealthBar);
+
     this.body.setZeroVelocity();
     if (!this.game.player.isDead()){
         this.move();
     }
     if(this.HealthValue<= 0){
-        console.log("HealthBar", this.HealthBar);
-        this.HealthBar.x = -100;
-        console.log("HealthBar AFTER", this.HealthBar);
+      //  console.log("HealthBar", this.HealthBar);
+        this.HealthBar.flipped = true;
+        this.HealthBar.setPosition(-1 , -1);
+       // console.log("HealthBar AFTER", this.HealthBar);
         this.destroy();
 
     }

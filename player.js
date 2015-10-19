@@ -108,7 +108,7 @@ Player.prototype.update = function() {
 		player.animations.play('down');
 		
 		player.body.y += 3;
-		this.y += 3;
+		this.y  = player.body.y
 
 		position.faceLeft = false;
  		position.faceRight = false;
@@ -116,9 +116,10 @@ Player.prototype.update = function() {
  		position.faceDown = true;
 	}
 	else if (wasd.left.isDown) {
+		console.log("still moving", player.body.x , this.x);
 		player.animations.play('left');
 		player.body.x -= 3;
-		this.x -= 3;
+		this.x  = player.body.x;
 		position.faceLeft = true;
  		position.faceRight = false;
  		position.faceUp = false;
@@ -127,7 +128,7 @@ Player.prototype.update = function() {
 	else if (wasd.right.isDown) {
 		player.animations.play('right');
 		player.body.x += 3;
-		this.x += 3;
+		this.x  = player.body.x;
 		position.faceLeft = false;
  		position.faceRight = true;
  		position.faceUp = false;
@@ -136,7 +137,7 @@ Player.prototype.update = function() {
 	else if (wasd.up.isDown) {
 		player.animations.play('up');
 		player.body.y -= 3;
-		this.y -= 3;
+		this.y = player.body.y
 		position.faceLeft = false;
  		position.faceRight = false;
  		position.faceUp = true;
