@@ -60,7 +60,13 @@ function create(){
     game.npc = new Npc(game , 200 , 100 , 8,'npc');
 	game.player = new Player(game , 148 , 757, 8);
 	console.log(game.npc);
-	game.dragon = new Enemy(game , 300 , 100, 'dragon');
+	
+		game.dragon = game.add.group();
+	for (var i = 0; i< 4;i++ ){
+
+		 var enemy = new Enemy(game , 300 , 100, 'dragon');
+		 game.dragon.add(enemy);
+	}
 
 	//draws the foreground so the player looks like they are walking behind objects
 	// example: the tops of the trees!

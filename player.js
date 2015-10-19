@@ -11,6 +11,8 @@ var position;
 var HealthValue;
 var npc;
 var distNpc;
+var weaponTime = 0;
+var weaponDelay = 400
 
 function Player(game, x, y, speed) {
 	console.log("Creating Player");
@@ -38,7 +40,7 @@ function Player(game, x, y, speed) {
 	this.game = game;
 	this.body.collideWorldBounds = true;
 
-	this.weapon = new WeaponGroup(this.game , this.x , this.y , 10, 'rock');
+	//this.weapon = new WeaponGroup(this.game , this.x , this.y , 10, 'rock');
 
 	//might need to look at this
 
@@ -134,20 +136,32 @@ Player.prototype.update = function() {
 	} 
 	if (fire.isDown) {
 		console.log("shooting ...");
+	      if(game.time.now > weaponTime){
+            console.log("shooting ...");
 
-		if(position.faceLeft == true){
-		     this.weapon.fire(this.x , this.y , 0 , -400);
-		} 
-		else if (position.faceRight == true){
-		     this.weapon.fire(this.x , this.y , 0 , 400);
-		}
-		else if (position.faceUp == true){
-		     this.weapon.fire(this.x , this.y , -400 , 0);
-		}
-		else if(position.faceDown == true){
-		     this.weapon.fire(this.x , this.y , 400 , 0);
+            if(position.faceLeft == true){
+            this.weapon = new Weapon(this.game ,this.x -8, this.y ,10, 'rock', -400, 0);
+             //player.weapon.fire(player.x , player.y , 0 , -400);
+            } 
+            else if (position.faceRight == true){
+            this.weapon = new Weapon(this.game ,this.x +8,this.y ,10, 'rock', 400, 0);
+
+            // player.weapon.fire(player.x , player.y , 0 , 400);
+            }
+            else if (position.faceUp == true){
+            this.weapon = new Weapon(this.game ,this.x ,this.y -8,10, 'rock', 0, -400);
+
+            // player.weapon.fire(player.x , player.y , -400 , 0);
+            }
+            else if(position.faceDown == true){
+               this.weapon = new Weapon(this.game ,this.x ,this.y+15 ,10, 'rock', 0, 400);
+
+            // player.weapon.fire(player.x , player.y , 400 , 0);
+            }  
+            weaponTime = game.time.now + weaponDelay;
+        }       
 		}         
-	}
+	
 	if(action.isDown && distNpc < 50){
 		console.log("about to talk");
 		npc.talk(this.game , 1);
