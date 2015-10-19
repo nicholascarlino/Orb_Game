@@ -14,7 +14,7 @@ var prompt;
 var followPlayer;
 var initialX;
 var initialY;
-function Npc(game, x, y, spriteType) {
+function Npc(game, x, y, speed ,spriteType) {
 	console.log("Creating NPC");
 	console.log("Creating Player");
 	initialY = y;
@@ -25,8 +25,8 @@ function Npc(game, x, y, spriteType) {
 	game.physics.arcade.enable(this.body , true);
 	//game.physics.p2.enable(this.body, true);
 	console.log(this.body.x , this.body.y);
-	this.body.animations.add('left', [9, 10, 11, 10], speed, true);
-	this.body.animations.add('right', [3, 4, 5, 4], speed, true);
+	this.body.animations.add('left', [9, 10, 11, 10],speed, true);
+	this.body.animations.add('right', [3, 4, 5, 4],speed, true);
 	this.body.animations.add('up', [0, 1, 2, 1], speed, true);
 	this.body.animations.add('down', [6, 7, 8, 7], speed, true);
 	
@@ -117,7 +117,7 @@ Npc.prototype.followPlayer = function(){
 
 	var dist1 = this.body.x - this.game.player.x;
     var dist2 = this.body.y - this.game.player.y;
-    var speed = 10;
+    var speed = 5;
  var painDist = 15;
   if( Math.abs(dist1) > Math.abs(dist2)){
         if(dist1 > painDist ){
@@ -188,17 +188,17 @@ Npc.prototype.followPlayer = function(){
 Npc.prototype.moveVertical = function (speed)
 {
 
-    this.body.y = this.game.player.y;
+    //this.body.y = this.game.player.y;
     //enemy.body.y += -speed;
-   // this.body.y += speed;
+   this.body.y += speed;
 
 }
 
 
 Npc.prototype.moveHorizontal = function moveHorizontal(speed){
 
-    this.body.x = this.game.player.x ;
+    //this.body.x = this.game.player.x ;
    // enemy.body.x += speed;
-   // this.body.x+= speed;
+   this.body.x+= speed;
 
 }
