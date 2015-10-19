@@ -28,12 +28,10 @@ function Player(game, x, y, speed) {
 	player.body.addRectangle(25, 18, 0, 18);
 	player.body.fixedRotation = true;
 	player.scale.setTo(.7,.7);
-	player.wood = 0;
+	player.weapon_part = 0;
 
 	this.game = game;
 	player.body.collideWorldBounds = true;
-
-	player.weapon = new WeaponGroup(this.game , player.x , player.y ,10, 'rock');
 
 	player.weapon = new WeaponGroup(this.game , player.x , player.y , 10, 'rock');
 
@@ -186,7 +184,13 @@ Player.prototype.isDead = function(){
 }
 
 Player.prototype.addHealth = function(power) {
-	HealthValue += power;
+	var amount = power;
+	
+	if (HealthValue + power > 100){
+		amount = 100 - HealthValue;
+	}
+	
+	HealthValue += amount;
 	this.HealthBar.setPercent(HealthValue);
 }
 
