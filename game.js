@@ -30,21 +30,23 @@ function preload(){
 function create(){
 
 	// START MAP CONSTRUCTION
-
-	map = game.add.tilemap('Level1');
+	game.map = game.add.tilemap('Level1');
 	// ADDS THE TILE SETS INTO THE MAP OBKECT 
-	map.addTilesetImage('collision', "Collisiontile");
-	map.addTilesetImage('desert_1', 'DesertTiles');
+	game.map.addTilesetImage('collision', "Collisiontile");
+	game.map.addTilesetImage('desert_1', 'DesertTiles');
+	//game.map.addTilesetImage('Night', 'NightTile');
 	
 
 	// these lines begin drawing the different layers of the map in order
 	
-	background = map.createLayer('BackgroundLayer');
-	background2 = map.createLayer('Extra_Seaweed');
-	background3 = map.createLayer('Rock_Layer');
-	background4 = map.createLayer('Collision');
+	background = game.map.createLayer('BackgroundLayer');
+	background2 = game.map.createLayer('Extra_Seaweed');
+	background3 = game.map.createLayer('Rock_Layer');
+	background4 = game.map.createLayer('Collision');
+	
 	// sets the opacity for the collision layer at 40%
 	background4.alpha = 0;
+	
 
 	// resize the entire world bounds to fit the map that I created 
 	background.resizeWorld();
@@ -53,30 +55,41 @@ function create(){
 
 	// start the new physics system
 	game.physics.startSystem(Phaser.Physics.P2JS);
-	game.physics.p2.setBoundsToWorld(true, true, true, true, false);
+	//game.physics.startSystem(Phaser.Physics.ARCADE);
+	//game.physics.p2.setBoundsToWorld(true, true, true, true, false);
 
 
 	// create player and enemy objects 
     game.npc = new Npc(game , 200 , 100 , 8,'npc');
-	game.player = new Player(game , 148 , 757, 8);
-	console.log(game.npc);
-	
-		game.dragon = game.add.group();
+	game.player = new Player(game ,148 , 757, 8);
+
+
+	game.dragon = game.add.group();
 	for (var i = 0; i< 4;i++ ){
 
 		 var enemy = new Enemy(game , 300 , 100, 'dragon');
 		 game.dragon.add(enemy);
 	}
+	
+
+	//draws the foreground so the player looks like they are walking behind objects
+
+
+	// create player and enemy objects 
 
 	//draws the foreground so the player looks like they are walking behind objects
 	// example: the tops of the trees!
-	foreground = map.createLayer('Foreground');
+	foreground = game.map.createLayer('Foreground');
 	
 	// these two lines set and define the collision objects, in this case
 	// it refers to the red squares that you can kind of see on the map 
-	map.setCollision(313, true, "Collision");
+	game.map.setCollision(313, true, "Collision");
 	console.log("set collision!");
-	game.physics.p2.convertTilemap(map, 'Collision');
+	game.physics.p2.convertTilemap(game.map, 'Collision');
+	//background5 = game.map.createLayer('Night');
+	//background5.alpha = .7;
+	// these two lines set and define the collision objects, in this case
+	// it refers to the red squares that you can kind of see on the map 
 	game.food = new Collectible(game, 500, 500, 'food');
 	game.water = new Collectible(game, 540, 500, 'water');
 	game.wood = new Collectible(game, 460, 500, 'wood');
