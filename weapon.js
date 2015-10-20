@@ -17,7 +17,7 @@ function Weapon(game, x, y , power, sprite, speedX, speedY) {
     this.checkWorldBounds = true;
     this.outOfBoundsKill = true;
     
-    this.scale.setTo(0.5, 0.5);
+    //this.scale.setTo(0.8, 0.8);
 
 
     game.physics.p2.enable(this, true);
