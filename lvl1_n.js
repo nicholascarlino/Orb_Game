@@ -45,14 +45,18 @@ var level1NightState = {
 	update: function(){
 		game.pHealth = HealthValue
 		if (game.player.dead == true) {
-			var coord = game.player.getCoordinates();
-			text = game.add.text(coord.x - 400, coord.y - 50, 'You have died. Press action to continue',{ font: "15px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 500, align: "left"});
+			game.player.wood = false;
+			text = game.add.text(game.width / 2, game.height / 2, 'You have died. Press action to continue',{ font: "25px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 500, align: "left"});
 			if (action.isDown){
 				game.state.start('lvl1_d');
 			}
 		}	
 		if (game.enemies.length == 0){
-			game.state.start('lvl2_d');
+			game.player.wood = false;
+			text = game.add.text(game.width / 2, game.height / 2, 'You have survived... for now. Action to progress', {font: "15px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 500, align: "left"});
+			if (action.isDown){
+				game.state.start('lvl2_d');
+			}
 		}
 		game.camera.follow(game.player);
 	},

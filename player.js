@@ -36,12 +36,11 @@ function Player(game, x, y, speed, health) {
 	player.body.fixedRotation = true;
 	player.scale.setTo(.7,.7);
 	console.log("Scale/rotation");
-	player.weapon_part = 0;
+	player.wood = false;
 	console.log("Weapon_part");
 
 	npc = game.npc;
 	this.game = game;
-	player.body.collideWorldBounds = true;
 
 	 var barConfig ={
        width: 40,
@@ -227,5 +226,6 @@ Player.prototype.addHealth = function(power) {
 }
 
 Player.prototype.addNPC = function(New_npc) {
+	console.log("add npc");
 	this.npc = New_npc;
 }

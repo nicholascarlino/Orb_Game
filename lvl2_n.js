@@ -8,7 +8,7 @@ var level2NightState = {
 		background = game.map.createLayer('Background2');
 		background2 = game.map.createLayer('StoneBridge ');
 		background3 = game.map.createLayer('Night2');
-		background4 = game.map.createLayer('Collision');
+		background4 = game.map.createLayer('Collision2');
 		
 		background4.alpha = 0;
 		background.resizeWorld();
