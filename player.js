@@ -15,7 +15,7 @@ var weaponTime = 0;
 var weaponDelay = 400
 var player;
 
-function Player(game, x, y, speed) {
+function Player(game, x, y, speed, health) {
 	console.log("Creating Player");
 
 	Phaser.Sprite.call(this, game , x , y);
@@ -36,12 +36,11 @@ function Player(game, x, y, speed) {
 	player.body.fixedRotation = true;
 	player.scale.setTo(.7,.7);
 	console.log("Scale/rotation");
-	player.weapon_part = 0;
+	player.wood = false;
 	console.log("Weapon_part");
 
 	npc = game.npc;
 	this.game = game;
-	player.body.collideWorldBounds = true;
 
 	 var barConfig ={
        width: 40,
@@ -58,7 +57,7 @@ function Player(game, x, y, speed) {
       flipped: false
   };
 	this.HealthBar = new HealthBar(game, barConfig);
-	HealthValue = 100;
+	HealthValue = health;
 	this.HealthBar.setPercent(100);
 
 	wasd = {
@@ -227,6 +226,6 @@ Player.prototype.addHealth = function(power) {
 }
 
 Player.prototype.addNPC = function(New_npc) {
+	console.log("add npc");
 	this.npc = New_npc;
 }
-
