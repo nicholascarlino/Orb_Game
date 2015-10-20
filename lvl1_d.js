@@ -15,7 +15,7 @@ var level1DayState = {
 		background4 = game.map.createLayer('Collision');
 
 		// SETS OPACITY
-		background4.alpha = 0;
+		background4.alpha = .5;
 
 		// RESIZE WORLD BOUNDS TO FIT CREATED MAP
 		background.resizeWorld();
@@ -33,6 +33,8 @@ var level1DayState = {
 		game.map.setCollision(313, true, 'Collision');
 		console.log("set collision");
 		game.physics.p2.convertTilemap(game.map, 'Collision');
+
+		game.wood = new Collectible(game, 550, 500, 'wood');
 	},
 	update: function(){
 		if (game.player.wood) {

@@ -1,6 +1,6 @@
 var menuState = {
 	create: function(){
-		var nameLabel = game.add.text(game.width / 2, game.height/2, 'Press enter to Start', {font: '50px Arial', fill: '#ffffff' });
+		var nameLabel = game.add.text(game.width / 2 - 200, game.height/2, 'Press enter to Start', {font: '50px Arial', fill: '#ffffff' });
 
 		var instrLabel = game.add.text(game.width/2, game.height/2 + 50, 'Press i for Instructions',  {font: '25px Arial', fill: '#ffffff'});
 

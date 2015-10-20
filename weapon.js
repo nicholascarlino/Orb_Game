@@ -1,83 +1,72 @@
-WeaponGroup.prototype = Object.create(Phaser.Sprite.prototype);
+Weapon.prototype = Object.create(Phaser.Sprite.prototype);
 
-WeaponGroup.prototype.constructor = WeaponGroup;
+Weapon.prototype.constructor = Weapon;
 
-WeaponGroup.prototype.force = {x:0.0, y:0.0}; 
+Weapon.prototype.force = {x:0.0, y:0.0}; 
 
 
-var weaponGroup;
-var weapon;
-var weaponTime = 0;
 
-function WeaponGroup(game, x, y , power, sprite) {
-    console.log("Creating WeaponGroup");
+function Weapon(game, x, y , power, sprite, speedX, speedY) {
+    console.log("Creating Weapon");
 
-    Phaser.Sprite.call(this, game);
+    Phaser.Sprite.call(this, game, x, y, sprite);
 
-    weaponGroup = game.add.group();
+    this.velocityY = speedY;
+    this.velocityX = speedX;
+    this.x = x;
+    this.y = y;
 
-    weaponGroup.enableBody = true;
-    weaponGroup.physicsBodyType = Phaser.Physics.ARCADE;
-    weaponGroup.createMultiple(30, sprite);
-    weaponGroup.setAll('anchor.x', 0.5);
-    weaponGroup.setAll('anchor.y', 1);
-    weaponGroup.setAll('outOfBoundsKill', true);
-    weaponGroup.setAll('checkWorldBounds', true);
+    this.checkWorldBounds = true;
+    this.outOfBoundsKill = true;
+    
+    this.scale.setTo(0.5, 0.5);
 
-    game.physics.p2.enable(this);
+
+    game.physics.p2.enable(this, true);
+    this.body.fixedRotation = true;
 
     this.game = game;
     this.power = power;
 
     game.add.existing(this);
+
 }
 
 
-WeaponGroup.prototype.fire= function(x , y , speedY , speedX){
+Weapon.prototype.update= function(){
 
-    if (game.time.now > weaponTime)
-    {
-        //  Grab the first bullet we can from the pool
-        weapon = weaponGroup.getFirstExists(false);
+    console.log("in shooting update");
+    
+    this.body.velocity.y = this.velocityY;
+    this.body.velocity.x = this.velocityX;
 
-        if (weapon)
-        {
-            //  And fire it
-            weapon.reset(x, y + 8);
-            weapon.body.velocity.y = speedY;
-            weapon.body.velocity.x = speedX;
-            weaponTime = game.time.now + 200;
-        }
+    var tile = game.map.getTileWorldXY(this.x + (this.velocityX / 22), this.y + (this.velocityY / 22), 16, 16, "Collision");
+    if (tile == null){
+        this.damage_enemy(this.game.dragon);
     }
-    // does something that the WeaponGroup does
+    else if (tile.collides == true){
+        this.destroy();
+    }
 }
-
-WeaponGroup.prototype.setPos = function(x , y){
-     WeaponGroup.x = x;
-     WeaponGroup.y = y;
-
-}	
-WeaponGroup.prototype.update = function(){
-
-	this.damage_enemy(this.game.dragon);	
-}
-WeaponGroup.prototype.damage_enemy = function(group)
+Weapon.prototype.damage_enemy = function(group)
 {
-	var enemy;
-	var dam_dist = 15;
+    var enemy;
+    var dam_dist = 35;
 
-	var distx;
-	var disty;
+    var distx;
+    var disty;
 
-	for (var i = 0; i < group.length; i++) {
-		enemy = group.getAt(i);
+    if (group != null){
+    	for (var i = 0; i < group.length; i++) {
+        	enemy = group.getAt(i);
 
-		distx = this.x - enemy.x;
-		disty = this.y - enemy.y;
+        	distx = this.x - enemy.x;
+        	disty = this.y - enemy.y;
 
-		if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
-			enemy.reduceLife(this.power);
-			this.kill();
-		}
-	}
+      	 	if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
+            	enemy.reduceLife(this.power);
+            	this.destroy();
+        	}
+    	}
+    }
 }

@@ -1,8 +1,8 @@
-var level1DayState = {
+var level1NightState = {
 	create: function(){
 		// START MAP CONSTRUCTION
 
-		game.map = game.add.tilemap('Level1Day');
+		game.map = game.add.tilemap('Level1Night');
 		
 		// ADDS THE TILE SETS INTO THE MAP OBJECT
 		game.map.addTilesetImage('collision', 'Collisiontile');
