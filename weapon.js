@@ -18,7 +18,7 @@ function Weapon(game, x, y , power, sprite, speedX, speedY) {
     this.outOfBoundsKill = true;
 
 
-    game.physics.p2.enable(this, true);
+    game.physics.p2.enable(this);
     if (sprite == 'rock'){
         this.body.fixedRotation = true;
     }   
@@ -54,15 +54,18 @@ Weapon.prototype.update= function(){
             var dam_dist = 60;
             var distx = this.x - game.obelisk.x;
             var disty = this.y - game.obelisk.y;
-
+            console.log("IN THIS problem")
             if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
                 game.obelisk.HealthValue -= this.power/2;
                 game.obelisk.HealthBar.setPercent(game.obelisk.HealthValue);
                 this.destroy();
             }
         }
-        this.damage_enemy(this.game.enemies);
-        }   
+        if(game.enemies){
+            console.log("HELLO THERE")
+                 this.damage_enemy(game.enemies);
+             }
+           
     }
     else if (tile.collides == true){
         this.destroy();

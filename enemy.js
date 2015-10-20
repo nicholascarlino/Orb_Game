@@ -24,7 +24,7 @@ function Enemy(game, x, y , sprite) {
         this.animations.add('down',[6,7,8,7], 12, true);
     }
     
-    game.physics.p2.enable(this, true); 
+    game.physics.p2.enable(this); 
 
     this.anchor.setTo(0.5, 0.5);
     this.body.clearShapes();

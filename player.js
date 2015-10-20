@@ -30,7 +30,7 @@ function Player(game, x, y, speed) {
 	player.animations.add('down', [6, 7, 8, 7], speed, true);
 
 	console.log("Animations");
-	game.physics.p2.enable(player, true);
+	game.physics.p2.enable(player);
 	player.anchor.setTo(.5,.5);
 	console.log("Anchor");
 	player.body.clearShapes();

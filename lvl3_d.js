@@ -13,13 +13,15 @@ var level3DayState = {
 		// DRAW DIFFERENT LAYERS OF MAP
 		background = game.map.createLayer('Background3');
 		background2 = game.map.createLayer('Cliffs');
-
+//game.player = new Player(game, 148, 757, 8);
+game.player = new Player(game, 1760, 1792, 8);
 		// SETS OPACITY
 		if (npc_is_attached == true){
 			game.player.addNPC(new Npc(game, game.player.x - 10, game.player.y + 10, 8, 'npcFem'));
 			followPlayer = true;
 		}
 		if (plasma == true){
+			console.log("has plasma")
 			game.player.change_weapon('plasma', 20);
 		}
 
@@ -28,7 +30,7 @@ var level3DayState = {
 		game.world.setBounds(0,0,1920,1920);
 		game.enemies = game.add.group();
 		// PLAYER AND ENEMIES
-		game.player = new Player(game, 148, 757, 8);
+		//game.player = new Player(game, 148, 757, 8);
 
 		game.time.events.loop(Phaser.Timer.SECOND * 10, this.createBlueDragons, this);
 		game.time.events.loop(Phaser.Timer.SECOND * 15, this.createGoldDragons, this);
@@ -55,7 +57,7 @@ var level3DayState = {
 
 		//CREATE THE OBELISK 768, 256
 		game.obelisk = game.add.sprite(818, 300, 'obelisk');
-		game.physics.p2.enable(game.obelisk, true);
+		game.physics.p2.enable(game.obelisk);
 		game.obelisk.body.clearShapes();
 		game.obelisk.body.addRectangle(80, 70);
 		game.obelisk.body.fixedRotation = true;
@@ -96,6 +98,9 @@ var level3DayState = {
 				HealthValue = 100;
 				game.state.start('lvl1_d');
 			}
+		}
+		if(game.obelisk.HealthValue == 0){
+			game.state.start('end');
 		}	
 		game.camera.follow(game.player);
 	},

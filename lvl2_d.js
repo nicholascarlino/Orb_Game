@@ -51,7 +51,7 @@ var level2DayState = {
 	update: function(){
 		game.pHealth = HealthValue
 		if (game.player.wood == true) {
-			text = game.add.text(688, 50, 'Night approaches... Press action to continue', {font: '15px Arial', fill: '#ffffff', wordWrap: true});
+			text = game.add.text(720, 50, 'Night approaches... Press action to continue', {font: '25px Arial', fill: '#ffffff', wordWrap: true});
 			if(action.isDown){
 				backgroundMusic.loop = false;
 				backgroundMusic.stop();
