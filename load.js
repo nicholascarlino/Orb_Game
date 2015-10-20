@@ -7,6 +7,7 @@ var loadState = {
 		game.load.spritesheet('wormr', 'assets/enemySprites/skyll-spriteRight.png', 24, 32);
 		game.load.spritesheet('player', 'assets/playerSprites/warrior_m.png', 32, 36);
 		game.load.spritesheet('npcFem', 'assets/playerSprites/warrior_f.png', 32, 36);
+		game.load.spritesheet('golem', 'assets/enemySprites/golem.png', 24, 32);
 		game.load.image('rock', 'assets/rock.png');
 		game.load.tilemap("Level1Day", 'assets/backgroundSprites/TileMaps/Level1Day.json', null, Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap("Level1Night", 'assets/backgroundSprites/TileMaps/Level1Night.json', null, Phaser.Tilemap.TILED_JSON);
@@ -22,6 +23,6 @@ var loadState = {
 		game.load.image('wood', 'assets/wood.png');
 	},
 	create: function(){
-		game.state.start('menu');
+		game.state.start('lvl2_d');
 	},
 };

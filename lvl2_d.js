@@ -26,7 +26,7 @@ var level2DayState = {
 		game.food = new Collectible(game, 864, 1104, 'food');
 		game.water = new Collectible(game, 176, 160, 'water');
 		game.spear = new Collectible(game, 1184, 1136, 'spear');
-		game.wood = new Collectible(game, 688, 20, 'wood');
+		game.wood = new Collectible(game, 640/*688, 20*/, 1248, 'wood');
 
 
 		// DRAW FOREGROUND
