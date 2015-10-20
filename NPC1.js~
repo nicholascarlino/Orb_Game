@@ -1,8 +1,8 @@
-Npc.prototype = Object.create(Phaser.Sprite.prototype);
+npc.prototype = Object.create(Phaser.Sprite.prototype);
 
-Npc.prototype.constructor = Npc;
+npc.prototype.constructor = Npc;
 
-Npc.prototype.force = {x:0.0, y:0.0};
+npc.prototype.force = {x:0.0, y:0.0};
 
 function Npc(game, x, y, spriteType) {
 	console.log("Creating NPC");
@@ -11,7 +11,7 @@ function Npc(game, x, y, spriteType) {
 	this.body.allowRotation = false;
 	game.add.existing(this);
 }
-Npc.prototype.talk = function(game, npc_value) {
+npc.prototype.talk = function(game, npc_value) {
 	var message;
 	var style = {font: "30px Arial", fill: "#ff0044", align: "center" };
 
