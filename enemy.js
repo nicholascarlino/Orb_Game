@@ -202,7 +202,7 @@ Enemy.prototype.update = function() {
     if(this.HealthValue<= 0){
       //  console.log("HealthBar", this.HealthBar);
         this.HealthBar.flipped = true;
-        this.HealthBar.setPosition(-1 , -1);
+        this.HealthBar.setPosition(-100 , -100);
        // console.log("HealthBar AFTER", this.HealthBar);
         this.destroy();
 
