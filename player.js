@@ -18,6 +18,7 @@ var npc_is_attached = false;
 var plasma = false;
 
 function Player(game, x, y, speed) {
+
 	console.log("Creating Player");
 
 	Phaser.Sprite.call(this, game , x , y);
@@ -59,7 +60,9 @@ function Player(game, x, y, speed) {
       flipped: false
   };
 	this.HealthBar = new HealthBar(game, barConfig);
-	this.HealthBar.setPercent(HealthValue);
+	//HealthValue = health;
+	this.HealthBar.setPercent(100);
+
 
 	wasd = {
 		up: game.input.keyboard.addKey(Phaser.Keyboard.W),
@@ -234,3 +237,4 @@ Player.prototype.addNPC = function(New_npc) {
 	this.npc = New_npc;
 	npc_is_attached = true;
 }
+

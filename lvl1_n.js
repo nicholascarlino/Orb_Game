@@ -23,7 +23,7 @@ var level1NightState = {
 		game.world.setBounds(0,0,960,960);
 		
 		// PLAYER AND ENEMIES
-		game.player = new Player(game, 148, 757, 8);
+		game.player = new Player(game, 148, 757, 8, game.pHealth);
 
 		game.enemies = game.add.group();
 		for (var i = 0; i < 4; i++){
@@ -48,6 +48,7 @@ var level1NightState = {
 			game.player.wood = false;
 			text = game.add.text(game.width / 2, game.height / 2, 'You have died. Press action to continue',{ font: "25px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 500, align: "left"});
 			if (action.isDown){
+				HealthValue = 100;
 				game.state.start('lvl1_d');
 			}
 		}	

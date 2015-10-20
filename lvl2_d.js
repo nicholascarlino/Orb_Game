@@ -22,13 +22,19 @@ var level2DayState = {
 
 		// PLAYER AND NPC
 		game.npc = new Npc(game, 1168, 1088, 8, 'npcFem');
-		game.player = new Player(game, 640, 1248, 8);
+
+		
+
+		game.player = new Player(game, 640, 1248, 8, game.pHealth);
+
 		game.food = new Collectible(game, 864, 1104, 'food');
 		game.water = new Collectible(game, 176, 160, 'water');
 		game.plasma = new Collectible(game, 1184, 1136, 'plasma');
+
 		game.wood = new Collectible(game, 688, 20, 'wood');
 
 
+        game.player.wood = false;
 		// DRAW FOREGROUND
 		foreground = game.map.createLayer('Foreground2');
 
@@ -46,6 +52,7 @@ var level2DayState = {
 				game.state.start('lvl2_n');
 			}
 		}
+		
 		game.camera.follow(game.player);
 	},
 }
