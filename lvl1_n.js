@@ -43,7 +43,8 @@ var level1NightState = {
 		background5.alpha = .7;
 	},
 	update: function(){
-		if (game.player.isDead()) {
+		if (game.player.dead == true) {
+			console.log("Check Dead");
 			game.state.start('lvl1_d');
 		}	
 		if (game.enemies.length == 0){
