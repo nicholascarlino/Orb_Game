@@ -18,15 +18,13 @@ var initialY;
 var weaponTime2 = 0;
 var weaponDelay2 = 400;
 function Npc(game, x, y, speed ,spriteType) {
-	console.log("Creating NPC");
-	console.log("Creating Player");
 	initialY = y;
 	initialX = x;
 	Phaser.Sprite.call(this, game);
 
 	this.body = this.game.add.sprite(x,y, spriteType);
 	game.physics.arcade.enable(this.body , true);
-	console.log(this.body.x , this.body.y);
+
 	this.body.animations.add('left', [9, 10, 11, 10],speed, true);
 	this.body.animations.add('right', [3, 4, 5, 4],speed, true);
 	this.body.animations.add('up', [0, 1, 2, 1], speed, true);
@@ -54,7 +52,7 @@ function Npc(game, x, y, speed ,spriteType) {
 
 
 Npc.prototype.talk = function(game, npc_value) {
-	console.log("in Talk");
+
 
 		if( i > 0  && counter %12 == 0 && i < 3){
 			texts[i -1].kill();
@@ -71,7 +69,7 @@ Npc.prototype.talk = function(game, npc_value) {
 		 style = { font: "30px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: 600, align: "left" };
 
 	if( counter % 12 == 0 && i < 3){
-		console.log(counter);
+
 		if(i == 2){
 			prompt = game.add.text(this.body.x - 500, this.body.y - 200, messages[i], style)
 		}else{
@@ -110,7 +108,7 @@ Npc.prototype.update = function(){
 
 Npc.prototype.followPlayer = function(){
 
-	console.log("npc follow");
+
 	var dist1 = this.body.x - this.game.player.x;
  	var dist2 = this.body.y - this.game.player.y;
     	var speed = 5;
@@ -188,7 +186,7 @@ Npc.prototype.moveHorizontal = function moveHorizontal(speed){
 
 Npc.prototype.Shoot = function(weaponSprite, power){
 
-	console.log("npc shoot");
+	
        if(game.time.now > weaponTime2){
 
          if(this.position.faceLeft == true){
@@ -207,7 +205,7 @@ Npc.prototype.Shoot = function(weaponSprite, power){
                this.weapon = new Weapon(this.game ,this.body.x ,this.body.x+ 25 ,power, weaponSprite, 0, 400);
          
             }  
-            console.log("after!!!", weaponTime);
+   
             weaponTime2 = game.time.now + weaponDelay2;
         }       
 
