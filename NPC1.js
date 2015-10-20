@@ -26,7 +26,6 @@ function Npc(game, x, y, speed ,spriteType) {
 
 	this.body = this.game.add.sprite(x,y, spriteType);
 	game.physics.arcade.enable(this.body , true);
-
 	console.log(this.body.x , this.body.y);
 	this.body.animations.add('left', [9, 10, 11, 10],speed, true);
 	this.body.animations.add('right', [3, 4, 5, 4],speed, true);
@@ -34,7 +33,6 @@ function Npc(game, x, y, speed ,spriteType) {
 	this.body.animations.add('down', [6, 7, 8, 7], speed, true);
 	
 	this.body.anchor.setTo(0.5,0.5);
-
 	this.body.checkCollision = true;
 
 
@@ -136,7 +134,8 @@ Npc.prototype.followPlayer = function(){
 		        this.position.faceUp = false;
 		        this.position.faceDown = false;
     		}
-        }else {
+        }
+       else {
         	if(dist2> painDist){
         		this.body.animations.play('up');
 
@@ -172,17 +171,15 @@ Npc.prototype.followPlayer = function(){
         	}
 	}
 }
+
 Npc.prototype.moveVertical = function (speed)
 {
-
    this.body.y += speed;
 
 }
 
 
 Npc.prototype.moveHorizontal = function moveHorizontal(speed){
-
-
    this.body.x+= speed;
 
 }

@@ -10,12 +10,10 @@ function Weapon(game, x, y , power, sprite, speedX, speedY) {
     console.log("Creating Weapon" , sprite);
 
     Phaser.Sprite.call(this, game, x, y, sprite);
-
     this.velocityY = speedY;
     this.velocityX = speedX;
     this.x = x;
     this.y = y;
-
     this.checkWorldBounds = true;
     this.outOfBoundsKill = true;
     
@@ -31,8 +29,6 @@ function Weapon(game, x, y , power, sprite, speedX, speedY) {
     game.add.existing(this);
 
 }
-
-
 Weapon.prototype.update= function(){
 
     //console.log("in shooting update", this);
@@ -57,17 +53,17 @@ Weapon.prototype.damage_enemy = function(group)
     var disty;
 
     if (group != null){
-        for (var i = 0; i < group.length; i++) {
-            console.log("In weapon for loop");
-        enemy = group.getAt(i);
+    	for (var i = 0; i < group.length; i++) {
+        	console.log("In weapon for loop");
+		enemy = group.getAt(i);
 
-            distx = this.x - enemy.x;
-            disty = this.y - enemy.y;
+        	distx = this.x - enemy.x;
+        	disty = this.y - enemy.y;
 
-            if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
-            enemy.reduceLife(this.power);
-            this.destroy();
-            }
-        }
+      	 	if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
+         	enemy.reduceLife(this.power);
+         	this.destroy();
+        	}
+    	}
    }
 }

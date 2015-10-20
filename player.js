@@ -14,12 +14,11 @@ var distNpc;
 var weaponTime = 0;
 var weaponDelay = 400
 var player;
+
 function Player(game, x, y, speed) {
 	console.log("Creating Player");
 
 	Phaser.Sprite.call(this, game , x , y);
-
-
 	player = this.game.add.sprite(x,y, 'player');
 
 	player.animations.add('left', [9, 10, 11, 10], speed, true);
@@ -90,18 +89,15 @@ function Player(game, x, y, speed) {
 Player.prototype.update = function() {
 
 	player.body.setZeroVelocity();
-
 	if (game.npc){
 		//console.log("Dist to NPC: ", distNpc);
 		distNpc = Math.sqrt( (player.body.x- npc.body.x)*(player.body.x- npc.body.x) + (player.body.y- npc.body.y)*(player.body.y- npc.body.y) );
-
 	}
 	this.HealthBar.setPosition(player.x , player.y -20);
 	if (wasd.down.isDown) {
 		player.animations.play('down');
 		
 		player.body.y += 3;
-
 		this.y = player.body.y;
 
 		position.faceLeft = false;
@@ -125,9 +121,7 @@ Player.prototype.update = function() {
 	else if (wasd.right.isDown) {
 		player.animations.play('right');
 		player.body.x += 3;
-
 		this.x = player.body.x;
-
 		position.faceLeft = false;
  		position.faceRight = true;
  		position.faceUp = false;
@@ -136,9 +130,7 @@ Player.prototype.update = function() {
 	else if (wasd.up.isDown) {
 		player.animations.play('up');
 		player.body.y -= 3;
-
 		this.y = player.body.y;
-
 		position.faceLeft = false;
  		position.faceRight = false;
  		position.faceUp = true;
@@ -162,7 +154,6 @@ Player.prototype.update = function() {
             else if (position.faceUp == true){
             player.weapon = new Weapon(this.game ,player.x ,player.y -8,this.power, this.weaponType, 0, -400);
 
-
             }
             else if(position.faceDown == true){
                player.weapon = new Weapon(this.game ,player.x ,player.y+ 25 ,this.power, this.weaponType, 0, 400);
@@ -178,7 +169,6 @@ Player.prototype.update = function() {
 			       this.npc.Shoot(this.weaponType , this.power);
 		   } 
 		}         
-	
 	if(action.isDown && distNpc < 50){
 		console.log("about to talk");
 		npc.talk(this.game , 1);

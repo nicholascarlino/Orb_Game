@@ -4,18 +4,12 @@ Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.force = {x:0.0, y:0.0}; 
 
-
-//var velocity;
-//var this.position;
-
 function Enemy(game, x, y , sprite) {
     console.log("Creating this");
     Phaser.Sprite.call(this, game, x, y, sprite);
 
     //CHANGE: THIS WAS AFTER GAME>ADD>EXISTING>THIS
     if(this.spriteType != 'worm'){
-
-        //this = game.add.sprite(x,y, sprite);
 
         console.log("enemy sprite created");
 
@@ -24,8 +18,6 @@ function Enemy(game, x, y , sprite) {
         this.animations.add('up', [0,1,2,1], 12, true);
         this.animations.add('down',[6,7,8,7], 12, true);
     }else{
-
-        //this = game.add.sprite(x,y, sprite);//USED TO BE this.spriteType
 
         this.animations.add('left',[0,1,2,3], 12, true);
         this.animations.add('right', [4,5,6,7], 12, true);
@@ -67,7 +59,6 @@ function Enemy(game, x, y , sprite) {
     this.HealthBar = new HealthBar(game , barConfig);
     this.HealthValue = 100;
     this.HealthBar.setPercent(100);
-
 }
 
 
@@ -77,8 +68,6 @@ Enemy.prototype.reduceLife= function(amount){
         console.log("enemy health very down", this.HeathValue);
         this.destroy();
     }
-
-    // does something to kill the this
     this.HealthValue -=amount;
     this.HealthBar.setPercent(this.HealthValue);
     console.log("enemy health", HealthValue);
@@ -95,7 +84,6 @@ Enemy.prototype.move = function move() {
     var painDist = 25;
 
     var coor = this.game.player.getCoordinates();
-
     var dist1 = this.x - coor.x;
     var dist2 = this.y - coor.y;
 
@@ -103,7 +91,6 @@ Enemy.prototype.move = function move() {
 
   if( Math.abs(dist1) > Math.abs(dist2)){
         if(dist1 > painDist ){
-
         this.animations.play('left');
         moveHorizontal(-speed);
         this.body.x -= speed;
@@ -129,7 +116,6 @@ Enemy.prototype.move = function move() {
     }
   }else{
         if(dist2> painDist){
-
         this.animations.play('up');
 
         moveVertical(-speed);
@@ -140,7 +126,6 @@ Enemy.prototype.move = function move() {
         this.position.faceLeft = false;
         this.position.faceRight = false;
     } else if (dist2 < -painDist){
-
         this.animations.play('down');
 
         moveVertical(speed);
@@ -175,7 +160,6 @@ function moveVertical(speed){
 
     this.y += speed;
 
-
 }
 function moveHorizontal(speed){
 
@@ -198,7 +182,5 @@ Enemy.prototype.update = function() {
         this.destroy();
 
     }
-    /*var bool = game.physics.arcade.overlap(this.game.player, this, this.game.player.reduceHealth()  , null , this);
-    console.log(bool);*/
 }
 
