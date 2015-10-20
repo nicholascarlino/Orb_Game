@@ -22,10 +22,10 @@ var level2DayState = {
 
 		// PLAYER AND NPC
 		game.npc = new Npc(game, 1168, 1088, 8, 'npcFem');
-		game.player = new Player(game, 640, 1248, 8, game.pHealth);
+		game.player = new Player(game, 640, 1248, 8);
 		game.food = new Collectible(game, 864, 1104, 'food');
 		game.water = new Collectible(game, 176, 160, 'water');
-		game.spear = new Collectible(game, 1184, 1136, 'spear');
+		game.plasma = new Collectible(game, 1184, 1136, 'plasma');
 		game.wood = new Collectible(game, 688, 20, 'wood');
 
 
