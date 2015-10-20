@@ -47,7 +47,7 @@ var level1NightState = {
 			console.log("Check Dead");
 			game.state.start('lvl1_d');
 		}	
-		if (game.enemies.length == 4){ // change
+		if (game.enemies.length == 0){ // change
 			game.state.start('lvl2_d');
 		}
 		game.camera.follow(game.player);
