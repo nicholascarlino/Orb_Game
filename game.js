@@ -4,7 +4,7 @@ var game = new Phaser.Game(boundsx, boundsy, Phaser.AUTO, "game");
 game.state.add('boot', bootState);
 game.state.add('load', loadState);
 game.state.add('menu', menuState);
-//game.state.add('intro', introState);
+game.state.add('intro', introState);
 game.state.add('instr', instructState);
 game.state.add('lvl1_d', level1DayState);
 game.state.add('lvl1_n', level1NightState);

@@ -1,6 +1,6 @@
+var i = 0;
 var gameOverState = {
 	create: function() {
-		var i = 0;
 		if (npc_is_attached == true){
 			message1 = "Out of the Obelisk fell a glowing orb...";
 			message2 = "It shined with a green light... A haunting light...";
