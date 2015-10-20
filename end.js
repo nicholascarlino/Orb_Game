@@ -8,7 +8,7 @@ var gameOverState = {
 			message3 = "The two both thought the same thing: << I must have it! >>";
 			message4 = "They tore each other apart in a ravenous fury.";
 			message5 = "At the end, the orb rolled away, as if by its own accord...";
-			message6 = "END";
+			message6 = "                       END                                ";
 			message7 = "To restart, hit enter";
 
 			messages = [message1, message2, message3, message4, message5, message6, message7];
@@ -17,7 +17,7 @@ var gameOverState = {
 			message2 = "It shined with a green light... A haunting light...";
 			message3 = "You pick it up off the ground and feel a strange energy course through you...";
 			message4 = "You smile as you think of the possiblities...";
-			message5 = "                END                        ";
+			message5 = "                         END                        ";
 			message6 = "To restart, hit enter";
 			messages = [message1, message2, message3, message4, message5, message6];
 		}
@@ -33,11 +33,7 @@ var gameOverState = {
 
 	},
 	update: function() {
-			if (action.isDown){
-				console.log("IN HERE");
-				i++;
-			}
-			prompt.y -=1;
+			
 			for( var i = 0 ; i < 5 ; i++){
 				if(texts[i]){
 					texts[i].y -= 1;
