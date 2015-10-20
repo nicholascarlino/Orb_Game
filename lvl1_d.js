@@ -39,10 +39,11 @@ var level1DayState = {
 
 	},
 	update: function(){
-		if (game.player.wood) {
-			var message = game.add.text(80, 80, 'Brace yourself... The night is upon you', {font: '25px Arial', fill: '#ffffff' });
-
-			game.state.start('lvl1_n');
+		if (game.player.wood == true) {
+			game.add.text(750, 50, 'Brace yourself... The night is upon you. Hit action to continue', {font: '25px Arial', fill: '#000000', wordWrap: true, wordWrapWidth: 200 });
+			if (action.isDown){
+				game.state.start('lvl1_n');
+			}
 		}
 		game.camera.follow(game.player);
 	},

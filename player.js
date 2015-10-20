@@ -88,17 +88,12 @@ Player.prototype.update = function() {
 
 	player.body.setZeroVelocity();
 
-	if(this.isDead()){
-		player.x = 0;
-		player.y = 0;
-	}else{
-		if (game.npc){
-			console.log("Dist to NPC: ", distNpc);
-			distNpc = Math.sqrt( (player.body.x- npc.body.x)*(player.body.x- npc.body.x) + (player.body.y- npc.body.y)*(player.body.y- npc.body.y) );
-		}
+	if (game.npc){
+		console.log("Dist to NPC: ", distNpc);
+		distNpc = Math.sqrt( (player.body.x- npc.body.x)*(player.body.x- npc.body.x) + (player.body.y- npc.body.y)*(player.body.y- npc.body.y) );
 
-	this.HealthBar.setPosition(player.x , player.y -20);
 	}
+	this.HealthBar.setPosition(player.x , player.y -20);
 	if (wasd.down.isDown) {
 		player.animations.play('down');
 		
@@ -173,6 +168,7 @@ Player.prototype.update = function() {
 }
 
 
+
 Player.prototype.getCoordinates = function() {
 
 	var location = {x:player.x , y:player.y};
@@ -197,10 +193,6 @@ Player.prototype.dies = function(){
    	player.kill();
    	this.kill();
    	this.HealthBar.setPosition(-1 , -1); // not good
-   	player.x = 0;
-   	player.y = 0;
-   	this.x = 0;
-   	this.y = 0;
 }
 
 Player.prototype.isDead = function(){

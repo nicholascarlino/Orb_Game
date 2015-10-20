@@ -44,8 +44,11 @@ var level1NightState = {
 	},
 	update: function(){
 		if (game.player.dead == true) {
-			console.log("Check Dead");
-			game.state.start('lvl1_d');
+			var coord = game.player.getCoordinates();
+			text = game.add.text(coord.x, coord.y - 50, 'You have died. Press action to continue',{ font: "15px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 200, align: "left"});
+			if (action.isDown){
+				game.state.start('lvl1_d');
+			}
 		}	
 		if (game.enemies.length == 0){
 			game.state.start('lvl2_d');
