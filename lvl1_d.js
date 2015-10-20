@@ -15,7 +15,7 @@ var level1DayState = {
 		background4 = game.map.createLayer('Collision');
 
 		// SETS OPACITY
-		background4.alpha = .5;
+		background4.alpha = 0;
 
 		// RESIZE WORLD BOUNDS TO FIT CREATED MAP
 		background.resizeWorld();
