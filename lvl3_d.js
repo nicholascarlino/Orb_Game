@@ -21,6 +21,7 @@ game.player = new Player(game, 1760, 1792, 8);
 			console.log("has plasma")
 			game.player.change_weapon('plasma', 20);
 		}
+		game.food = new Collectible(game, 400, 1792, 'food');
 
 		// RESIZE WORLD BOUNDS TO FIT CREATED MAP
 		background.resizeWorld();
