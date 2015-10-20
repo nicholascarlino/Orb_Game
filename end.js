@@ -33,7 +33,7 @@ var gameOverState = {
 
 	},
 	update: function() {
-			
+			prompt.y -=1;
 			for( var i = 0 ; i < 5 ; i++){
 				if(texts[i]){
 					texts[i].y -= 1;

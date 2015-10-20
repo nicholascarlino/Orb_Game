@@ -12,7 +12,7 @@ function Collectible(game, x, y, type) {
 	if (type == 'food'){
 		this.scale.setTo(.05, .05);
 	}
-	game.physics.p2.enable(this, true);
+	game.physics.p2.enable(this);
 	this.body.fixedRotation = true;
 
 	this.game = game;
