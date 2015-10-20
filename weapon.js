@@ -7,7 +7,7 @@ Weapon.prototype.force = {x:0.0, y:0.0};
 
 
 function Weapon(game, x, y , power, sprite, speedX, speedY) {
-    console.log("Creating Weapon" , sprite);
+
 
     Phaser.Sprite.call(this, game, x, y, sprite);
     this.velocityY = speedY;
@@ -24,7 +24,6 @@ function Weapon(game, x, y , power, sprite, speedX, speedY) {
     }   
     else{
        // this.scale.setTo(.2, .2);
-        console.log ('NOT A ROCK');
         this.body.fixedRotation = true;
     }
     
@@ -43,7 +42,7 @@ Weapon.prototype.update= function(){
     this.body.velocity.y = this.velocityY;
     this.body.velocity.x = this.velocityX;
     if(this.game.map.key == "Level3Day"){
-        console.log("Helllo bebebebbebeb!");
+
         size = 32;
     }else{
         size = 16;
@@ -54,7 +53,7 @@ Weapon.prototype.update= function(){
             var dam_dist = 60;
             var distx = this.x - game.obelisk.x;
             var disty = this.y - game.obelisk.y;
-            console.log("IN THIS problem")
+  
             if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
                 game.obelisk.HealthValue -= this.power/2;
                 game.obelisk.HealthBar.setPercent(game.obelisk.HealthValue);
@@ -62,7 +61,7 @@ Weapon.prototype.update= function(){
             }
         }
         if(game.enemies){
-            console.log("HELLO THERE")
+
                  this.damage_enemy(game.enemies);
              }
            
@@ -78,10 +77,10 @@ Weapon.prototype.damage_enemy = function(group)
 
     var distx;
     var disty;
-    console.log("in gr")
+
     if (group != null){
     	for (var i = 0; i < group.length; i++) {
-        	console.log("In weapon for loop");
+
 		enemy = group.getAt(i);
 
         	distx = this.x - enemy.x;
