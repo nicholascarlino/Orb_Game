@@ -28,7 +28,7 @@ var level2NightState = {
 		}
 		foreground = game.map.createLayer('Foreground2');
 		game.map.setCollision(36, true, 'Collision');
-		game.physics.p2.convertTilemap(game.map, 'Collision');
+		game.physics.p2.convertTilemap(game.map, 'Collision2');
 	},
 	update: function(){
 		game.pHealth = HealthValue
