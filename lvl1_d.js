@@ -43,7 +43,7 @@ var level1DayState = {
 		if (game.player.wood == true) {//change userself
 			game.add.text(750, 50, 'Brace yourself... The night is upon you. Hit action to continue', {font: '25px Arial', fill: '#000000', wordWrap: true, wordWrapWidth: 200 });
 			if (action.isDown){
-				game.state.start('lvl1_n');
+				game.state.start('end');
 			}
 		}
 		game.camera.follow(game.player);

@@ -48,6 +48,7 @@ var level1NightState = {
 			game.player.wood = false;
 			text = game.add.text(game.width / 2, game.height / 2, 'You have died. Press action to continue',{ font: "25px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 500, align: "left"});
 			if (action.isDown){
+				HealthValue = 100;
 				game.state.start('lvl1_d');
 			}
 		}	
