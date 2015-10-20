@@ -4,7 +4,6 @@ Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.force = {x:0.0, y:0.0}; 
 
-
 function Enemy(game, x, y , sprite) {
     console.log("Creating this");
     Phaser.Sprite.call(this, game, x, y, sprite);
@@ -62,13 +61,13 @@ function Enemy(game, x, y , sprite) {
     this.HealthBar.setPercent(100);
 }
 
+
 Enemy.prototype.reduceLife= function(amount){
 
     if(this.HealthValue <= 1){
         console.log("enemy health very down", this.HeathValue);
         this.destroy();
     }
-
     this.HealthValue -=amount;
     this.HealthBar.setPercent(this.HealthValue);
     console.log("enemy health", HealthValue);
@@ -96,7 +95,6 @@ Enemy.prototype.move = function move() {
         moveHorizontal(-speed);
         this.body.x -= speed;
 
-      
 
         this.position.faceLeft = true;
         this.position.faceRight = false;
@@ -168,16 +166,21 @@ function moveHorizontal(speed){
     this.x += speed;
 
 } 
+
 Enemy.prototype.update = function() {
-    
+
     this.body.setZeroVelocity();
     if (!this.game.player.isDead()){
         this.move();
     }
     if(this.HealthValue<= 0){
 
-        this.HealthBar.setPosition(-1000, -1000);
-	this.destroy();
+      //  console.log("HealthBar", this.HealthBar);
+        this.HealthBar.flipped = true;
+        this.HealthBar.setPosition(-100 , -100);
+       // console.log("HealthBar AFTER", this.HealthBar);
+        this.destroy();
 
     }
 }
+

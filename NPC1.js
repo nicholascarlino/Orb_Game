@@ -14,6 +14,9 @@ var prompt;
 var followPlayer;
 var initialX;
 var initialY;
+
+var weaponTime2 = 0;
+var weaponDelay2 = 400;
 function Npc(game, x, y, speed ,spriteType) {
 	console.log("Creating NPC");
 	console.log("Creating Player");
@@ -52,27 +55,29 @@ function Npc(game, x, y, speed ,spriteType) {
 
 Npc.prototype.talk = function(game, npc_value) {
 	console.log("in Talk");
-	if( i > 0  && counter %12 == 0 && i < 3){
-		texts[i -1].kill();
-	}
-	if (npc_value == 1){
-		message1 = "Help me, please.  I have been stranded here for days.  I miss my family! ... Press K";
-		message2 = "You look pretty capable... Do you think that I could hang with you? I bet we would survive better if we stuck together"
-		message3 = "Press Y if you want to help and N if you don't"
-		messages = [message1 , message2 , message3];
-	}
-	else if (npc_value == 2){
-		message = "What do you want, boy? I'm very busy.  But I guess you look capable.  What do you say, want to fight with me against these bastards?"
-	}	
-	style = { font: "15px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 200, align: "left" };
+
+		if( i > 0  && counter %12 == 0 && i < 3){
+			texts[i -1].kill();
+		}
+		if (npc_value == 1){
+			message1 = "Help me, please.  I have been stranded here for days.  I miss my family! ... Press E";
+			message2 = "You look pretty capable... Do you think that I could hang with you? I bet we would survive better if we stuck together"
+			message3 = "Press Y if you want to help and N if you don't"
+			messages = [message1 , message2 , message3];
+		}
+		else if (npc_value == 2){
+			message = "What do you want, boy? I'm very busy.  But I guess you look capable.  What do you say, want to fight with me against these bastards?"
+		}	
+		 style = { font: "30px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: 600, align: "left" };
+
 	if( counter % 12 == 0 && i < 3){
 		console.log(counter);
 		if(i == 2){
-			prompt = game.add.text(300, this.game.height - 50, messages[i], style)
+			prompt = game.add.text(this.body.x - 500, this.body.y - 200, messages[i], style)
 		}else{
-	     		texts[i] = game.add.text(300, this.game.height - 50, messages[i], style);
-	    	}
-	 	i = i+1;
+	     texts[i] = game.add.text(this.body.x - 500, this.body.y - 200, messages[i], style);
+	    }
+	     i = i+1;
 	 }
 	 counter = counter + 1;
 
@@ -81,23 +86,23 @@ Npc.prototype.talk = function(game, npc_value) {
 
 Npc.prototype.update = function(){
 	console.log("in pudat");
-	if(no.isDown){
+	if(no.isDown && prompt!=null){
 		prompt.kill();
 	}
-	if(yes.isDown){
+	if(yes.isDown && prompt!=null){
 		prompt.kill();
 		this.game.player.addNPC(this);
 		followPlayer = true;
 	}
 
 	if(followPlayer == true){
-		console.log(this.body.x , this.body.y);
+		//console.log(this.body.x , this.body.y);
 		this.followPlayer();
 	}else{
-		console.log("Before",this.body.x , this.body.y);
+		//console.log("Before",this.body.x , this.body.y);
 		this.body.x = initialX;
 		this.body.y = initialY;
-		console.log("After",this.body.x , this.body.y);
+		//console.log("After",this.body.x , this.body.y);
 	}
 }
 
@@ -149,21 +154,22 @@ Npc.prototype.followPlayer = function(){
 		        this.position.faceUp = false;
 		        this.position.faceLeft = false;
 		        this.position.faceRight = false;
-    		} 
-			else if ((dist1> -painDist) && (dist1 < painDist) && (dist2 >-painDist) && (dist2 < painDist)){
-       		 if (this.position.faceLeft==true){
-            		this.body.animations.play('left');
+    		}
+		else if ((dist1> -painDist) && (dist1 < painDist) && (dist2 >-painDist) && (dist2 < painDist)){
+       			if (this.position.faceLeft==true){
+            			this.body.animations.play('left');
+        		}
+	        	else if(this.position.faceRight==true){
+        	        	this.body.animations.play('right');
+        		}
+        		else if (this.position.faceUp==true){
+            			this.body.animations.play('up');
+        		}
+        		else if (this.position.faceDown==true){
+            			this.body.animations.play('down');
+        		}
         	}
-	        else if(this.position.faceRight==true){
-        	        this.body.animations.play('right');
-        	}
-        	else if (this.position.faceUp==true){
-            		this.body.animations.play('up');
-        	}
-        	else if (this.position.faceDown==true){
-            		this.body.animations.play('down');
-        	} 
-    	}
+	}
 }
 
 Npc.prototype.moveVertical = function (speed)
@@ -177,3 +183,31 @@ Npc.prototype.moveHorizontal = function moveHorizontal(speed){
    this.body.x+= speed;
 
 }
+
+Npc.prototype.Shoot = function(weaponSprite){
+
+       if(game.time.now > weaponTime2){
+
+         if(this.position.faceLeft == true){
+                this.weapon = new Weapon(this.game ,this.body.x -8, this.body.y ,10, weaponSprite, -400, 0);
+            } 
+         else if (this.position.faceRight == true){
+            this.weapon = new Weapon(this.game ,this.body.x +8,this.body.y ,10, weaponSprite, 400, 0);
+
+            }
+            else if (this.position.faceUp == true){
+            this.weapon = new Weapon(this.game ,this.body.x ,this.body.y -8,10, weaponSprite, 0, -400);
+
+
+            }
+            else if(this.position.faceDown == true){
+               this.weapon = new Weapon(this.game ,this.body.x ,this.body.x+ 25 ,10, weaponSprite, 0, 400);
+         
+            }  
+            console.log("after!!!", weaponTime);
+            weaponTime2 = game.time.now + weaponDelay2;
+        }       
+
+}
+
+

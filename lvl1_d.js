@@ -24,7 +24,10 @@ var level1DayState = {
 		// PLAYER
 		game.player = new Player(game, 148, 757, 8);
 
-
+		game.wood = new Collectible(game, 848, 48, 'wood');
+		game.food = new Collectible(game, 48, 304, 'food');
+		game.water = new Collectible(game, 880, 496, 'water');
+		
 		// DRAW FOREGROUND
 		// makes it look like characters are walking behind objects
 		foreground = game.map.createLayer('Foreground');
@@ -34,13 +37,13 @@ var level1DayState = {
 		console.log("set collision");
 		game.physics.p2.convertTilemap(game.map, 'Collision');
 
-		game.wood = new Collectible(game, 550, 500, 'wood');
 	},
 	update: function(){
-		if (game.player.wood) {
-			var message = game.add.text(80, 80, 'Brace yourself... The night is upon you', {font: '25px Arial', fill: '#ffffff' });
-
-			game.state.start('lvl1_n');
+		if (game.player.wood == true) {//change userself
+			game.add.text(750, 50, 'Brace yourself... The night is upon you. Hit action to continue', {font: '25px Arial', fill: '#000000', wordWrap: true, wordWrapWidth: 200 });
+			if (action.isDown){
+				game.state.start('lvl1_n');
+			}
 		}
 		game.camera.follow(game.player);
 	},

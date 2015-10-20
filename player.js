@@ -19,7 +19,6 @@ function Player(game, x, y, speed) {
 	console.log("Creating Player");
 
 	Phaser.Sprite.call(this, game , x , y);
-
 	player = this.game.add.sprite(x,y, 'player');
 
 	player.animations.add('left', [9, 10, 11, 10], speed, true);
@@ -78,6 +77,7 @@ function Player(game, x, y, speed) {
 
 	fire = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	action = game.input.keyboard.addKey(Phaser.Keyboard.E);
+	this.dead = false;
 
 	game.add.existing(this);	
 }
@@ -85,17 +85,11 @@ function Player(game, x, y, speed) {
 Player.prototype.update = function() {
 
 	player.body.setZeroVelocity();
-
-	if(this.isDead()){
-		player.x = 0;
-		player.y = 0;
-	}else{
-		if (game.npc){
-			distNpc = Math.sqrt( (player.body.x- npc.body.x)*(player.body.x- npc.body.x) + (player.body.y- npc.body.y)*(player.body.y- npc.body.y) );
-		}
-
-	this.HealthBar.setPosition(player.x , player.y -20);
+	if (game.npc){
+		//console.log("Dist to NPC: ", distNpc);
+		distNpc = Math.sqrt( (player.body.x- npc.body.x)*(player.body.x- npc.body.x) + (player.body.y- npc.body.y)*(player.body.y- npc.body.y) );
 	}
+	this.HealthBar.setPosition(player.x , player.y -20);
 	if (wasd.down.isDown) {
 		player.animations.play('down');
 		
@@ -108,10 +102,13 @@ Player.prototype.update = function() {
  		position.faceDown = true;
 	}
 	else if (wasd.left.isDown) {
+
+		console.log("still moving", player.body.x , this.x);
+		
 		player.animations.play('left');
 		player.body.x -= 3;
-
 		this.x = player.body.x;
+
 		position.faceLeft = true;
  		position.faceRight = false;
  		position.faceUp = false;
@@ -137,34 +134,47 @@ Player.prototype.update = function() {
 
 	} 
 	if (fire.isDown) {
+	
 		console.log("shooting ...");
 	      if(game.time.now > weaponTime){
             console.log("shooting ...");
 
             if(position.faceLeft == true){
-            player.weapon = new Weapon(player.game ,player.x -8, player.y ,10, 'rock', -400, 0);
+            player.weapon = new Weapon(this.game ,player.x -8, player.y ,10, 'rock', -400, 0);
+
             } 
             else if (position.faceRight == true){
-            player.weapon = new Weapon(player.game ,player.x +8,player.y ,10, 'rock', 400, 0);
+            player.weapon = new Weapon(this.game ,player.x +8,player.y ,10, 'rock', 400, 0);
 
             }
             else if (position.faceUp == true){
-            player.weapon = new Weapon(player.game ,player.x ,player.y -8,10, 'rock', 0, -400);
+            player.weapon = new Weapon(this.game ,player.x ,player.y -8,10, 'rock', 0, -400);
 
             }
             else if(position.faceDown == true){
-               player.weapon = new Weapon(player.game ,player.x ,player.y+25 ,10, 'rock', 0, 400);
-
+               player.weapon = new Weapon(this.game ,player.x ,player.y+ 25 ,10, 'rock', 0, 400);
+         
             }  
+
             weaponTime = game.time.now + weaponDelay;
-        }       
+            
+           }  
+           console.log("BONJOUR LES GENS")   
+          	if(this.npc){
+			       console.log("IN BEEEEECHH FIRE ", this.npc);
+			       this.npc.Shoot('rock');
+		   } 
 		}         
 	if(action.isDown && distNpc < 50){
 		console.log("about to talk");
 		npc.talk(this.game , 1);
 	}
-
+	if (HealthValue <= 0){
+		this.dead = true;
+		this.dies();
+	}
 }
+
 
 
 Player.prototype.getCoordinates = function() {
@@ -180,10 +190,7 @@ Player.prototype.change_weapon = function(weapon) {
 }
 Player.prototype.reduceHealth = function(power) {
 	
-	if(HealthValue <= 1){
-		this.dies();
-	}
-
+	console.log(HealthValue);
 	HealthValue -= power;
 	this.HealthBar.setPercent(HealthValue);
 
@@ -192,13 +199,9 @@ Player.prototype.reduceHealth = function(power) {
 Player.prototype.dies = function(){
 	//console.log("is about to die")
 	console.log("is about to die")
-   	player.destroy();
-   	this.destroy();
+   	player.kill();
+   	this.kill();
    	this.HealthBar.setPosition(-1 , -1); // not good
-   	player.x = 0 ;
-   	player.y = 0;
-   	this.x = 0;
-   	this.y = 0;
 }
 
 Player.prototype.isDead = function(){
