@@ -78,6 +78,7 @@ function Player(game, x, y, speed) {
 
 	fire = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	action = game.input.keyboard.addKey(Phaser.Keyboard.E);
+	this.dead = false;
 
 	game.add.existing(this);	
 }
@@ -91,6 +92,7 @@ Player.prototype.update = function() {
 		player.y = 0;
 	}else{
 		if (game.npc){
+			console.log("Dist to NPC: ", distNpc);
 			distNpc = Math.sqrt( (player.body.x- npc.body.x)*(player.body.x- npc.body.x) + (player.body.y- npc.body.y)*(player.body.y- npc.body.y) );
 		}
 	this.HealthBar.setPosition(player.x , player.y -20);
@@ -176,7 +178,10 @@ Player.prototype.update = function() {
 		console.log("about to talk");
 		npc.talk(this.game , 1);
 	}
-
+	if (HealthValue <= 0){
+		this.dead = true;
+		this.dies();
+	}
 }
 
 
@@ -193,10 +198,7 @@ Player.prototype.change_weapon = function(weapon) {
 }
 Player.prototype.reduceHealth = function(power) {
 	
-	if(HealthValue <= 1){
-		this.dies();
-	}
-
+	console.log(HealthValue);
 	HealthValue -= power;
 	this.HealthBar.setPercent(HealthValue);
 
@@ -208,7 +210,7 @@ Player.prototype.dies = function(){
    	player.kill();
    	this.kill();
    	this.HealthBar.setPosition(-1 , -1); // not good
-   	player.x = 0 ;
+   	player.x = 0;
    	player.y = 0;
    	this.x = 0;
    	this.y = 0;

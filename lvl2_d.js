@@ -23,6 +23,9 @@ var level2DayState = {
 		// PLAYER AND NPC
 		game.npc = new Npc(game, 1168, 1088, 8, 'npcFem');
 		game.player = new Player(game, 640, 1248, 8);
+		game.food = new Collectible(game, 864, 1104, 'food');
+		game.water = new Collectible(game, 176, 160, 'water');
+		game.spear = new Collectible(game, 1184, 1136, 'spear');
 
 		// DRAW FOREGROUND
 		foreground = game.map.createLayer('Foreground2');
