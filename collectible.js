@@ -5,7 +5,7 @@ Collectible.prototype.constructor = Collectible;
 Collectible.prototype.force = {x:0.0, y:0.0};
 
 function Collectible(game, x, y, type) {
-	console.log("Creating Collectible");
+
 
 	Phaser.Sprite.call(this, game, x, y, type);
 
@@ -35,16 +35,16 @@ Collectible.prototype.update = function()
 		this.destroy();
 		if (this.name == 'water') {
 			game.player.addHealth(20);
-			console.log("Picked up water");
+
 		}
 		else if (this.name == 'food') {
 			game.player.addHealth(40);
-			console.log("Picked up food");
+
 		}
 		else if (this.name == 'wood') {
-			console.log("Picked up wood");
+
 			game.player.wood = true;
-			console.log(game.player.wood);
+
 		} else if (this.name == 'plasma') {
 			game.player.change_weapon('plasma', 20);
 		}
