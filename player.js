@@ -88,7 +88,7 @@ Player.prototype.update = function() {
 	player.body.setZeroVelocity();
 
 	if (game.npc){
-		console.log("Dist to NPC: ", distNpc);
+		//console.log("Dist to NPC: ", distNpc);
 		distNpc = Math.sqrt( (player.body.x- npc.body.x)*(player.body.x- npc.body.x) + (player.body.y- npc.body.y)*(player.body.y- npc.body.y) );
 
 	}
@@ -142,12 +142,13 @@ Player.prototype.update = function() {
 
 	} 
 	if (fire.isDown) {
+	
 		console.log("shooting ...");
 	      if(game.time.now > weaponTime){
             console.log("shooting ...");
 
             if(position.faceLeft == true){
-            player.weapon = new Weapon(this.game ,player.x -8, player.y ,10, 'rock', -400, 0);
+                player.weapon = new Weapon(this.game ,player.x -8, player.y ,10, 'rock', -400, 0);
 
             } 
             else if (position.faceRight == true){
@@ -160,14 +161,18 @@ Player.prototype.update = function() {
 
             }
             else if(position.faceDown == true){
-               player.weapon = new Weapon(this.game ,player.x ,player.y+ 15 ,10, 'rock', 0, 400);
+               player.weapon = new Weapon(this.game ,player.x ,player.y+ 25 ,10, 'rock', 0, 400);
          
-
-            // player.weapon.fire(player.x , player.y , 400 , 0);
             }  
 
             weaponTime = game.time.now + weaponDelay;
-        }       
+            
+           }  
+           console.log("BONJOUR LES GENS")   
+          	if(this.npc){
+			       console.log("IN BEEEEECHH FIRE ", this.npc);
+			       this.npc.Shoot('rock');
+		   } 
 		}         
 	
 	if(action.isDown && distNpc < 50){

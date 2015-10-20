@@ -14,6 +14,9 @@ var prompt;
 var followPlayer;
 var initialX;
 var initialY;
+
+var weaponTime2 = 0;
+var weaponDelay2 = 400;
 function Npc(game, x, y, speed ,spriteType) {
 	console.log("Creating NPC");
 	console.log("Creating Player");
@@ -85,23 +88,23 @@ Npc.prototype.talk = function(game, npc_value) {
 
 Npc.prototype.update = function(){
 	console.log("in pudat");
-	if(no.isDown){
+	if(no.isDown && prompt!=null){
 		prompt.kill();
 	}
-	if(yes.isDown){
+	if(yes.isDown && prompt!=null){
 		prompt.kill();
 		this.game.player.addNPC(this);
 		followPlayer = true;
 	}
 
 	if(followPlayer == true){
-		console.log(this.body.x , this.body.y);
+		//console.log(this.body.x , this.body.y);
 		this.followPlayer();
 	}else{
-		console.log("Before",this.body.x , this.body.y);
+		//console.log("Before",this.body.x , this.body.y);
 		this.body.x = initialX;
 		this.body.y = initialY;
-		console.log("After",this.body.x , this.body.y);
+		//console.log("After",this.body.x , this.body.y);
 	}
 }
 
@@ -183,3 +186,31 @@ Npc.prototype.moveHorizontal = function moveHorizontal(speed){
    this.body.x+= speed;
 
 }
+
+Npc.prototype.Shoot = function(weaponSprite){
+
+       if(game.time.now > weaponTime2){
+
+         if(this.position.faceLeft == true){
+                this.weapon = new Weapon(this.game ,this.body.x -8, this.body.y ,10, weaponSprite, -400, 0);
+            } 
+         else if (this.position.faceRight == true){
+            this.weapon = new Weapon(this.game ,this.body.x +8,this.body.y ,10, weaponSprite, 400, 0);
+
+            }
+            else if (this.position.faceUp == true){
+            this.weapon = new Weapon(this.game ,this.body.x ,this.body.y -8,10, weaponSprite, 0, -400);
+
+
+            }
+            else if(this.position.faceDown == true){
+               this.weapon = new Weapon(this.game ,this.body.x ,this.body.x+ 25 ,10, weaponSprite, 0, 400);
+         
+            }  
+            console.log("after!!!", weaponTime);
+            weaponTime2 = game.time.now + weaponDelay2;
+        }       
+
+}
+
+
