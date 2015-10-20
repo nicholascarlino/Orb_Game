@@ -19,7 +19,6 @@ function Player(game, x, y, speed) {
 
 	Phaser.Sprite.call(this, game , x , y);
 
-	//Phaser.Sprite.call(this, game, x, y, 'player');
 
 	player = this.game.add.sprite(x,y, 'player');
 
@@ -44,10 +43,6 @@ function Player(game, x, y, speed) {
 	npc = game.npc;
 	this.game = game;
 	player.body.collideWorldBounds = true;
-
-	//player.weapon = new WeaponGroup(player.game , player.x , player.y , 10, 'rock');
-
-	//might need to look at player
 
 	 var barConfig ={
        width: 40,
@@ -90,7 +85,6 @@ function Player(game, x, y, speed) {
 Player.prototype.update = function() {
 
 
-	// reset the player's movement every loop to make sure they stay still 
 	player.body.setZeroVelocity();
 
 	if(this.isDead()){
@@ -101,7 +95,6 @@ Player.prototype.update = function() {
 			distNpc = Math.sqrt( (player.body.x- npc.body.x)*(player.body.x- npc.body.x) + (player.body.y- npc.body.y)*(player.body.y- npc.body.y) );
 		}
 
-		//console.log("dist NPC is ", distNpc);
 	this.HealthBar.setPosition(player.x , player.y -20);
 	}
 	if (wasd.down.isDown) {
@@ -150,22 +143,18 @@ Player.prototype.update = function() {
 
             if(position.faceLeft == true){
             player.weapon = new Weapon(player.game ,player.x -8, player.y ,10, 'rock', -400, 0);
-             //player.weapon.fire(player.x , player.y , 0 , -400);
             } 
             else if (position.faceRight == true){
             player.weapon = new Weapon(player.game ,player.x +8,player.y ,10, 'rock', 400, 0);
 
-            // player.weapon.fire(player.x , player.y , 0 , 400);
             }
             else if (position.faceUp == true){
             player.weapon = new Weapon(player.game ,player.x ,player.y -8,10, 'rock', 0, -400);
 
-            // player.weapon.fire(player.x , player.y , -400 , 0);
             }
             else if(position.faceDown == true){
                player.weapon = new Weapon(player.game ,player.x ,player.y+25 ,10, 'rock', 0, 400);
 
-            // player.weapon.fire(player.x , player.y , 400 , 0);
             }  
             weaponTime = game.time.now + weaponDelay;
         }       
@@ -181,13 +170,11 @@ Player.prototype.update = function() {
 
 Player.prototype.getCoordinates = function() {
 
-	//console.log("Halllo",player.x , player.y);
 	var location = {x:player.x , y:player.y};
 
 	return location;
 }
 
-//weapon has to be a sprite
 Player.prototype.change_weapon = function(weapon) {
 	
 	player.weapon = new Weapon(weapon);
@@ -195,18 +182,15 @@ Player.prototype.change_weapon = function(weapon) {
 Player.prototype.reduceHealth = function(power) {
 	
 	if(HealthValue <= 1){
-		//console.log("very down", HealthValue)
 		this.dies();
 	}
 
-	//console.log("reduceHealth ", HealthValue);
 	HealthValue -= power;
 	this.HealthBar.setPercent(HealthValue);
 
 }
 
 Player.prototype.dies = function(){
-	//console.log("is about to die")
 	console.log("is about to die")
    	player.destroy();
    	this.destroy();
