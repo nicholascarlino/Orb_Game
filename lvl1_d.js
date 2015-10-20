@@ -37,12 +37,18 @@ var level1DayState = {
 		console.log("set collision");
 		game.physics.p2.convertTilemap(game.map, 'Collision');
 
+		backgroundMusic = game.add.audio('Level1Music');
+		backgroundMusic.loop = true;
+		backgroundMusic.play();
+
 	},
 	update: function(){
 		game.pHealth = HealthValue;
 		if (game.player.wood == true) {//change userself
 			game.add.text(750, 50, 'Brace yourself... The night is upon you. Hit action to continue', {font: '25px Arial', fill: '#000000', wordWrap: true, wordWrapWidth: 200 });
 			if (action.isDown){
+				backgroundMusic.loop = false;
+				backgroundMusic.stop();
 				game.state.start('lvl1_n');
 			}
 		}

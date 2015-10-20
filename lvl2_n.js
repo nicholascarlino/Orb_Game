@@ -37,6 +37,10 @@ var level2NightState = {
 		background3.alpha = .7;
 
 		game.physics.p2.convertTilemap(game.map, 'Collision');
+
+		backgroundMusic = game.add.audio('LevelNightMusic');
+		backgroundMusic.loop = true;
+		backgroundMusic.play();
 	},
 	update: function(){
 		game.pHealth = HealthValue;
@@ -45,11 +49,15 @@ var level2NightState = {
 			text = game.add.text(coord.x - 400, coord.y - 50, 'You have died.  Press action to continue', {font: "15px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: 500, align: "left"});
 			if (action.isDown){
 				HealthValue = 100;
+				backgroundMusic.loop = false;
+				backgroundMusic.stop();
 				game.state.start('lvl2_d');
 			}
 		}
 		if (game.enemies.length == 0){
 			game.player.wood = false;
+			backgroundMusic.loop = false;
+			backgroundMusic.stop();
 			game.state.start('lvl3_d');
 		}
 		game.camera.follow(game.player);

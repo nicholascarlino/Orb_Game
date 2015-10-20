@@ -35,12 +35,48 @@ var level3DayState = {
 
 		background3 = game.map.createLayer('Mausoleum');
 		background4 = game.map.createLayer('Collision');
-		background4.alpha = 0;
+		background4.alpha = .4;
 
 		// DEFINE COLLISION OBJECTS IN MAP
 		game.map.setCollision(3825, true, 'Collision');
 		console.log("set collision");
 		game.physics.p2.convertTilemap(game.map, 'Collision');
+
+		backgroundMusic = game.add.audio('Level3Music');
+		backgroundMusic.loop = true;
+		backgroundMusic.play();
+
+
+		//CREATE THE OBELISK 768, 256
+		game.obelisk = game.add.sprite(818, 300, 'obelisk');
+		game.physics.p2.enable(game.obelisk, true);
+		game.obelisk.body.clearShapes();
+		game.obelisk.body.addRectangle(80, 70);
+		game.obelisk.body.fixedRotation = true;
+		game.obelisk.anchor.setTo(.5,.5);
+		game.obelisk.body.x = game.obelisk.x;
+		game.obelisk.body.y = game.obelisk.y;
+
+	 	var barConfig ={
+      	 width: 40,
+       	 height: 10,
+       	 x: 818,
+       	 y: 210,
+       	 bg: {
+      	 color: '#651828'
+      	 },
+      	 bar: {
+      	 color: '#0000FF'
+      	 },
+      	 animationDuration: 200,
+       	flipped: false
+   		 };
+   		 game.obelisk.HealthValue = 100;
+   		 game.obelisk.HealthBar = new HealthBar(game, barConfig);
+   		 game.obelisk.HealthBar.setPercent(100);
+
+
+
 	},
 	update: function(){
 
@@ -49,6 +85,8 @@ var level3DayState = {
 			game.player.wood = false;
 			text = game.add.text(game.width / 2, game.height / 2, 'You have died. Press action to continue',{ font: "25px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 500, align: "left"});
 			if (action.isDown){
+				backgroundMusic.loop = false;
+				backgroundMusic.stop();
 				game.state.start('lvl1_d');
 			}
 		}	

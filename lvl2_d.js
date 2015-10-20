@@ -43,12 +43,18 @@ var level2DayState = {
 		console.log("set collision2");
 		game.physics.p2.convertTilemap(game.map, 'Collision');
 
+		backgroundMusic = game.add.audio('Level2Music');
+		backgroundMusic.loop = true;
+		backgroundMusic.play();
+
 	},
 	update: function(){
 		game.pHealth = HealthValue
 		if (game.player.wood == true) {
 			text = game.add.text(688, 50, 'Night approaches... Press action to continue', {font: '15px Arial', fill: '#ffffff', wordWrap: true});
 			if(action.isDown){
+				backgroundMusic.loop = false;
+				backgroundMusic.stop();
 				game.state.start('lvl2_n');
 			}
 		}
