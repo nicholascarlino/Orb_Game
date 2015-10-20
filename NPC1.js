@@ -59,7 +59,7 @@ Npc.prototype.talk = function(game, npc_value) {
 			texts[i -1].kill();
 		}
 		if (npc_value == 1){
-			message1 = "Help me, please.  I have been stranded here for days.  I miss my family! ... Press K";
+			message1 = "Help me, please.  I have been stranded here for days.  I miss my family! ... Press E";
 			message2 = "You look pretty capable... Do you think that I could hang with you? I bet we would survive better if we stuck together"
 			message3 = "Press Y if you want to help and N if you don't"
 			messages = [message1 , message2 , message3];
@@ -67,14 +67,14 @@ Npc.prototype.talk = function(game, npc_value) {
 		else if (npc_value == 2){
 			message = "What do you want, boy? I'm very busy.  But I guess you look capable.  What do you say, want to fight with me against these bastards?"
 		}	
-		 style = { font: "15px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 200, align: "left" };
+		 style = { font: "30px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: 600, align: "left" };
 
 	if( counter % 12 == 0 && i < 3){
 		console.log(counter);
 		if(i == 2){
-			prompt = game.add.text(300, this.game.height - 50, messages[i], style)
+			prompt = game.add.text(this.body.x - 500, this.body.y - 200, messages[i], style)
 		}else{
-	     texts[i] = game.add.text(300, this.game.height - 50, messages[i], style);
+	     texts[i] = game.add.text(this.body.x - 500, this.body.y - 200, messages[i], style);
 	    }
 	     i = i+1;
 	 }
@@ -109,73 +109,64 @@ Npc.prototype.followPlayer = function(){
 
 
 	var dist1 = this.body.x - this.game.player.x;
-    var dist2 = this.body.y - this.game.player.y;
-    var speed = 5;
- var painDist = 15;
-  if( Math.abs(dist1) > Math.abs(dist2)){
-        if(dist1 > painDist ){
-        //move to the left
-        this.body.animations.play('left');
-        this.moveHorizontal(-speed);
-        //this.body.body.x += -speed;
+ 	var dist2 = this.body.y - this.game.player.y;
+    	var speed = 5;
+ 	var painDist = 15;
+  	if( Math.abs(dist1) > Math.abs(dist2)){
+        	if(dist1 > painDist ){
+        		this.body.animations.play('left');
+        		this.moveHorizontal(-speed);
 
-      
+        		this.position.faceLeft = true;
+        		this.position.faceRight = false;
+		        this.position.faceUp = false;
+		        this.position.faceDown = false;
 
-        this.position.faceLeft = true;
-        this.position.faceRight = false;
-        this.position.faceUp = false;
-        this.position.faceDown = false;
+	        }else if (dist1 < -painDist){
 
-    }else if (dist1 < -painDist){
+       			 this.body.animations.play('right');
 
-        this.body.animations.play('right');
+		        this.moveHorizontal(speed);
 
-        this.moveHorizontal(speed);
-       // this.body.body.x += speed;
+		        this.position.faceRight = true;
+        		this.position.faceLeft = false;
+		        this.position.faceUp = false;
+		        this.position.faceDown = false;
+    		}
+        }else {
+        	if(dist2> painDist){
+        		this.body.animations.play('up');
 
-        this.position.faceRight = true;
-        this.position.faceLeft = false;
-        this.position.faceUp = false;
-        this.position.faceDown = false;
-    }
-  }else {
-        if(dist2> painDist){
-        //move up
-        this.body.animations.play('up');
+		        this.moveVertical(-speed);
 
-        this.moveVertical(-speed);
-       // this.body.body.y += -speed;
+		        this.position.faceUp = true;
+		        this.position.faceDown = false;
+		        this.position.faceLeft = false;
+		        this.position.faceRight = false;
+  	        }else if (dist2 < -painDist){
+		        this.body.animations.play('down');
 
-        this.position.faceUp = true;
-        this.position.faceDown = false;
-        this.position.faceLeft = false;
-        this.position.faceRight = false;
-    }else if (dist2 < -painDist){
-        // move down
-        this.body.animations.play('down');
+		        this.moveVertical(speed);
 
-        this.moveVertical(speed);
-        //this.body.body.y += speed;
-
-        this.position.faceDown = true;
-        this.position.faceUp = false;
-        this.position.faceLeft = false;
-        this.position.faceRight = false;
-    }
-    else if ((dist1> -painDist) && (dist1 < painDist) && (dist2 >-painDist) && (dist2 < painDist)){
-        if (this.position.faceLeft==true){
-            this.body.animations.play('left');
-        }
-        else if(this.position.faceRight==true){
-            this.body.animations.play('right');
-        }
-        else if (this.position.faceUp==true){
-            this.body.animations.play('up');
-        }
-        else if (this.position.faceDown==true){
-            this.body.animations.play('down');
-        }
-    }
+		        this.position.faceDown = true;
+		        this.position.faceUp = false;
+		        this.position.faceLeft = false;
+		        this.position.faceRight = false;
+    		}
+		else if ((dist1> -painDist) && (dist1 < painDist) && (dist2 >-painDist) && (dist2 < painDist)){
+       			if (this.position.faceLeft==true){
+            			this.body.animations.play('left');
+        		}
+	        	else if(this.position.faceRight==true){
+        	        	this.body.animations.play('right');
+        		}
+        		else if (this.position.faceUp==true){
+            			this.body.animations.play('up');
+        		}
+        		else if (this.position.faceDown==true){
+            			this.body.animations.play('down');
+        		}
+        	}
 	}
 }
 Npc.prototype.moveVertical = function (speed)

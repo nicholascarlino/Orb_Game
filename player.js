@@ -162,7 +162,8 @@ Player.prototype.update = function() {
 
             }
             else if(position.faceDown == true){
-               player.weapon = new Weapon(this.game ,player.x ,player.y+15 ,10, 'rock', 0, 400);
+               player.weapon = new Weapon(this.game ,player.x ,player.y+ 15 ,10, 'rock', 0, 400);
+         
 
             // player.weapon.fire(player.x , player.y , 400 , 0);
             }  
@@ -204,8 +205,8 @@ Player.prototype.reduceHealth = function(power) {
 Player.prototype.dies = function(){
 	//console.log("is about to die")
 	console.log("is about to die")
-   	player.destroy();
-   	this.destroy();
+   	player.kill();
+   	this.kill();
    	this.HealthBar.setPosition(-1 , -1); // not good
    	player.x = 0 ;
    	player.y = 0;
