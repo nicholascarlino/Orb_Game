@@ -8,7 +8,7 @@ var wasd;
 var fire;
 var action;
 var position;
-var HealthValue = 100;
+var HealthValue = 50;
 var npc;
 var distNpc;
 var weaponTime = 0;
