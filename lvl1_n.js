@@ -43,6 +43,9 @@ var level1NightState = {
 		background5.alpha = .7;
 	},
 	update: function(){
+		if (game.enemies.length == 0){
+			game.state.start('lvl2_d');
+		}
 		game.camera.follow(game.player);
 	},
 }
