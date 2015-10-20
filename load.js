@@ -40,6 +40,12 @@ var loadState = {
 		game.load.image('food', 'assets/burger.png');
 		game.load.image('water', 'assets/water.png');
 		game.load.image('wood', 'assets/wood.png');
+		game.load.image('obelisk', 'assets/enemySprites/obelisk.png');
+
+		game.load.audio('Level1Music', 'assets/music/Level1Day.mp3');
+		game.load.audio('Level2Music', 'assets/music/Level2Day.mp3');
+		game.load.audio('LevelNightMusic', 'assets/music/LevelNight.mp3');
+		game.load.audio('Level3Music', 'assets/music/Level3.mp3');
 	},
 	create: function(){
 		game.state.start('menu');

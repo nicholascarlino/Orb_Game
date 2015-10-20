@@ -41,6 +41,10 @@ var level1NightState = {
 		game.physics.p2.convertTilemap(game.map, 'Collision');
 		background5 = game.map.createLayer('Night');
 		background5.alpha = .7;
+
+		backgroundMusic = game.add.audio ('LevelNightMusic');
+		backgroundMusic.loop = true;
+		backgroundMusic.play();
 	},
 	update: function(){
 		game.pHealth = HealthValue
@@ -49,6 +53,8 @@ var level1NightState = {
 			text = game.add.text(game.width / 2, game.height / 2, 'You have died. Press action to continue',{ font: "25px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 500, align: "left"});
 			if (action.isDown){
 				HealthValue = 100;
+				backgroundMusic.loop = false;
+				backgroundMusic.stop();
 				game.state.start('lvl1_d');
 			}
 		}	
@@ -56,6 +62,8 @@ var level1NightState = {
 			game.player.wood = false;
 			text = game.add.text(game.width / 2, game.height / 2, 'You have survived... for now. Action to progress', {font: "15px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 500, align: "left"});
 			if (action.isDown){
+				backgroundMusic.loop = false;
+				backgroundMusic.stop();
 				game.state.start('lvl2_d');
 			}
 		}

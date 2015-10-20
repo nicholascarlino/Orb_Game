@@ -50,7 +50,19 @@ Weapon.prototype.update= function(){
     }
     var tile = game.map.getTileWorldXY(this.x + (this.velocityX / 18), this.y + (this.velocityY / 18), size, size, "Collision");
     if (tile == null){
+        if (this.game.obelisk != null){
+            var dam_dist = 60;
+            var distx = this.x - game.obelisk.x;
+            var disty = this.y - game.obelisk.y;
+
+            if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
+                game.obelisk.HealthValue -= this.power/2;
+                game.obelisk.HealthBar.setPercent(game.obelisk.HealthValue);
+                this.destroy();
+            }
+        }
         this.damage_enemy(this.game.enemies);
+        }   
     }
     else if (tile.collides == true){
         this.destroy();

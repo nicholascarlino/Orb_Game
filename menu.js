@@ -12,7 +12,7 @@ var menuState = {
 
 	},
 	start: function() {
-		game.state.start('intro');
+		game.state.start('lvl3_d');
 	},
 	instr: function() {
 		game.state.start('instr');

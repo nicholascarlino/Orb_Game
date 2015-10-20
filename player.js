@@ -14,8 +14,6 @@ var distNpc;
 var weaponTime = 0;
 var weaponDelay = 400
 var player;
-
-
 var npc_is_attached = false;
 var plasma = false;
 
@@ -235,7 +233,6 @@ Player.prototype.addHealth = function(power) {
 }
 
 Player.prototype.addNPC = function(New_npc) {
-
 	console.log("add npc");
 	this.npc = New_npc;
 	npc_is_attached = true;
