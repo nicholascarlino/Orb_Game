@@ -45,6 +45,10 @@ Collectible.prototype.update = function()
 			console.log("Picked up wood");
 			game.player.wood = true;
 			console.log(game.player.wood);
+		} else if (this.name == 'spear') {
+			console.log("Picked up spear...!!!!!!!!!");
+			game.player.change_weapon('spear', 20);
+			//console.log(game.player.wood);
 		}
 	}
 }

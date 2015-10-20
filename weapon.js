@@ -7,7 +7,7 @@ Weapon.prototype.force = {x:0.0, y:0.0};
 
 
 function Weapon(game, x, y , power, sprite, speedX, speedY) {
-    console.log("Creating Weapon");
+    console.log("Creating Weapon" , sprite);
 
     Phaser.Sprite.call(this, game, x, y, sprite);
 
@@ -35,7 +35,7 @@ function Weapon(game, x, y , power, sprite, speedX, speedY) {
 
 Weapon.prototype.update= function(){
 
-    console.log("in shooting update");
+    //console.log("in shooting update", this);
     
     this.body.velocity.y = this.velocityY;
     this.body.velocity.x = this.velocityX;

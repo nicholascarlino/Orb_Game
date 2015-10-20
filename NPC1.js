@@ -87,7 +87,7 @@ Npc.prototype.talk = function(game, npc_value) {
 }
 
 Npc.prototype.update = function(){
-	console.log("in pudat");
+	
 	if(no.isDown && prompt!=null){
 		prompt.kill();
 	}
@@ -187,24 +187,24 @@ Npc.prototype.moveHorizontal = function moveHorizontal(speed){
 
 }
 
-Npc.prototype.Shoot = function(weaponSprite){
+Npc.prototype.Shoot = function(weaponSprite, power){
 
        if(game.time.now > weaponTime2){
 
          if(this.position.faceLeft == true){
-                this.weapon = new Weapon(this.game ,this.body.x -8, this.body.y ,10, weaponSprite, -400, 0);
+                this.weapon = new Weapon(this.game ,this.body.x -8, this.body.y ,power, weaponSprite, -400, 0);
             } 
          else if (this.position.faceRight == true){
-            this.weapon = new Weapon(this.game ,this.body.x +8,this.body.y ,10, weaponSprite, 400, 0);
+            this.weapon = new Weapon(this.game ,this.body.x +8,this.body.y ,power, weaponSprite, 400, 0);
 
             }
             else if (this.position.faceUp == true){
-            this.weapon = new Weapon(this.game ,this.body.x ,this.body.y -8,10, weaponSprite, 0, -400);
+            this.weapon = new Weapon(this.game ,this.body.x ,this.body.y -8,power, weaponSprite, 0, -400);
 
 
             }
             else if(this.position.faceDown == true){
-               this.weapon = new Weapon(this.game ,this.body.x ,this.body.x+ 25 ,10, weaponSprite, 0, 400);
+               this.weapon = new Weapon(this.game ,this.body.x ,this.body.x+ 25 ,power, weaponSprite, 0, 400);
          
             }  
             console.log("after!!!", weaponTime);

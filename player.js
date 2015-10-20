@@ -80,7 +80,11 @@ function Player(game, x, y, speed) {
 	action = game.input.keyboard.addKey(Phaser.Keyboard.E);
 	this.dead = false;
 
-	game.add.existing(this);	
+	this.weaponType = 'rock';
+	this.power = 10;
+
+	game.add.existing(this);
+
 }
 
 Player.prototype.update = function() {
@@ -148,20 +152,20 @@ Player.prototype.update = function() {
             console.log("shooting ...");
 
             if(position.faceLeft == true){
-                player.weapon = new Weapon(this.game ,player.x -8, player.y ,10, 'rock', -400, 0);
+                player.weapon = new Weapon(this.game ,player.x -8, player.y ,this.power, this.weaponType, -400, 0);
 
             } 
             else if (position.faceRight == true){
-            player.weapon = new Weapon(this.game ,player.x +8,player.y ,10, 'rock', 400, 0);
+            player.weapon = new Weapon(this.game ,player.x +8,player.y ,this.power, this.weaponType, 400, 0);
 
             }
             else if (position.faceUp == true){
-            player.weapon = new Weapon(this.game ,player.x ,player.y -8,10, 'rock', 0, -400);
+            player.weapon = new Weapon(this.game ,player.x ,player.y -8,this.power, this.weaponType, 0, -400);
 
 
             }
             else if(position.faceDown == true){
-               player.weapon = new Weapon(this.game ,player.x ,player.y+ 25 ,10, 'rock', 0, 400);
+               player.weapon = new Weapon(this.game ,player.x ,player.y+ 25 ,this.power, this.weaponType, 0, 400);
          
             }  
 
@@ -171,7 +175,7 @@ Player.prototype.update = function() {
            console.log("BONJOUR LES GENS")   
           	if(this.npc){
 			       console.log("IN BEEEEECHH FIRE ", this.npc);
-			       this.npc.Shoot('rock');
+			       this.npc.Shoot(this.weaponType , this.power);
 		   } 
 		}         
 	
@@ -194,9 +198,10 @@ Player.prototype.getCoordinates = function() {
 	return location;
 }
 
-Player.prototype.change_weapon = function(weapon) {
+Player.prototype.change_weapon = function(weaponSprite , power) {
 	
-	player.weapon = new Weapon(weapon);
+	this.weaponType = weaponSprite;
+	this.power = power;
 }
 Player.prototype.reduceHealth = function(power) {
 	
