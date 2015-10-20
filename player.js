@@ -19,7 +19,7 @@ var plasma = false;
 
 function Player(game, x, y, speed) {
 
-	console.log("Creating Player");
+
 
 	Phaser.Sprite.call(this, game , x , y);
 	player = this.game.add.sprite(x,y, 'player');
@@ -29,18 +29,18 @@ function Player(game, x, y, speed) {
 	player.animations.add('up', [0, 1, 2, 1], speed, true);
 	player.animations.add('down', [6, 7, 8, 7], speed, true);
 
-	console.log("Animations");
+
 	game.physics.p2.enable(player);
 	player.anchor.setTo(.5,.5);
-	console.log("Anchor");
+
 	player.body.clearShapes();
 	player.body.addRectangle(25, 18, 0, 18);
-	console.log("Rectangles");
+
 	player.body.fixedRotation = true;
 	player.scale.setTo(.7,.7);
-	console.log("Scale/rotation");
+
 	player.wood = false;
-	console.log("Weapon_part");
+
 
 	npc = game.npc;
 	this.game = game;
@@ -110,7 +110,7 @@ Player.prototype.update = function() {
 	}
 	else if (wasd.left.isDown) {
 
-		console.log("still moving", player.body.x , this.x);
+
 		
 		player.animations.play('left');
 		player.body.x -= 3;
@@ -142,9 +142,9 @@ Player.prototype.update = function() {
 	} 
 	if (fire.isDown) {
 	
-		console.log("shooting ...");
+
 	      if(game.time.now > weaponTime){
-            console.log("shooting ...");
+
 
             if(position.faceLeft == true){
                 player.weapon = new Weapon(this.game ,player.x -25, player.y ,this.power, this.weaponType, -400, 0);
@@ -166,14 +166,14 @@ Player.prototype.update = function() {
             weaponTime = game.time.now + weaponDelay;
             
            }  
-           console.log("BONJOUR LES GENS")   
+ 
           	if(this.npc){
-			       console.log("IN BEEEEECHH FIRE ", this.npc);
+		
 			       this.npc.Shoot(this.weaponType , this.power);
 		   } 
 		}         
 	if(action.isDown && distNpc < 50){
-		console.log("about to talk");
+
 		npc.talk(this.game , 1);
 	}
 	if (HealthValue <= 0){
@@ -201,15 +201,14 @@ Player.prototype.change_weapon = function(weaponSprite , power) {
 }
 Player.prototype.reduceHealth = function(power) {
 	
-	console.log(HealthValue);
+
 	HealthValue -= power;
 	this.HealthBar.setPercent(HealthValue);
 
 }
 
 Player.prototype.dies = function(){
-	//console.log("is about to die")
-	console.log("is about to die")
+
    	player.kill();
    	this.kill();
    	this.HealthBar.setPosition(-1 , -1); // not good
@@ -233,7 +232,7 @@ Player.prototype.addHealth = function(power) {
 }
 
 Player.prototype.addNPC = function(New_npc) {
-	console.log("add npc");
+
 	this.npc = New_npc;
 	npc_is_attached = true;
 }
