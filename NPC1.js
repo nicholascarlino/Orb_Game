@@ -151,20 +151,21 @@ Npc.prototype.followPlayer = function(){
 		        this.position.faceLeft = false;
 		        this.position.faceRight = false;
     		}
-	}else if ((dist1> -painDist) && (dist1 < painDist) && (dist2 >-painDist) && (dist2 < painDist)){
-       		 if (this.position.faceLeft==true){
-            		this.body.animations.play('left');
-        	}
-	        else if(this.position.faceRight==true){
-        	        this.body.animations.play('right');
-        	}
-        	else if (this.position.faceUp==true){
-            		this.body.animations.play('up');
-        	}
-        	else if (this.position.faceDown==true){
-            		this.body.animations.play('down');
-        	}
-    	}
+		/*else if ((dist1> -painDist) && (dist1 < painDist) && (dist2 >-painDist) && (dist2 < painDist)){
+       			if (this.position.faceLeft==true){
+            			this.body.animations.play('left');
+        		}
+	        	else if(this.position.faceRight==true){
+        	        	this.body.animations.play('right');
+        		}
+        		else if (this.position.faceUp==true){
+            			this.body.animations.play('up');
+        		}
+        		else if (this.position.faceDown==true){
+            			this.body.animations.play('down');
+        		}
+    		}*/
+	}
 }
 Npc.prototype.moveVertical = function (speed)
 {

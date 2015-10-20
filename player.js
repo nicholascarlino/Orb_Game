@@ -142,18 +142,18 @@ Player.prototype.update = function() {
             console.log("shooting ...");
 
             if(position.faceLeft == true){
-            player.weapon = new Weapon(player.game ,player.x -8, player.y ,10, 'rock', -400, 0);
+            player.weapon = new Weapon(player.game ,player.x -8, player.y ,100, 'rock', -400, 0);
             } 
             else if (position.faceRight == true){
-            player.weapon = new Weapon(player.game ,player.x +8,player.y ,10, 'rock', 400, 0);
+            player.weapon = new Weapon(player.game ,player.x +8,player.y ,100, 'rock', 400, 0);
 
             }
             else if (position.faceUp == true){
-            player.weapon = new Weapon(player.game ,player.x ,player.y -8,10, 'rock', 0, -400);
+            player.weapon = new Weapon(player.game ,player.x ,player.y -8,100, 'rock', 0, -400);
 
             }
             else if(position.faceDown == true){
-               player.weapon = new Weapon(player.game ,player.x ,player.y+25 ,10, 'rock', 0, 400);
+               player.weapon = new Weapon(player.game ,player.x ,player.y+25 ,100, 'rock', 0, 400);
 
             }  
             weaponTime = game.time.now + weaponDelay;
@@ -192,8 +192,8 @@ Player.prototype.reduceHealth = function(power) {
 
 Player.prototype.dies = function(){
 	console.log("is about to die")
-   	player.destroy();
-   	this.destroy();
+   	player.kill();
+   	this.kill();
    	this.HealthBar.setPosition(-1 , -1); // not good
    	player.x = 0 ;
    	player.y = 0;
