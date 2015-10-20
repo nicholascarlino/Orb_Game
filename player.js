@@ -8,14 +8,16 @@ var wasd;
 var fire;
 var action;
 var position;
-var HealthValue;
+var HealthValue = 100;
 var npc;
 var distNpc;
 var weaponTime = 0;
 var weaponDelay = 400
 var player;
+var npc_is_attached = false;
+var plasma = false;
 
-function Player(game, x, y, speed, health) {
+function Player(game, x, y, speed) {
 	console.log("Creating Player");
 
 	Phaser.Sprite.call(this, game , x , y);
@@ -57,8 +59,7 @@ function Player(game, x, y, speed, health) {
       flipped: false
   };
 	this.HealthBar = new HealthBar(game, barConfig);
-	HealthValue = health;
-	this.HealthBar.setPercent(100);
+	this.HealthBar.setPercent(HealthValue);
 
 	wasd = {
 		up: game.input.keyboard.addKey(Phaser.Keyboard.W),
@@ -78,7 +79,7 @@ function Player(game, x, y, speed, health) {
 	action = game.input.keyboard.addKey(Phaser.Keyboard.E);
 	this.dead = false;
 
-	this.weaponType = 'rock';
+	this.weaponType ='rock';
 	this.power = 10;
 
 	game.add.existing(this);
@@ -143,19 +144,19 @@ Player.prototype.update = function() {
             console.log("shooting ...");
 
             if(position.faceLeft == true){
-                player.weapon = new Weapon(this.game ,player.x -8, player.y ,this.power, this.weaponType, -400, 0);
+                player.weapon = new Weapon(this.game ,player.x -25, player.y ,this.power, this.weaponType, -400, 0);
 
             } 
             else if (position.faceRight == true){
-            player.weapon = new Weapon(this.game ,player.x +8,player.y ,this.power, this.weaponType, 400, 0);
+            player.weapon = new Weapon(this.game ,player.x +25,player.y ,this.power, this.weaponType, 400, 0);
 
             }
             else if (position.faceUp == true){
-            player.weapon = new Weapon(this.game ,player.x ,player.y -8,this.power, this.weaponType, 0, -400);
+            player.weapon = new Weapon(this.game ,player.x ,player.y -25,this.power, this.weaponType, 0, -400);
 
             }
             else if(position.faceDown == true){
-               player.weapon = new Weapon(this.game ,player.x ,player.y+ 25 ,this.power, this.weaponType, 0, 400);
+               player.weapon = new Weapon(this.game ,player.x ,player.y+ 44 ,this.power, this.weaponType, 0, 400);
          
             }  
 
@@ -191,6 +192,9 @@ Player.prototype.change_weapon = function(weaponSprite , power) {
 	
 	this.weaponType = weaponSprite;
 	this.power = power;
+	if (weaponSprite == 'plasma'){
+		plasma = true;
+	}
 }
 Player.prototype.reduceHealth = function(power) {
 	
@@ -228,4 +232,5 @@ Player.prototype.addHealth = function(power) {
 Player.prototype.addNPC = function(New_npc) {
 	console.log("add npc");
 	this.npc = New_npc;
+	npc_is_attached = true;
 }

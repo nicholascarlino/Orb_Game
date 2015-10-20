@@ -22,7 +22,7 @@ var level1DayState = {
 		game.world.setBounds(0,0,960,960);
 		
 		// PLAYER
-		game.player = new Player(game, 148, 757, 8, 40);
+		game.player = new Player(game, 148, 757, 8);
 
 		game.wood = new Collectible(game, 848, 48, 'wood');
 		game.food = new Collectible(game, 48, 304, 'food');

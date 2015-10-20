@@ -23,7 +23,7 @@ var level1NightState = {
 		game.world.setBounds(0,0,960,960);
 		
 		// PLAYER AND ENEMIES
-		game.player = new Player(game, 148, 757, 8, game.pHealth);
+		game.player = new Player(game, 148, 757, 8);
 
 		game.enemies = game.add.group();
 		for (var i = 0; i < 4; i++){

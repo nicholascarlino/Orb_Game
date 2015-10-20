@@ -19,11 +19,14 @@ var level2NightState = {
 		game.world.setBounds(0,0,1280,1280);
 		console.log("set Bounds");
 		
-		game.player = new Player(game, 640, 1248, 8, game.pHealth);
+		game.player = new Player(game, 640, 1248, 8);
 
-		if (game.npc == true){
-			player.npc = new Npc(game, 635, 1250, 8, 'npcFem');
+		if (npc_is_attached == true){
+			game.player.addNPC(new Npc(game, 635, 1250, 8, 'npcFem'));
 			followPlayer = true;
+		}
+		if (plasma == true){
+			game.player.change_weapon('plasma', 20);
 		}
 		game.enemies = game.add.group();
 		console.log("make enemies");
@@ -42,6 +45,7 @@ var level2NightState = {
 		background4.alpha = 0;
 		game.map.setCollision(36, true, 'Collision');
 		background3 = game.map.createLayer('Night2');
+		background3.alpha = .7;
 
 		game.physics.p2.convertTilemap(game.map, 'Collision');
 	},
