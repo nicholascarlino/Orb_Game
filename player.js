@@ -15,7 +15,7 @@ var weaponTime = 0;
 var weaponDelay = 400
 var player;
 
-function Player(game, x, y, speed) {
+function Player(game, x, y, speed, health) {
 	console.log("Creating Player");
 
 	Phaser.Sprite.call(this, game , x , y);
@@ -36,12 +36,11 @@ function Player(game, x, y, speed) {
 	player.body.fixedRotation = true;
 	player.scale.setTo(.7,.7);
 	console.log("Scale/rotation");
-	player.weapon_part = 0;
+	player.wood = false;
 	console.log("Weapon_part");
 
 	npc = game.npc;
 	this.game = game;
-	player.body.collideWorldBounds = true;
 
 	 var barConfig ={
        width: 40,
@@ -58,7 +57,7 @@ function Player(game, x, y, speed) {
       flipped: false
   };
 	this.HealthBar = new HealthBar(game, barConfig);
-	HealthValue = 100;
+	HealthValue = health;
 	this.HealthBar.setPercent(100);
 
 	wasd = {
@@ -79,7 +78,7 @@ function Player(game, x, y, speed) {
 	action = game.input.keyboard.addKey(Phaser.Keyboard.E);
 	this.dead = false;
 
-	this.weaponType = 'rock';
+	this.weaponType ='rock';
 	this.power = 10;
 
 	game.add.existing(this);
@@ -144,19 +143,19 @@ Player.prototype.update = function() {
             console.log("shooting ...");
 
             if(position.faceLeft == true){
-                player.weapon = new Weapon(this.game ,player.x -8, player.y ,this.power, this.weaponType, -400, 0);
+                player.weapon = new Weapon(this.game ,player.x -25, player.y ,this.power, this.weaponType, -400, 0);
 
             } 
             else if (position.faceRight == true){
-            player.weapon = new Weapon(this.game ,player.x +8,player.y ,this.power, this.weaponType, 400, 0);
+            player.weapon = new Weapon(this.game ,player.x +25,player.y ,this.power, this.weaponType, 400, 0);
 
             }
             else if (position.faceUp == true){
-            player.weapon = new Weapon(this.game ,player.x ,player.y -8,this.power, this.weaponType, 0, -400);
+            player.weapon = new Weapon(this.game ,player.x ,player.y -25,this.power, this.weaponType, 0, -400);
 
             }
             else if(position.faceDown == true){
-               player.weapon = new Weapon(this.game ,player.x ,player.y+ 25 ,this.power, this.weaponType, 0, 400);
+               player.weapon = new Weapon(this.game ,player.x ,player.y+ 44 ,this.power, this.weaponType, 0, 400);
          
             }  
 
@@ -227,6 +226,6 @@ Player.prototype.addHealth = function(power) {
 }
 
 Player.prototype.addNPC = function(New_npc) {
+	console.log("add npc");
 	this.npc = New_npc;
 }
-

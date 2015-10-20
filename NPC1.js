@@ -88,11 +88,13 @@ Npc.prototype.update = function(){
 	
 	if(no.isDown && prompt!=null){
 		prompt.kill();
+		this.game.hasNPC = false;
 	}
 	if(yes.isDown && prompt!=null){
 		prompt.kill();
 		this.game.player.addNPC(this);
 		followPlayer = true;
+		this.game.hasNPC = true;
 	}
 
 	if(followPlayer == true){
@@ -108,7 +110,7 @@ Npc.prototype.update = function(){
 
 Npc.prototype.followPlayer = function(){
 
-
+	console.log("npc follow");
 	var dist1 = this.body.x - this.game.player.x;
  	var dist2 = this.body.y - this.game.player.y;
     	var speed = 5;
@@ -186,6 +188,7 @@ Npc.prototype.moveHorizontal = function moveHorizontal(speed){
 
 Npc.prototype.Shoot = function(weaponSprite, power){
 
+	console.log("npc shoot");
        if(game.time.now > weaponTime2){
 
          if(this.position.faceLeft == true){

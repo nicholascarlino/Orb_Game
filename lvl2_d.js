@@ -22,11 +22,17 @@ var level2DayState = {
 
 		// PLAYER AND NPC
 		game.npc = new Npc(game, 1168, 1088, 8, 'npcFem');
-		game.player = new Player(game, 640, 1248, 8);
+
+		
+
+		game.player = new Player(game, 640, 1248, 8, game.pHealth);
+
 		game.food = new Collectible(game, 864, 1104, 'food');
 		game.water = new Collectible(game, 176, 160, 'water');
-		game.spear = new Collectible(game, 1184, 1136, 'spear');
+		game.plasma = new Collectible(game, 1184, 1136, 'plasma');
+		game.wood = new Collectible(game, 640, 20, 'wood');
 
+        game.player.wood = false;
 		// DRAW FOREGROUND
 		foreground = game.map.createLayer('Foreground2');
 
@@ -35,12 +41,14 @@ var level2DayState = {
 		console.log("set collision2");
 		game.physics.p2.convertTilemap(game.map, 'Collision');
 
-		game.wood = new Collectible(game, 640, 1230, 'wood');
 	},
 	update: function(){
-		if (game.player.wood) {
+		console.log("IN LEVEL 2" , game.player.wood);
+		if (game.player.wood == true) {
+			console.log(game.player.wood);
 			game.state.start('lvl2_n');
 		}
+		
 		game.camera.follow(game.player);
 	},
 }
