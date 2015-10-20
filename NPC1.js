@@ -23,7 +23,7 @@ function Npc(game, x, y, speed ,spriteType) {
 
 	this.body = this.game.add.sprite(x,y, spriteType);
 	game.physics.arcade.enable(this.body , true);
-	//game.physics.p2.enable(this.body, true);
+
 	console.log(this.body.x , this.body.y);
 	this.body.animations.add('left', [9, 10, 11, 10],speed, true);
 	this.body.animations.add('right', [3, 4, 5, 4],speed, true);
@@ -31,14 +31,7 @@ function Npc(game, x, y, speed ,spriteType) {
 	this.body.animations.add('down', [6, 7, 8, 7], speed, true);
 	
 	this.body.anchor.setTo(0.5,0.5);
-	//this.body.clearShapes();
 
-	//this.body.addRectangle(25, 18, 0, 18);
-	this.body.immovale = false;
-	//this.body.body.gravity.y = 6;
-	//this.body.bodbounce.y = 0.0;
-//this.body.body.bounce.x = 0.0;
-	//this.body.body.fixedRotation = true;
 	this.body.checkCollision = true;
 
 
@@ -61,7 +54,7 @@ function Npc(game, x, y, speed ,spriteType) {
 
 Npc.prototype.talk = function(game, npc_value) {
 	console.log("in Talk");
-//	var style = {font: "12px Arial", fill: "#ff0044", align: "center" };
+
 		if( i > 0  && counter %12 == 0 && i < 3){
 			texts[i -1].kill();
 		}
@@ -75,7 +68,7 @@ Npc.prototype.talk = function(game, npc_value) {
 			message = "What do you want, boy? I'm very busy.  But I guess you look capable.  What do you say, want to fight with me against these bastards?"
 		}	
 		 style = { font: "15px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 200, align: "left" };
-	//game.debug.text( message, this.body.x, this.body.y );
+
 	if( counter % 12 == 0 && i < 3){
 		console.log(counter);
 		if(i == 2){
@@ -105,10 +98,10 @@ Npc.prototype.update = function(){
 		console.log(this.body.x , this.body.y);
 		this.followPlayer();
 	}else{
-		//console.log("Before",this.body.x , this.body.y);
+		console.log("Before",this.body.x , this.body.y);
 		this.body.x = initialX;
 		this.body.y = initialY;
-		//console.log("After",this.body.x , this.body.y);
+		console.log("After",this.body.x , this.body.y);
 	}
 }
 
@@ -188,8 +181,6 @@ Npc.prototype.followPlayer = function(){
 Npc.prototype.moveVertical = function (speed)
 {
 
-    //this.body.y = this.game.player.y;
-    //enemy.body.y += -speed;
    this.body.y += speed;
 
 }
@@ -197,8 +188,7 @@ Npc.prototype.moveVertical = function (speed)
 
 Npc.prototype.moveHorizontal = function moveHorizontal(speed){
 
-    //this.body.x = this.game.player.x ;
-   // enemy.body.x += speed;
+
    this.body.x+= speed;
 
 }

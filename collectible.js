@@ -43,7 +43,7 @@ Collectible.prototype.update = function()
 		}
 		else if (this.name == 'wood') {
 			console.log("Picked up wood");
-			game.player.weapon_part++;
+			game.player.wood = true;
 			console.log(game.player.weapon_part);
 		}
 	}

@@ -14,7 +14,9 @@ function Enemy(game, x, y , sprite) {
 
     //CHANGE: THIS WAS AFTER GAME>ADD>EXISTING>THIS
     if(this.spriteType != 'worm'){
+
         //this = game.add.sprite(x,y, sprite);
+
         console.log("enemy sprite created");
 
         this.animations.add('left',[9,10,11,10], 12, true);
@@ -22,6 +24,7 @@ function Enemy(game, x, y , sprite) {
         this.animations.add('up', [0,1,2,1], 12, true);
         this.animations.add('down',[6,7,8,7], 12, true);
     }else{
+
         //this = game.add.sprite(x,y, sprite);//USED TO BE this.spriteType
 
         this.animations.add('left',[0,1,2,3], 12, true);
@@ -38,15 +41,13 @@ function Enemy(game, x, y , sprite) {
     }
     
     game.physics.p2.enable(this, true); 
-   // game.physics.enable(this, Phaser.Physics.ARCADE);
+
     this.anchor.setTo(0.5, 0.5);
     this.body.clearShapes();
     this.body.addRectangle(24,24,0,12);
     this.body.fixedRotation = true;
     game.add.existing(this);
     this.game = game;
-   // this.body.velocity.x = 0;
-    //this.body.velocity.y = 0;
 
     var barConfig ={
        width: 40,
@@ -66,12 +67,9 @@ function Enemy(game, x, y , sprite) {
     this.HealthBar = new HealthBar(game , barConfig);
     this.HealthValue = 100;
     this.HealthBar.setPercent(100);
+
 }
 
-
-Enemy.prototype.attack= function(){
-    // does something to kill the this
-}
 
 Enemy.prototype.reduceLife= function(amount){
 
@@ -79,11 +77,11 @@ Enemy.prototype.reduceLife= function(amount){
         console.log("enemy health very down", this.HeathValue);
         this.destroy();
     }
+
     // does something to kill the this
     this.HealthValue -=amount;
     this.HealthBar.setPercent(this.HealthValue);
     console.log("enemy health", HealthValue);
-    //this.destroy();
 }
 
 Enemy.prototype.dies = function(){
@@ -98,8 +96,6 @@ Enemy.prototype.move = function move() {
 
     var coor = this.game.player.getCoordinates();
 
-    //var dist1 = this.body.x - coor.x; // used to be this.x
-    //var dist2 = this.body.y - coor.y; // used to be this.y
     var dist1 = this.x - coor.x;
     var dist2 = this.y - coor.y;
 
@@ -107,8 +103,7 @@ Enemy.prototype.move = function move() {
 
   if( Math.abs(dist1) > Math.abs(dist2)){
         if(dist1 > painDist ){
-        //move to the left
-     //   console.log("this move left");
+
         this.animations.play('left');
         moveHorizontal(-speed);
         this.body.x -= speed;
@@ -134,8 +129,7 @@ Enemy.prototype.move = function move() {
     }
   }else{
         if(dist2> painDist){
-        //move up
-        //console.log("this move up");
+
         this.animations.play('up');
 
         moveVertical(-speed);
@@ -146,8 +140,7 @@ Enemy.prototype.move = function move() {
         this.position.faceLeft = false;
         this.position.faceRight = false;
     } else if (dist2 < -painDist){
-        // move down
-       // console.log("this move down");
+
         this.animations.play('down');
 
         moveVertical(speed);
@@ -181,25 +174,23 @@ Enemy.prototype.move = function move() {
 function moveVertical(speed){
 
     this.y += speed;
-    //this.body.y = speed;
-   // this.body.y += speed;
+
 
 }
 function moveHorizontal(speed){
 
     this.x += speed;
-   // this.body.x += speed;
-    //this.body.x = speed;
 
 } 
+
 Enemy.prototype.update = function() {
-    //game.physics.arcade.overlap(this, this.game.player.body, this.game.player.reduceHealth(.1));
 
     this.body.setZeroVelocity();
     if (!this.game.player.isDead()){
         this.move();
     }
     if(this.HealthValue<= 0){
+
       //  console.log("HealthBar", this.HealthBar);
         this.HealthBar.flipped = true;
         this.HealthBar.setPosition(-100 , -100);
@@ -210,3 +201,4 @@ Enemy.prototype.update = function() {
     /*var bool = game.physics.arcade.overlap(this.game.player, this, this.game.player.reduceHealth()  , null , this);
     console.log(bool);*/
 }
+
