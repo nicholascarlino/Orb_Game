@@ -16,13 +16,18 @@ function Weapon(game, x, y , power, sprite, speedX, speedY) {
     this.y = y;
     this.checkWorldBounds = true;
     this.outOfBoundsKill = true;
-    
-    this.scale.setTo(0.5, 0.5);
 
 
     game.physics.p2.enable(this, true);
-    this.body.fixedRotation = true;
-
+    if (sprite == 'rock'){
+        this.body.fixedRotation = true;
+    }   
+    else{
+       // this.scale.setTo(.2, .2);
+        console.log ('NOT A ROCK');
+        this.body.fixedRotation = true;
+    }
+    
     this.game = game;
     this.power = power;
 
@@ -32,7 +37,6 @@ function Weapon(game, x, y , power, sprite, speedX, speedY) {
 Weapon.prototype.update= function(){
 
     //console.log("in shooting update", this);
-    
     this.body.velocity.y = this.velocityY;
     this.body.velocity.x = this.velocityX;
 

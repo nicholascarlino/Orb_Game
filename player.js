@@ -79,7 +79,7 @@ function Player(game, x, y, speed) {
 	action = game.input.keyboard.addKey(Phaser.Keyboard.E);
 	this.dead = false;
 
-	this.weaponType = 'rock';
+	this.weaponType ='plasma';
 	this.power = 10;
 
 	game.add.existing(this);
@@ -144,19 +144,19 @@ Player.prototype.update = function() {
             console.log("shooting ...");
 
             if(position.faceLeft == true){
-                player.weapon = new Weapon(this.game ,player.x -8, player.y ,this.power, this.weaponType, -400, 0);
+                player.weapon = new Weapon(this.game ,player.x -25, player.y ,this.power, this.weaponType, -400, 0);
 
             } 
             else if (position.faceRight == true){
-            player.weapon = new Weapon(this.game ,player.x +8,player.y ,this.power, this.weaponType, 400, 0);
+            player.weapon = new Weapon(this.game ,player.x +25,player.y ,this.power, this.weaponType, 400, 0);
 
             }
             else if (position.faceUp == true){
-            player.weapon = new Weapon(this.game ,player.x ,player.y -8,this.power, this.weaponType, 0, -400);
+            player.weapon = new Weapon(this.game ,player.x ,player.y -25,this.power, this.weaponType, 0, -400);
 
             }
             else if(position.faceDown == true){
-               player.weapon = new Weapon(this.game ,player.x ,player.y+ 25 ,this.power, this.weaponType, 0, 400);
+               player.weapon = new Weapon(this.game ,player.x ,player.y+ 44 ,this.power, this.weaponType, 0, 400);
          
             }  
 
