@@ -23,12 +23,6 @@ function Enemy(game, x, y , sprite) {
         this.animations.add('up', [0,1,2,1], 12, true);
         this.animations.add('down',[6,7,8,7], 12, true);
     }
-        this.position = {
-           faceLeft:false,
-           faceRight:false,
-           faceUp:false,
-           faceDown:true,
-        }
     
     game.physics.p2.enable(this, true); 
 
@@ -38,7 +32,7 @@ function Enemy(game, x, y , sprite) {
     this.body.fixedRotation = true;
     game.add.existing(this);
     this.game = game;
-
+    
     var barConfig ={
        width: 40,
        height: 10,

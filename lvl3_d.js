@@ -26,7 +26,7 @@ var level3DayState = {
 
 		game.time.events.loop(Phaser.Timer.SECOND * 10, this.createBlueDragons, this);
 		game.time.events.loop(Phaser.Timer.SECOND * 15, this.createGoldDragons, this);
-		//game.time.events.loop(Phaser.Timer.SECOND * 20, this.createGolem, this);
+		game.time.events.loop(Phaser.Timer.SECOND * 20, this.createGolem, this);
 
 
 		// DRAW FOREGROUND
@@ -72,7 +72,7 @@ var level3DayState = {
 		console.log("creating golems");
 		 for (var i = 0; i < 2; i++){
 		 	console.log(i);
-			var enemy = new Enemy(game, 128, 128, 'Golem');
+			var enemy = new Enemy(game, 128, 128, 'golem');
 			game.enemies.add(enemy);
 		  }
 	},

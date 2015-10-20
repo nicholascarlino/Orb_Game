@@ -30,7 +30,9 @@ var level2DayState = {
 		game.food = new Collectible(game, 864, 1104, 'food');
 		game.water = new Collectible(game, 176, 160, 'water');
 		game.plasma = new Collectible(game, 1184, 1136, 'plasma');
-		game.wood = new Collectible(game, 640, 20, 'wood');
+
+		game.wood = new Collectible(game, 688, 20, 'wood');
+
 
         game.player.wood = false;
 		// DRAW FOREGROUND
@@ -43,10 +45,12 @@ var level2DayState = {
 
 	},
 	update: function(){
-		console.log("IN LEVEL 2" , game.player.wood);
+		game.pHealth = HealthValue
 		if (game.player.wood == true) {
-			console.log(game.player.wood);
-			game.state.start('lvl2_n');
+			text = game.add.text(688, 50, 'Night approaches... Press action to continue', {font: '15px Arial', fill: '#ffffff', wordWrap: true});
+			if(action.isDown){
+				game.state.start('lvl2_n');
+			}
 		}
 		
 		game.camera.follow(game.player);

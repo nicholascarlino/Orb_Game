@@ -36,7 +36,9 @@ function Weapon(game, x, y , power, sprite, speedX, speedY) {
 }
 Weapon.prototype.update= function(){
 
+
     var size;
+
 
     this.body.velocity.y = this.velocityY;
     this.body.velocity.x = this.velocityX;
