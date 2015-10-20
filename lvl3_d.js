@@ -15,7 +15,13 @@ var level3DayState = {
 		background2 = game.map.createLayer('Cliffs');
 
 		// SETS OPACITY
-		
+		if (npc_is_attached == true){
+			game.player.addNPC(new Npc(game, game.player.x - 10, game.player.y + 10, 8, 'npcFem'));
+			followPlayer = true;
+		}
+		if (plasma == true){
+			game.player.change_weapon('plasma', 20);
+		}
 
 		// RESIZE WORLD BOUNDS TO FIT CREATED MAP
 		background.resizeWorld();
@@ -49,6 +55,7 @@ var level3DayState = {
 			game.player.wood = false;
 			text = game.add.text(game.width / 2, game.height / 2, 'You have died. Press action to continue',{ font: "25px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 500, align: "left"});
 			if (action.isDown){
+				HealthValue = 100;
 				game.state.start('lvl1_d');
 			}
 		}	
