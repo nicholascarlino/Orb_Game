@@ -90,11 +90,13 @@ Npc.prototype.update = function(){
 	console.log("in pudat");
 	if(no.isDown && prompt!=null){
 		prompt.kill();
+		this.game.hasNPC = false;
 	}
 	if(yes.isDown && prompt!=null){
 		prompt.kill();
 		this.game.player.addNPC(this);
 		followPlayer = true;
+		this.game.hasNPC = true;
 	}
 
 	if(followPlayer == true){

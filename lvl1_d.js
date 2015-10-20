@@ -22,7 +22,7 @@ var level1DayState = {
 		game.world.setBounds(0,0,960,960);
 		
 		// PLAYER
-		game.player = new Player(game, 148, 757, 8);
+		game.player = new Player(game, 148, 757, 8, 40);
 
 		game.wood = new Collectible(game, 848, 48, 'wood');
 		game.food = new Collectible(game, 48, 304, 'food');
@@ -39,6 +39,7 @@ var level1DayState = {
 
 	},
 	update: function(){
+		game.pHealth = HealthValue;
 		if (game.player.wood == true) {//change userself
 			game.add.text(750, 50, 'Brace yourself... The night is upon you. Hit action to continue', {font: '25px Arial', fill: '#000000', wordWrap: true, wordWrapWidth: 200 });
 			if (action.isDown){

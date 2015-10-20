@@ -14,7 +14,7 @@ var distNpc;
 var weaponTime = 0;
 var weaponDelay = 400
 var player;
-function Player(game, x, y, speed) {
+function Player(game, x, y, speed, health) {
 	console.log("Creating Player");
 
 	Phaser.Sprite.call(this, game , x , y);
@@ -59,7 +59,7 @@ function Player(game, x, y, speed) {
       flipped: false
   };
 	this.HealthBar = new HealthBar(game, barConfig);
-	HealthValue = 100;
+	HealthValue = health;
 	this.HealthBar.setPercent(100);
 
 	wasd = {
@@ -233,5 +233,12 @@ Player.prototype.addHealth = function(power) {
 
 Player.prototype.addNPC = function(New_npc) {
 	this.npc = New_npc;
+}
+Player.prototype.setLocation = function(game, x, y) {
+	this.game = game;
+	this.x = x;
+	this.y = y;
+	player.body.x = x;
+	player.body.y = y;
 }
 
