@@ -61,7 +61,7 @@ function Player(game, x, y, speed) {
   };
 	this.HealthBar = new HealthBar(game, barConfig);
 	//HealthValue = health;
-	this.HealthBar.setPercent(100);
+	this.HealthBar.setPercent(HealthValue);
 
 
 	wasd = {
