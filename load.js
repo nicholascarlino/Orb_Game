@@ -42,6 +42,6 @@ var loadState = {
 		game.load.image('wood', 'assets/wood.png');
 	},
 	create: function(){
-		game.state.start('lvl3_d');
+		game.state.start('menu');
 	},
 };
