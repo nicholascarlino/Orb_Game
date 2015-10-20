@@ -57,17 +57,17 @@ Weapon.prototype.damage_enemy = function(group)
     var disty;
 
     if (group != null){
-    	for (var i = 0; i < group.length; i++) {
-        	console.log("In weapon for loop");
-		enemy = group.getAt(i);
+        for (var i = 0; i < group.length; i++) {
+            console.log("In weapon for loop");
+        enemy = group.getAt(i);
 
-        	distx = this.x - enemy.x;
-        	disty = this.y - enemy.y;
+            distx = this.x - enemy.x;
+            disty = this.y - enemy.y;
 
-      	 	if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
-         	enemy.reduceLife(this.power);
-         	this.destroy();
-        	}
-    	}
+            if ((distx > -dam_dist) && (distx < dam_dist) && (disty > -dam_dist) && (disty < dam_dist)){
+            enemy.reduceLife(this.power);
+            this.destroy();
+            }
+        }
    }
 }

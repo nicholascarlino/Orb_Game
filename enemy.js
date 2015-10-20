@@ -5,6 +5,8 @@ Enemy.prototype.constructor = Enemy;
 Enemy.prototype.force = {x:0.0, y:0.0}; 
 
 
+//var velocity;
+//var this.position;
 
 function Enemy(game, x, y , sprite) {
     console.log("Creating this");
@@ -12,6 +14,9 @@ function Enemy(game, x, y , sprite) {
 
     //CHANGE: THIS WAS AFTER GAME>ADD>EXISTING>THIS
     if(this.spriteType != 'worm'){
+
+        //this = game.add.sprite(x,y, sprite);
+
         console.log("enemy sprite created");
 
         this.animations.add('left',[9,10,11,10], 12, true);
@@ -19,6 +24,8 @@ function Enemy(game, x, y , sprite) {
         this.animations.add('up', [0,1,2,1], 12, true);
         this.animations.add('down',[6,7,8,7], 12, true);
     }else{
+
+        //this = game.add.sprite(x,y, sprite);//USED TO BE this.spriteType
 
         this.animations.add('left',[0,1,2,3], 12, true);
         this.animations.add('right', [4,5,6,7], 12, true);
@@ -34,6 +41,7 @@ function Enemy(game, x, y , sprite) {
     }
     
     game.physics.p2.enable(this, true); 
+
     this.anchor.setTo(0.5, 0.5);
     this.body.clearShapes();
     this.body.addRectangle(24,24,0,12);
@@ -59,7 +67,9 @@ function Enemy(game, x, y , sprite) {
     this.HealthBar = new HealthBar(game , barConfig);
     this.HealthValue = 100;
     this.HealthBar.setPercent(100);
+
 }
+
 
 Enemy.prototype.reduceLife= function(amount){
 
@@ -67,6 +77,8 @@ Enemy.prototype.reduceLife= function(amount){
         console.log("enemy health very down", this.HeathValue);
         this.destroy();
     }
+
+    // does something to kill the this
     this.HealthValue -=amount;
     this.HealthBar.setPercent(this.HealthValue);
     console.log("enemy health", HealthValue);
@@ -91,11 +103,11 @@ Enemy.prototype.move = function move() {
 
   if( Math.abs(dist1) > Math.abs(dist2)){
         if(dist1 > painDist ){
+
         this.animations.play('left');
         moveHorizontal(-speed);
         this.body.x -= speed;
 
-      
 
         this.position.faceLeft = true;
         this.position.faceRight = false;
@@ -103,6 +115,7 @@ Enemy.prototype.move = function move() {
         this.position.faceDown = false;
 
     }else if (dist1 < -painDist){
+        //console.log("this move right");
 
         this.animations.play('right');
 
@@ -116,6 +129,7 @@ Enemy.prototype.move = function move() {
     }
   }else{
         if(dist2> painDist){
+
         this.animations.play('up');
 
         moveVertical(-speed);
@@ -126,6 +140,7 @@ Enemy.prototype.move = function move() {
         this.position.faceLeft = false;
         this.position.faceRight = false;
     } else if (dist2 < -painDist){
+
         this.animations.play('down');
 
         moveVertical(speed);
@@ -160,21 +175,30 @@ function moveVertical(speed){
 
     this.y += speed;
 
+
 }
 function moveHorizontal(speed){
 
     this.x += speed;
 
 } 
+
 Enemy.prototype.update = function() {
-    
+
     this.body.setZeroVelocity();
     if (!this.game.player.isDead()){
         this.move();
     }
     if(this.HealthValue<= 0){
-        this.HealthBar.setPosition(-1000, -1000);
-	this.destroy();
+
+      //  console.log("HealthBar", this.HealthBar);
+        this.HealthBar.flipped = true;
+        this.HealthBar.setPosition(-100 , -100);
+       // console.log("HealthBar AFTER", this.HealthBar);
+        this.destroy();
 
     }
+    /*var bool = game.physics.arcade.overlap(this.game.player, this, this.game.player.reduceHealth()  , null , this);
+    console.log(bool);*/
 }
+

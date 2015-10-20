@@ -50,7 +50,7 @@ var level1NightState = {
 				game.state.start('lvl1_d');
 			}
 		}	
-		if (game.enemies.length == 0){
+		if (game.enemies.length == 0){ // change
 			game.state.start('lvl2_d');
 		}
 		game.camera.follow(game.player);

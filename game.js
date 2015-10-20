@@ -1,4 +1,5 @@
 var boundsx = 800*.8, boundsy = 600*.8;
+
 var game = new Phaser.Game(boundsx, boundsy, Phaser.AUTO, "game");
 
 game.state.add('boot', bootState);
@@ -15,8 +16,6 @@ game.state.add('lvl4', level4State);
 game.state.add('end', gameOverState); */
 
 game.state.start('boot');
-
-
 
 
 

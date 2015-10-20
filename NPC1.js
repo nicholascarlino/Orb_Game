@@ -23,6 +23,7 @@ function Npc(game, x, y, speed ,spriteType) {
 
 	this.body = this.game.add.sprite(x,y, spriteType);
 	game.physics.arcade.enable(this.body , true);
+
 	console.log(this.body.x , this.body.y);
 	this.body.animations.add('left', [9, 10, 11, 10],speed, true);
 	this.body.animations.add('right', [3, 4, 5, 4],speed, true);
@@ -31,7 +32,6 @@ function Npc(game, x, y, speed ,spriteType) {
 	
 	this.body.anchor.setTo(0.5,0.5);
 
-	this.body.immovale = false;
 	this.body.checkCollision = true;
 
 
@@ -54,27 +54,29 @@ function Npc(game, x, y, speed ,spriteType) {
 
 Npc.prototype.talk = function(game, npc_value) {
 	console.log("in Talk");
-	if( i > 0  && counter %12 == 0 && i < 3){
-		texts[i -1].kill();
-	}
-	if (npc_value == 1){
-		message1 = "Help me, please.  I have been stranded here for days.  I miss my family! ... Press K";
-		message2 = "You look pretty capable... Do you think that I could hang with you? I bet we would survive better if we stuck together"
-		message3 = "Press Y if you want to help and N if you don't"
-		messages = [message1 , message2 , message3];
-	}
-	else if (npc_value == 2){
-		message = "What do you want, boy? I'm very busy.  But I guess you look capable.  What do you say, want to fight with me against these bastards?"
-	}	
-	style = { font: "15px Arial", fill: "#000000", wordWrap: true, wordWrapWidth: 200, align: "left" };
+
+		if( i > 0  && counter %12 == 0 && i < 3){
+			texts[i -1].kill();
+		}
+		if (npc_value == 1){
+			message1 = "Help me, please.  I have been stranded here for days.  I miss my family! ... Press E";
+			message2 = "You look pretty capable... Do you think that I could hang with you? I bet we would survive better if we stuck together"
+			message3 = "Press Y if you want to help and N if you don't"
+			messages = [message1 , message2 , message3];
+		}
+		else if (npc_value == 2){
+			message = "What do you want, boy? I'm very busy.  But I guess you look capable.  What do you say, want to fight with me against these bastards?"
+		}	
+		 style = { font: "30px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: 600, align: "left" };
+
 	if( counter % 12 == 0 && i < 3){
 		console.log(counter);
 		if(i == 2){
-			prompt = game.add.text(300, this.game.height - 50, messages[i], style)
+			prompt = game.add.text(this.body.x - 500, this.body.y - 200, messages[i], style)
 		}else{
-	     		texts[i] = game.add.text(300, this.game.height - 50, messages[i], style);
-	    	}
-	 	i = i+1;
+	     texts[i] = game.add.text(this.body.x - 500, this.body.y - 200, messages[i], style);
+	    }
+	     i = i+1;
 	 }
 	 counter = counter + 1;
 
@@ -151,7 +153,7 @@ Npc.prototype.followPlayer = function(){
 		        this.position.faceLeft = false;
 		        this.position.faceRight = false;
     		}
-		/*else if ((dist1> -painDist) && (dist1 < painDist) && (dist2 >-painDist) && (dist2 < painDist)){
+		else if ((dist1> -painDist) && (dist1 < painDist) && (dist2 >-painDist) && (dist2 < painDist)){
        			if (this.position.faceLeft==true){
             			this.body.animations.play('left');
         		}
@@ -164,17 +166,19 @@ Npc.prototype.followPlayer = function(){
         		else if (this.position.faceDown==true){
             			this.body.animations.play('down');
         		}
-    		}*/
+        	}
 	}
 }
 Npc.prototype.moveVertical = function (speed)
 {
+
    this.body.y += speed;
 
 }
 
 
 Npc.prototype.moveHorizontal = function moveHorizontal(speed){
+
 
    this.body.x+= speed;
 
