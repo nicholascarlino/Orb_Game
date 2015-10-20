@@ -10,7 +10,7 @@ game.state.add('lvl1_d', level1DayState);
 game.state.add('lvl1_n', level1NightState);
 game.state.add('lvl2_d', level2DayState);
 game.state.add('lvl2_n', level2NightState);
-/*game.state.add('lvl3_d', level3State);*/
+game.state.add('lvl3_d', level3DayState);
 game.state.add('end', gameOverState);
 
 game.state.start('boot');

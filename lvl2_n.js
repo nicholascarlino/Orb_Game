@@ -50,7 +50,7 @@ var level2NightState = {
 		}
 		if (game.enemies.length == 0){
 			game.player.wood = false;
-			game.state.start('lvl3');
+			game.state.start('lvl3_d');
 		}
 		game.camera.follow(game.player);
 	},
