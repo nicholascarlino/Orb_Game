@@ -55,7 +55,7 @@ var level2NightState = {
 			var coord = game.player.getCoordinates();
 			text = game.add.text(coord.x - 400, coord.y - 50, 'You have died.  Press action to continue', {font: "15px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: 500, align: "left"});
 			if (action.isDown){
-				game.player = new Player(game, 640, 1248, 8);
+				HealthValue = 100;
 				game.state.start('lvl2_d');
 			}
 		}
